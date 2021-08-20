@@ -1,6 +1,8 @@
 const Router = require('express').Router;
 const userController = require('../controllers/user-controller');
 const askController = require('../controllers/ask-controller');
+const loadController = require('../controllers/load-controller');
+const upload = require('../config/load-config');
 const router = new Router();
 const {body} = require('express-validator');
 const authMiddleware = require('../middleware/auth-midleware');
@@ -22,6 +24,6 @@ router.post('/addask', askController.addAsk);
 router.get('/getask', askController.getAsk);
 router.post('/getoneask', askController.getOneAsk);
 
-
+router.post('/upload', upload.array("file"),loadController.upload);
 
 module.exports = router
