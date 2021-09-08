@@ -1,17 +1,9 @@
 class UploadController {
-    async upload(req, res, next) {
-        
-        try {
-            res.send("Single FIle upload success"); 
-            console.log(req.body.id);     
-        } catch (e) {
-            next(e);
-        }
-    }
-
     async download(req, res, next) {
         try {
-        
+            let file = __dirname + '/uploads/1631108761786--Chrysanthemum.jpg';
+            res.download(file);
+            console.log(req.body);
         } catch (e) {
             next(e);
         }

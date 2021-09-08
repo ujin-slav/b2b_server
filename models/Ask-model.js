@@ -13,7 +13,8 @@ const Ask = new Schema({
     TermsPayments: {type:String},
     EndDateOffers: {type: Date},
     Comment: {type:String},
-    TextAsk: {type: String}
+    TextAsk: {type: String},
+    Files: []
 })
 
 module.exports = model('Ask', Ask);

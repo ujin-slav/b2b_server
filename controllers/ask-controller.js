@@ -1,10 +1,10 @@
 const ApiError = require('../exceptions/api-error');
 const askService = require('../service/ask-service');
 
-class UserController {
+class AskController {
     async addAsk(req, res, next) {
         try {
-            const result = await askService.addAsk(req.body);
+            const result = await askService.addAsk(req);
             return res.json(result)
         } catch (e) {
             next(e);
@@ -34,4 +34,4 @@ class UserController {
 }
 
 
-module.exports = new UserController();
+module.exports = new AskController();

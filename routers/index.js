@@ -20,10 +20,10 @@ router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.get('/users', authMiddleware,userController.getUsers);
 
-router.post('/addask', askController.addAsk);
+router.post('/addask',  upload.array("file"), askController.addAsk);
 router.get('/getask', askController.getAsk);
 router.post('/getoneask', askController.getOneAsk);
 
-router.post('/upload', upload.array("file"),loadController.upload);
+router.get('/download', loadController.download);
 
 module.exports = router

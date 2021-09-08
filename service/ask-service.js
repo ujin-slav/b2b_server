@@ -1,36 +1,31 @@
 const AskModel = require("../models/Ask-model")
 
 class AskService {
-    async addAsk(body) {
+    async addAsk(req) {
         const {
-            Client,
             Name,
-            Status,
-            Price,
-            FIO,
-            Telefon,
-            DeliveryTime,
-            DeliveryAddress,
-            TermsPayments,
-            EndDateOffers,
-            Comment,
-            TextAsk,
-        } = body
-        console.log(body);
+            maxPrice,
+            maxDate,
+            DateExp,
+            Text,
+        } = req.body
         const ask = await AskModel.create({
-            Client,
+            Client:"Client",
             Name,
-            Status,
-            Price,
-            FIO,
-            Telefon,
-            DeliveryTime,
-            DeliveryAddress,
-            TermsPayments,
-            EndDateOffers,
-            Comment,
-            TextAsk,
+            Status:"Status",
+            Price:maxPrice,
+            FIO:"FIO",
+            Telefon:"Telefon",
+            DeliveryTime:maxDate,
+            DeliveryAddress:"DeliveryAddress",
+            TermsPayments:"TermsPayments",
+            EndDateOffers:DateExp,
+            Comment:"Comment",
+            TextAsk:Text,
+            Files:req.files
         })
+
+
 
         return {ask}
     }
