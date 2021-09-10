@@ -24,6 +24,6 @@ router.post('/addask',  upload.array("file"), askController.addAsk);
 router.get('/getask', askController.getAsk);
 router.post('/getoneask', askController.getOneAsk);
 
-router.get('/download', loadController.download);
+router.get('/download/:file', loadController.download);
 
 module.exports = router

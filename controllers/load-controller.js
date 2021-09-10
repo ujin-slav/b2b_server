@@ -1,9 +1,9 @@
 class UploadController {
     async download(req, res, next) {
         try {
-            let file = __dirname + '/uploads/1631108761786--Chrysanthemum.jpg';
+            let file = __dirname + '/../uploads/' + req.params.file;
             res.download(file);
-            console.log(req.body);
+            console.log(req.params.file);
         } catch (e) {
             next(e);
         }
