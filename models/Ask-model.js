@@ -13,6 +13,7 @@ const Ask = new Schema({
     EndDateOffers: {type: Date},
     Comment: {type:String},
     TextAsk: {type: String},
+    Region: {type: String},
     Files: []
 })
 

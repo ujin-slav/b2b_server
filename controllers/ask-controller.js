@@ -23,7 +23,7 @@ class AskController {
     async getOneAsk(req, res, next) {
         try {
             const id = req.body.id
-            console.log(req.body)
+            //console.log(req.body)
             const result = await askService.getOneAsk(id);
             return res.json(result)
         } catch (e) {
