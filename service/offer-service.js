@@ -26,10 +26,17 @@ class OfferService {
 
     async getOffers(req) {
         const {id} = req.body
-
         const offer = await OfferModel.find({Ask:id})
-        console.log(offer)
-        return {offer}
+        const result = await Promise.all(offer.map(async (item)=>{   
+            const user = await UserModel.findOne({ _id: item.Author });
+            const newitem = {
+                Text:item.Text,
+                Author: user.email,
+                Price: item.Price
+            }
+            return newitem;
+        }));
+        return result
     }
 
 }

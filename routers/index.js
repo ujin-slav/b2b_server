@@ -19,7 +19,7 @@ router.post('/forgot', userController.forgot);
 router.post('/reset', userController.reset);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
-router.get('/users', authMiddleware,userController.getUsers);
+router.post('/getuser',userController.getUser);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.get('/getask', askController.getAsk);

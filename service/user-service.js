@@ -119,11 +119,13 @@ class UserService {
         }
     }
 
-    async getAllUsers() {
-        await UserModel.find().toArray(function(err, users){
-            if(err) return console.log(err);
-            return users;
-        });
+    async getUser(req) {
+        const {id} = req.body
+        const user = await UserModel.findOne({_id:id});
+        const result = {
+            email:user.email
+        }
+        return result;
     }
 }
 
