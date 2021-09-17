@@ -20,6 +20,15 @@ class OfferController {
         }
     }
 
+    async getUserOffers(req, res, next) {
+        try {
+            const result = await offerService.getUserOffers(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
 }
 
 

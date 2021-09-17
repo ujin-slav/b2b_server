@@ -26,6 +26,7 @@ router.get('/getask', askController.getAsk);
 router.post('/getoneask', askController.getOneAsk);
 
 router.post('/getoffers', offerController.getOffers);
+router.post('/getuseroffers', offerController.getUserOffers);
 router.post('/addoffer', upload.array("file"), offerController.addOffer);
 
 router.get('/download/:file', loadController.download);

@@ -39,6 +39,12 @@ class OfferService {
         return result
     }
 
+    async getUserOffers(req) {
+        const {id} = req.body
+        const offer = await OfferModel.find({Author:id});
+        return offer
+    }
+
 }
 
 module.exports = new OfferService()
