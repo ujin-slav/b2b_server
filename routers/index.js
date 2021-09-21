@@ -31,4 +31,6 @@ router.post('/addoffer', upload.array("file"), offerController.addOffer);
 
 router.get('/download/:file', loadController.download);
 
+router.get('/parsing', loadController.parsing);
+
 module.exports = router
