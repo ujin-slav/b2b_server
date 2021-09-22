@@ -13,7 +13,7 @@ class AskService {
             Client:"Client",
             Name,
             Status:"Status",
-            Price:maxPrice,
+            Price:maxPrice.toString(),
             FIO:"FIO",
             Telefon:"Telefon",
             DeliveryTime:maxDate,
@@ -24,9 +24,6 @@ class AskService {
             TextAsk:Text,
             Files:req.files
         })
-
-
-
         return {ask}
     }
     async getAsk() {
