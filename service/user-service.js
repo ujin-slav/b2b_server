@@ -8,7 +8,14 @@ const UserDto = require('../dtos/user-dto')
 const ApiError = require('../exceptions/api-error');
 
 class UserService {
-    async registration(email,password) { 
+    async registration(req) { 
+        const { email, 
+                password,
+                name,
+                nameOrg,
+                INN,
+                adressOrg} = req.body.data;
+  
         const candidate = await UserModel.findOne({email})
         if (candidate){
             throw new ApiError.BadRequest(`Пользователь с таким ${email} уже существует`)
@@ -16,7 +23,7 @@ class UserService {
         const hashPassword = await bcrypt.hash(password,3)
         const activationLink = uuid.v4()
 
-        const user = await UserModel.create({email,password: hashPassword, activationLink}) 
+        const user = await UserModel.create({email,password: hashPassword, activationLink, name, nameOrg, INN,adressOrg}) 
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
         const userDto = new UserDto(user)
 
@@ -24,7 +31,7 @@ class UserService {
         await tokenService.saveToken(userDto.Id, tokens.refreshToken);
 
 
-        return {...tokens, user: userDto}
+        return {...tokens, user: userDto} 
     }
     
     async activate(activationLink){

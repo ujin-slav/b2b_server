@@ -6,6 +6,10 @@ const UserSchema = new Schema({
     isActivated: {type: Boolean, default: false},
     activationLink: {type: String},
     resetLink: {type: String},
+    name:{type: String},
+    nameOrg: {type: String},
+    INN: {type: String},
+    adressOrg: {type: String}
 })
 
 module.exports = model('User', UserSchema);
