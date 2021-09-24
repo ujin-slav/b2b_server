@@ -14,16 +14,20 @@ class UserService {
                 name,
                 nameOrg,
                 INN,
-                adressOrg} = req.body.data;
+                adressOrg,
+                fiz,
+                telefon} = req.body.data;
   
         const candidate = await UserModel.findOne({email})
         if (candidate){
-            throw new ApiError.BadRequest(`Пользователь с таким ${email} уже существует`)
+            throw ApiError.BadRequest(`Пользователь с таким ${email} уже существует`)
         }
         const hashPassword = await bcrypt.hash(password,3)
         const activationLink = uuid.v4()
 
-        const user = await UserModel.create({email,password: hashPassword, activationLink, name, nameOrg, INN,adressOrg}) 
+        const user = await UserModel.create(
+            {email,password: hashPassword,
+             activationLink, name, nameOrg, INN,adressOrg, fiz, telefon}) 
         await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
         const userDto = new UserDto(user)
 
@@ -53,6 +57,10 @@ class UserService {
         const isPassEquals = await bcrypt.compare(password, user.password);
         if (!isPassEquals) {
             return {passwordIncorrect:true}
+            //throw ApiError.BadRequest('Неверный пароль');
+        }
+        if (!user.isActivated) {
+            return {notActivated:true}
             //throw ApiError.BadRequest('Неверный пароль');
         }
         const userDto = new UserDto(user);

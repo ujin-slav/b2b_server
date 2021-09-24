@@ -8,8 +8,10 @@ const UserSchema = new Schema({
     resetLink: {type: String},
     name:{type: String},
     nameOrg: {type: String},
-    INN: {type: String},
-    adressOrg: {type: String}
+    telefon:{type: String},
+    inn: {type: String},
+    adressOrg: {type: String},
+    fiz:{type:Boolean}
 })
 
 module.exports = model('User', UserSchema);
