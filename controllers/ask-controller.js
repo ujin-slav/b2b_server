@@ -13,7 +13,7 @@ class AskController {
 
     async getAsk(req, res, next) {
         try {
-            const result = await askService.getAsk();
+            const result = await askService.getAsk(req);
             return res.json(result)
         } catch (e) {
             next(e);
@@ -31,6 +31,14 @@ class AskController {
         }
     }
 
+    async fillAsk(req, res, next) {
+        try {
+            const result = await askService.fillAsk();
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }    
 }
 
 

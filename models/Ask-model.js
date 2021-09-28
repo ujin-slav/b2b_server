@@ -1,5 +1,6 @@
 const { Double } = require('mongodb');
 const {Schema, model} = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const Ask = new Schema({
     Client: {type: String},
@@ -16,5 +17,7 @@ const Ask = new Schema({
     Region: {type: String},
     Files: []
 })
+
+Ask.plugin(mongoosePaginate);
 
 module.exports = model('Ask', Ask);

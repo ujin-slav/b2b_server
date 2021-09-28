@@ -26,14 +26,37 @@ class AskService {
         })
         return {ask}
     }
-    async getAsk() {
-        const ask = await AskModel.find();
-        return ask;
+    async getAsk(req) {
+        const {
+            limit,
+            page
+        } = req.body.formData
+        const result = await AskModel.paginate({}, {page,limit});
+        //const ask = await AskModel.find();
+        return result;
     }
 
     async getOneAsk(id) {
         const ask = await AskModel.findOne({_id:id});
         return ask;
+    }
+
+    async fillAsk() {
+        for (let i = 0; i < 50; i++) {
+                await AskModel.create({
+                    Client:"Client",
+                    Name:"111",
+                    Status:"Status" + i,
+                    Price:"12121",
+                    FIO:"FIO",
+                    Telefon:"Telefon",
+                    DeliveryAddress:"DeliveryAddress",
+                    TermsPayments:"TermsPayments",
+                    Comment:"Comment",
+                    TextAsk:"Text",
+                })
+        }
+        return {message:"hi"};
     }
 }
 

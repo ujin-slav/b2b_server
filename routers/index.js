@@ -22,12 +22,14 @@ router.get('/refresh', userController.refresh);
 router.post('/getuser',userController.getUser);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
-router.get('/getask', askController.getAsk);
+router.post('/getask', askController.getAsk);
 router.post('/getoneask', askController.getOneAsk);
+router.post('/fillask', askController.fillAsk);
 
 router.post('/getoffers', offerController.getOffers);
 router.post('/getuseroffers', offerController.getUserOffers);
 router.post('/addoffer', upload.array("file"), offerController.addOffer);
+
 
 router.get('/download/:file', loadController.download);
 
