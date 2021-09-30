@@ -18,21 +18,21 @@ class UploadController {
     async parsing(req, res, next) {
         try {
             var array = [];
-            needle.get('http://127.0.0.1/region.html', function(err, res){
+            needle.get('http://127.0.0.1/parsing.html', function(err, res){
                 var $ = cheerio.load(res.body);
                 $('div').each(function(i, item){
                     var array = [];
                     
                     $(this).children("p").each((i1,item1)=>{
                         array.push({
-                            value: "item" + i + "_" + i1,
-                            label: item1.children[0].data
+                            label: "item" + i + "_" + i1,
+                            value: item1.children[0].data
                         });
                     })
 
                     results.push({
-                        value: "item" + i,
-                        label: $(this).children("h2").text(),
+                        label: "item" + i,
+                        value: $(this).children("h2").text(),
                         children: array 
                 });
                 }); 

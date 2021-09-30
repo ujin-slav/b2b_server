@@ -30,7 +30,6 @@ router.post('/getoffers', offerController.getOffers);
 router.post('/getuseroffers', offerController.getUserOffers);
 router.post('/addoffer', upload.array("file"), offerController.addOffer);
 
-
 router.get('/download/:file', loadController.download);
 
 router.get('/parsing', loadController.parsing);

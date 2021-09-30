@@ -1,37 +1,47 @@
 const AskModel = require("../models/Ask-model")
+const UserModel =require('../models/user-model')
 
 class AskService {
     async addAsk(req) {
         const {
+            Author,
             Name,
-            maxPrice,
-            maxDate,
-            DateExp,
+            MaxPrice,
+            Telefon,
+            MaxDate,
+            EndDateOffers,
+            Comment,
             Text,
+            Category,
+            Region,
+            Date
         } = req.body
-        const ask = await AskModel.create({
-            Client:"Client",
+        console.log(req.body);
+         const ask = await AskModel.create({
+            Author,
             Name,
-            Status:"Status",
-            Price:maxPrice.toString(),
-            FIO:"FIO",
-            Telefon:"Telefon",
-            DeliveryTime:maxDate,
-            DeliveryAddress:"DeliveryAddress",
-            TermsPayments:"TermsPayments",
-            EndDateOffers:DateExp,
-            Comment:"Comment",
-            TextAsk:Text,
+            MaxPrice:MaxPrice.toString(),
+            Telefon,
+            MaxDate:MaxDate.toString(),
+            EndDateOffers,
+            Comment,
+            Text,
+            Category,
+            Region,
+            Date,
             Files:req.files
         })
-        return {ask}
+        return {ask} 
     }
     async getAsk(req) {
         const {
             limit,
-            page
+            page,
+            authorId
         } = req.body.formData
-        const result = await AskModel.paginate({}, {page,limit});
+        const user = await UserModel.findOne({_id:authorId});
+        const result = await AskModel.paginate({Author:user}, {page,limit});
+        console.log(result)
         //const ask = await AskModel.find();
         return result;
     }
