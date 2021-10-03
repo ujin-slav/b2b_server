@@ -20,6 +20,7 @@ router.post('/reset', userController.reset);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.post('/getuser',userController.getUser);
+router.post('/changeuser',userController.changeuser);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/getask', askController.getAsk);

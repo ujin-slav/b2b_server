@@ -139,6 +139,28 @@ class UserService {
         }
         return result;
     }
+
+    async changeuser(req) {
+        const {
+            id,
+            name,
+            nameOrg,
+            adressOrg,
+            telefon,
+            inn,
+            fiz
+        } = req.body.data.data
+        const user = await UserModel.updateOne({_id:id},{$set: 
+                {name,
+                nameOrg,
+                adressOrg,
+                telefon,
+                inn,
+                fiz   
+        }});
+        console.log(user)
+        //return token;
+    }
 }
 
 module.exports = new UserService()

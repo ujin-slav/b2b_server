@@ -66,6 +66,15 @@ class UserController {
         }
     }
 
+    async changeuser(req, res, next) {
+        try {
+            const result = await userService.changeuser(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async reset(req, res, next) {
         try {
             const {token, password} = req.body;
