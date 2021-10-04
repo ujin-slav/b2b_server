@@ -158,8 +158,8 @@ class UserService {
                 inn,
                 fiz   
         }});
-        console.log(user)
-        //return token;
+        const userDto = new UserDto(user);
+        return {user: userDto}
     }
 }
 

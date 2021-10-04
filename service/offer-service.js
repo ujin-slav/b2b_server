@@ -1,6 +1,7 @@
 const OfferModel = require("../models/offer-model")
 const AskModel = require("../models/Ask-model")
-const UserModel =require('../models/user-model')
+const UserModel = require('../models/user-model')
+const fs = require("fs");
 
 class OfferService {
     async addOffer(req) {
@@ -42,6 +43,23 @@ class OfferService {
     async getUserOffers(req) {
         const {id} = req.body
         const offer = await OfferModel.find({Author:id});
+        return offer
+    }
+    async deleteOffer(req) {
+        const {id} = req.body        
+        const offer = await OfferModel.findOne({_id:id});      
+        if(offer){
+            offer.Files.map((item)=>{
+                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Файл удалён");
+                    }
+                });
+            })
+        }
+        await OfferModel.deleteOne({_id:id}); 
         return offer
     }
 

@@ -41,8 +41,6 @@ class AskService {
         } = req.body.formData
         const user = await UserModel.findOne({_id:authorId});
         const result = await AskModel.paginate({Author:user}, {page,limit});
-        console.log(result)
-        //const ask = await AskModel.find();
         return result;
     }
 
@@ -67,6 +65,12 @@ class AskService {
                 })
         }
         return {message:"hi"};
+    }
+
+    async deleteAsk(req) {
+        // const ask = await AskModel.findOne({_id:id});
+        // return ask;
+        console.log(req.body.id);
     }
 }
 

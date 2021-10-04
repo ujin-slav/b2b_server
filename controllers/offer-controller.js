@@ -28,6 +28,15 @@ class OfferController {
             next(e);
         }
     }
+    async deleteOffer(req, res, next) {
+        try {
+            const result = await offerService.deleteOffer(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
 
 }
 

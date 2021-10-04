@@ -12,5 +12,6 @@ module.exports = class UserDto {
         this.adressOrg = model.adressOrg;
         this.fiz = model.fiz;
         this.telefon = model.telefon;
+        this.inn = model.inn;
     }
 }

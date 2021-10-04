@@ -39,6 +39,15 @@ class AskController {
             next(e);
         }
     }    
+
+    async deleteAsk(req, res, next) {
+        try {
+            const result = await askService.deleteAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }    
 }
 
 

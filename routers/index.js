@@ -25,9 +25,11 @@ router.post('/changeuser',userController.changeuser);
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/getask', askController.getAsk);
 router.post('/getoneask', askController.getOneAsk);
+router.post('/deleteask', askController.deleteAsk);
 router.post('/fillask', askController.fillAsk);
 
 router.post('/getoffers', offerController.getOffers);
+router.post('/deleteoffer', offerController.deleteOffer);
 router.post('/getuseroffers', offerController.getUserOffers);
 router.post('/addoffer', upload.array("file"), offerController.addOffer);
 
