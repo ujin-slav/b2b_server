@@ -1,5 +1,6 @@
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
+const fs = require("fs");
 
 class AskService {
     async addAsk(req) {
@@ -41,6 +42,7 @@ class AskService {
         } = req.body.formData
         const user = await UserModel.findOne({_id:authorId});
         const result = await AskModel.paginate({Author:user}, {page,limit});
+        console.log(authorId)
         return result;
     }
 
@@ -68,9 +70,21 @@ class AskService {
     }
 
     async deleteAsk(req) {
-        // const ask = await AskModel.findOne({_id:id});
-        // return ask;
-        console.log(req.body.id);
+        const {id} = req.body        
+        const ask = await AskModel.findOne({_id:id});      
+        if(ask){
+            ask.Files.map((item)=>{
+                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Файл удалён");
+                    }
+                });
+            })
+        }
+        await AskModel.deleteOne({_id:id}); 
+        return ask
     }
 }
 
