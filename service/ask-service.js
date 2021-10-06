@@ -17,7 +17,6 @@ class AskService {
             Region,
             Date
         } = req.body
-        console.log(req.body);
          const ask = await AskModel.create({
             Author,
             Name,
@@ -27,8 +26,8 @@ class AskService {
             EndDateOffers,
             Comment,
             Text,
-            Category,
-            Region,
+            Category:JSON.parse(Category),
+            Region:JSON.parse(Region),
             Date,
             Files:req.files
         })
