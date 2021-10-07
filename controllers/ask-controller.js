@@ -48,6 +48,15 @@ class AskController {
             next(e);
         }
     }    
+
+    async modifyAsk(req, res, next) {
+        try {
+            const result = await askService.modifyAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }   
 }
 
 

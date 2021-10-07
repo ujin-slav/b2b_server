@@ -85,6 +85,24 @@ class AskService {
         await AskModel.deleteOne({_id:id}); 
         return ask
     }
+
+    async modifyAsk(req) {
+        const {
+            Author,
+            Name,
+            MaxPrice,
+            Telefon,
+            MaxDate,
+            EndDateOffers,
+            Comment,
+            Text,
+            Category,
+            Region,
+            Date,
+            DeletedFiles
+        } = req.body
+        console.log(req.body)
+    }
 }
 
 module.exports = new AskService()
