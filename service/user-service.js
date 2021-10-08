@@ -49,7 +49,7 @@ class UserService {
 
     async login(email, password) {
         const user = await UserModel.findOne({email})
-        console.log(user);
+        //console.log(user);
         if (!user) {
             throw ApiError.BadRequest('Пользователь с таким email не найден')
         }
@@ -90,7 +90,7 @@ class UserService {
     async forgot(email) {
         try {
         const user = await UserModel.findOne({email})
-        console.log(user);
+        //console.log(user);
         if (!user) {
             return {emailIncorrect:true}
             //throw ApiError.BadRequest('Пользователь с таким email не найден')

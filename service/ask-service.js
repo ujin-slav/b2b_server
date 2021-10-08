@@ -41,7 +41,7 @@ class AskService {
         } = req.body.formData
         const user = await UserModel.findOne({_id:authorId});
         const result = await AskModel.paginate({Author:user}, {page,limit});
-        console.log(authorId)
+        //console.log(authorId)
         return result;
     }
 
@@ -88,20 +88,39 @@ class AskService {
 
     async modifyAsk(req) {
         const {
+            id,
             Author,
             Name,
-            MaxPrice,
             Telefon,
-            MaxDate,
             EndDateOffers,
-            Comment,
             Text,
             Category,
             Region,
             Date,
             DeletedFiles
         } = req.body
-        console.log(req.body)
+        JSON.parse(DeletedFiles).map((item)=>{
+            if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+            fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Файл удалён");
+                }
+            })};
+        })
+        const ask = await AskModel.replaceOne({_id:id},{
+            Author,
+            Name,
+            Telefon,
+            EndDateOffers,
+            Text,
+            Category:JSON.parse(Category),
+            Region:JSON.parse(Region),
+            Date,
+            Files:req.files
+        });
+        return ask
     }
 }
 
