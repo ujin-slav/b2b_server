@@ -3,6 +3,11 @@ const fs = require('fs');
 const needle = require('needle');
 var results = [];
 const XLSX = require('xlsx')
+const OrgModel =require('../models/Org-model')
+const csvjson = require('csvjson');
+const readFile = require('fs').readFile;
+const Excel = require('exceljs');
+var parse = require('csv-parse')
 
 class UploadController {
     
@@ -47,40 +52,32 @@ class UploadController {
 
      async parsing(req, res, next) {
         try {
-            var workbook = XLSX.readFile('C:/New.xlsx');
-            var sheet_name_list = workbook.SheetNames;
-            sheet_name_list.forEach(function(y) {
-            var worksheet = workbook.Sheets[y];
-            var headers = {};
-            var data = [];
-            for (var z in worksheet) {
-                if (z[0] === '!') continue;
-                //parse out the column, row, and value
-                var tt = 0;
-                for (var i = 0; i < z.length; i++) {
-                    if (!isNaN(z[i])) {
-                        tt = i;
-                        break;
-                    }
-                };
-                var col = z.substring(0, tt);
-                var row = parseInt(z.substring(tt));
-                var value = worksheet[z].v;
-
-                //store header names
-                if (row == 1 && value) {
-                    headers[col] = value;
-                    continue;
-                }
-
-                if (!data[row]) data[row] = {};
-                data[row][headers[col]] = value;
-            }
-            //drop those first two rows which are empty
-            data.shift();
-            data.shift();
-            console.log(data);
-            });          
+                await fs.createReadStream('C:/Users/John/Documents/Base1.csv')
+                    .pipe(parse({delimiter: ';',headers : true}))
+                    .on('data', await async function(csvrow) {
+                         let item = {
+                                NameOrg: csvrow[0],
+                                INN: csvrow[1],
+                                KPP: csvrow[2],
+                                Address: csvrow[3],
+                                Surname: csvrow[4],
+                                Name: csvrow[5],
+                                Patron: csvrow[6],
+                                Category:csvrow[7],
+                                Telefon: csvrow[8],
+                                email:csvrow[9],
+                                Debt: csvrow[10],
+                                Price: csvrow[11],
+                                OKPO: csvrow[12],
+                                Site: csvrow[13] 
+                        }    
+                        console.log(item);
+                        var result = await OrgModel.create(item)
+                    })
+                    .on('end',function() {
+                    //do something with csvData
+                    console.log("end");
+                    });
         } catch (e) {
             next(e);
         }

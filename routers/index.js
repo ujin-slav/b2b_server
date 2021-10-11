@@ -3,6 +3,7 @@ const userController = require('../controllers/user-controller');
 const askController = require('../controllers/ask-controller');
 const loadController = require('../controllers/load-controller');
 const offerController = require('../controllers/offer-controller');
+const orgController = require('../controllers/org-controller');
 const upload = require('../config/load-config');
 const router = new Router();
 const {body} = require('express-validator');
@@ -33,6 +34,8 @@ router.post('/getoffers', offerController.getOffers);
 router.post('/deleteoffer', offerController.deleteOffer);
 router.post('/getuseroffers', offerController.getUserOffers);
 router.post('/addoffer', upload.array("file"), offerController.addOffer);
+
+router.post('/getorg', orgController.getOrg);
 
 router.get('/download/:file', loadController.download);
 
