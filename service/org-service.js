@@ -1,9 +1,18 @@
 const OrgModel = require('../models/Org-model')
 
 class OrgService {
+
+    
+
     async getOrg(req) {
-        const {page,limit} = req.body
-        const result = await OrgModel.paginate({}, {page,limit});
+        const {page,limit,search} = req.body
+        let reg = ".*" + search + ".*";
+        const result = await OrgModel.paginate(
+            {INN: {
+            $regex: reg,
+            $options: 'i'
+        }}, {page,limit});
+        console.log(search)
         return result
     }
 
