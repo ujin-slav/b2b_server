@@ -6,12 +6,19 @@ class OrgService {
 
     async getOrg(req) {
         const {page,limit,search} = req.body
-        let reg = "^" + search + "";
+        let reg = "" + search + "";
         const result = await OrgModel.paginate(
+            { $or: [
             {INN: {
             $regex: reg,
             $options: 'i'
-        }}, {page,limit});
+        }}, {NameOrg: {
+            $regex: reg,
+            $options: 'i'
+        }}
+        ]}, 
+        {page,limit});
+        console.log(search)
         return result
     }
 
