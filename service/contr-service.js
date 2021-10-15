@@ -1,5 +1,7 @@
 const ContrModel = require('../models/contr-model')
 const UserModel = require('../models/user-model')
+const ApiError = require('../exceptions/api-error');
+
 class ContrService {
 
     async addContr(req) {
@@ -8,6 +10,13 @@ class ContrService {
             email
         } = req.body
         const user = await UserModel.findOne({ _id: userid });
+        const candidate = await ContrModel.findOne({
+            User:user, 
+            Email:email
+        })
+        if (candidate){
+            throw ApiError.BadRequest(`Такой email уже существует`)
+        }   
         const contr = await ContrModel.create({
             User:user, 
             Email:email
@@ -30,7 +39,7 @@ class ContrService {
             email
         } = req.body
         const user = await UserModel.findOne({ _id: userid });
-        console.log(email)
+
         const contr = await ContrModel.deleteOne({User:user, Email:email})
         return contr
     }
