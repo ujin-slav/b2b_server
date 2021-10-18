@@ -7,8 +7,16 @@ const cookieParser = require("cookie-parser");
 const mongoose = require('mongoose');
 const router = require('./routers/index');
 const errorMiddleware = require('./middleware/error-midleware');
+const {graphqlHTTP} = require('express-graphql')
+const schema = require('./graphql/schema')
+const root = require('./graphql/index')
 
 const app = express()
+app.use('/graphql', graphqlHTTP({
+    graphiql:true,
+    schema,
+    rootValue: root
+}))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
