@@ -33,7 +33,8 @@ class OfferService {
             const newitem = {
                 Text:item?.Text,
                 Author: user?.email,
-                Price: item?.Price
+                Price: item?.Price,
+                Files: item?.Files
             }
             return newitem;
         }));
