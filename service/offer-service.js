@@ -32,6 +32,7 @@ class OfferService {
             const user = await UserModel.findOne({ _id: item.Author });
             const newitem = {
                 Text:item?.Text,
+                AuthorID: user?._id,
                 Author: user?.email,
                 Price: item?.Price,
                 Files: item?.Files
