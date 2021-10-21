@@ -12,6 +12,15 @@ class QuestionController {
         }
     }
 
+    async getQuest(req, res, next) {
+        try {
+            const result = await questService.getQuest(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
 
 }
 
