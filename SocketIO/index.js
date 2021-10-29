@@ -1,4 +1,4 @@
-const IOconnect = (socket) =>{
+const IOconnect = (socket,io) =>{
   console.log(`User Connected: ${socket.id}`);
 
   socket.on("join_room", (data) => {
@@ -7,8 +7,7 @@ const IOconnect = (socket) =>{
   });
 
   socket.on("send_message", (data) => {
-    socket.to(data.room).emit("receive_message", data);
-    console.log(data)
+    io.in(data.room).emit("receive_message", data);
   });
 
   socket.on("disconnect", () => {

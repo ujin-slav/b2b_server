@@ -22,7 +22,7 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", IOconnect);
+io.on("connection", (socket)=>IOconnect(socket,io));
 
 app.use('/graphql', graphqlHTTP({
     graphiql:true,
@@ -53,3 +53,7 @@ const start = async () => {
 }
 
 start()
+
+module.exports = {
+    io: io
+};
