@@ -140,6 +140,11 @@ class UserService {
         return result;
     }
 
+    async getUsers() {
+        const result = await UserModel.find({},{id:true,name:true,nameOrg:true,email:true});
+        return result;
+    }
+
     async changeuser(req) {
         const {
             id,

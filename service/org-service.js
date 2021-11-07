@@ -2,8 +2,6 @@ const OrgModel = require('../models/Org-model')
 
 class OrgService {
 
-    
-
     async getOrg(req) {
         const {page,limit,search} = req.body
         let reg = "" + search + "";
@@ -18,12 +16,8 @@ class OrgService {
         }}
         ]}, 
         {page,limit});
-        console.log(search)
         return result
     }
-
-    
-
 }
 
 module.exports = new OrgService()

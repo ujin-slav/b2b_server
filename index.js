@@ -53,7 +53,3 @@ const start = async () => {
 }
 
 start()
-
-module.exports = {
-    io: io
-};

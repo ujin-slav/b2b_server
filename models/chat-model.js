@@ -1,8 +1,11 @@
 const {Schema, model} = require('mongoose');
 
 const Chat = new Schema({
-    Room: {type: String},
+    Text: {type: String},
+    To: {type: Schema.Types.ObjectId, ref: 'User'},
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
+    Date: {type: Date},
+    File: {type: String},
 })
 
 module.exports = model('Chat', Chat);

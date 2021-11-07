@@ -6,7 +6,6 @@ const offerController = require('../controllers/offer-controller');
 const orgController = require('../controllers/org-controller');
 const contrController = require('../controllers/contr-controller')
 const questionController = require('../controllers/question-controller')
-const messageController = require('../controllers/message-controller')
 const upload = require('../config/load-config');
 const router = new Router();
 const {body} = require('express-validator');
@@ -24,6 +23,7 @@ router.post('/reset', userController.reset);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.post('/getuser',userController.getUser);
+router.post('/getusers',userController.getUsers);
 router.post('/changeuser',userController.changeuser);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
@@ -45,9 +45,6 @@ router.post('/delcontr', contrController.delContr);
 
 router.post('/addquest', questionController.addQuest);
 router.post('/getquest', questionController.getQuest);
-
-router.post('/addmessage', messageController.addMessage);
-router.post('/getmessage', messageController.getMessage);
 
 router.get('/download/:file', loadController.download);
 
