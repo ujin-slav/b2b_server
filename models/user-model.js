@@ -11,6 +11,8 @@ const UserSchema = new Schema({
     telefon:{type: String},
     inn: {type: String},
     adressOrg: {type: String},
+    Category: [],
+    Region: [],
     fiz:{type:Boolean}
 })
 
