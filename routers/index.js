@@ -23,6 +23,7 @@ router.post('/reset', userController.reset);
 router.get('/activate/:link', userController.activate);
 router.get('/refresh', userController.refresh);
 router.post('/getuser',userController.getUser);
+router.post('/getuserbyid',userController.getUserById);
 router.post('/getusers',userController.getUsers);
 router.post('/changeuser',userController.changeuser);
 

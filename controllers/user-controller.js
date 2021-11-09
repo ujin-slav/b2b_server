@@ -102,6 +102,14 @@ class UserController {
             next(e);
         }
     }
+    async getUserById(req, res, next) {
+        try {
+            const users = await userService.getUserById(req);
+            return res.json(users);
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 

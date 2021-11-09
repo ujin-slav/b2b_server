@@ -22,7 +22,6 @@ class AskService {
             Name,
             MaxPrice:MaxPrice.toString(),
             Telefon,
-            MaxDate:MaxDate.toString(),
             EndDateOffers,
             Comment,
             Text,
@@ -39,10 +38,14 @@ class AskService {
             page,
             authorId
         } = req.body.formData
-        const user = await UserModel.findOne({_id:authorId});
-        const result = await AskModel.paginate({Author:user}, {page,limit});
-        //console.log(authorId)
-        return result;
+        if(authorId){
+            const user = await UserModel.findOne({_id:authorId});
+            const result = await AskModel.paginate({Author:user}, {page,limit});
+            return result;
+        } else {
+            const result = await AskModel.paginate({}, {page,limit});
+            return result;
+        }    
     }
 
     async getOneAsk(id) {
