@@ -43,7 +43,12 @@ class AskService {
             const result = await AskModel.paginate({Author:user}, {page,limit});
             return result;
         } else {
-            const result = await AskModel.paginate({}, {page,limit});
+            var abc = ({ path: 'Author', select: 'name nameOrg inn' });
+            var options = {
+                populate: abc, 
+                limit,
+                page};
+            const result = await AskModel.paginate({}, options);
             return result;
         }    
     }
