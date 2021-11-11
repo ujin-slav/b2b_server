@@ -157,7 +157,9 @@ class UserService {
             adressOrg,
             telefon,
             inn,
-            fiz
+            fiz,
+            region,
+            category
         } = req.body.data.data
         const user = await UserModel.updateOne({_id:id},{$set: 
                 {name,
@@ -165,7 +167,9 @@ class UserService {
                 adressOrg,
                 telefon,
                 inn,
-                fiz   
+                fiz,  
+                region:JSON.parse(region),
+                category:JSON.parse(category)
         }});
         const userDto = new UserDto(user);
         return {user: userDto}

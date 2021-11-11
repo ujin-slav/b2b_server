@@ -13,5 +13,7 @@ module.exports = class UserDto {
         this.fiz = model.fiz;
         this.telefon = model.telefon;
         this.inn = model.inn;
+        this.region = model.region;
+        this.category = model.category;
     }
 }
