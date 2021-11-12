@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const OfferSchema = new Schema({
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -7,5 +8,7 @@ const OfferSchema = new Schema({
     Ask: {type: Schema.Types.ObjectId, ref: 'Ask'},
     Files:[]
 })
+
+OfferSchema.plugin(mongoosePaginate);
 
 module.exports = model('Offer', OfferSchema);
