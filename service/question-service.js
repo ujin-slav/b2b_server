@@ -12,6 +12,8 @@ class QuestService {
         Text,
         Ask} = req.body
         
+        console.log(req.body)
+
         const ask = await AskModel.findOne({_id:Ask});
         const author = await UserModel.findOne({_id:Author});
         const destination = await UserModel.findOne({_id:Destination});

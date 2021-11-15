@@ -54,7 +54,7 @@ class AskService {
     }
 
     async getOneAsk(id) {
-        const ask = await AskModel.findOne({_id:id});
+        const ask = await AskModel.findOne({_id:id}).populate({path:'Author', select:'name nameOrg inn telefon'});
         return ask;
     }
 
