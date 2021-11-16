@@ -33,15 +33,14 @@ class QuestService {
         const questions = await QuestModel.find({Ask:id,Host:null});
         const result = await Promise.all(questions.map(async (item)=>{   
             const author = await UserModel.findOne({ _id: item.Author });
-            const destination = await UserModel.findOne({ _id: item.Destination });
+            const destination = await UserModel.findOne({ _id: item.Destination },{id:true,name:true,nameOrg:true,email:true});
             const answer =  await QuestModel.find({Host:item._id});
             const answerText = answer.map((item)=>item.Text)
             const newitem = {
                 ID: item._id,
                 Text:item?.Text,
                 Author: author?.email,
-                Destination: destination?.email,
-                DestinationID: destination?._id,
+                Destination: destination,
                 Answer:answerText
             }
             return newitem;
