@@ -1,4 +1,5 @@
 const QuestModel = require("../models/question-model")
+const UnreadQuestModel = require("../models/unreadQuest-model")
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model');
 const { assertWrappingType } = require("graphql");
@@ -11,19 +12,24 @@ class QuestService {
         Author,
         Text,
         Ask} = req.body
-        
-        console.log(req.body)
 
         const ask = await AskModel.findOne({_id:Ask});
         const author = await UserModel.findOne({_id:Author});
         const destination = await UserModel.findOne({_id:Destination});
 
-        const question = QuestModel.create
+        const question = await QuestModel.create
                 ({Host,
                 Destination:destination,
                 Author:author,
                 Text,
                 Ask:ask});
+        
+        const unread = await UnreadQuestModel.create
+        ({
+        Message:question,
+        To:destination,
+        From:author});
+                
         return question; 
     }
 
@@ -32,14 +38,14 @@ class QuestService {
         
         const questions = await QuestModel.find({Ask:id,Host:null});
         const result = await Promise.all(questions.map(async (item)=>{   
-            const author = await UserModel.findOne({ _id: item.Author });
+            const author = await UserModel.findOne({ _id: item.Author },{id:true,name:true,nameOrg:true,email:true});
             const destination = await UserModel.findOne({ _id: item.Destination },{id:true,name:true,nameOrg:true,email:true});
             const answer =  await QuestModel.find({Host:item._id});
             const answerText = answer.map((item)=>item.Text)
             const newitem = {
                 ID: item._id,
                 Text:item?.Text,
-                Author: author?.email,
+                Author: author,
                 Destination: destination,
                 Answer:answerText
             }
@@ -49,7 +55,12 @@ class QuestService {
         return result; 
     }
 
-    
+    async delQuest(req) {
+        const {id} = req.body
+        const result = QuestModel.deleteOne({_id:id});
+        return result;
+    }
+
 
 }
 

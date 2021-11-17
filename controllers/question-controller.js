@@ -21,6 +21,16 @@ class QuestionController {
         }
     }
 
+    
+    async delQuest(req, res, next) {
+        try {
+            const result = await questService.delQuest(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
 
 }
 
