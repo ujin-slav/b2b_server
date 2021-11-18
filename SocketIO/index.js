@@ -9,6 +9,7 @@ const IOconnect = (socket,io) =>{
   console.log(`User Connected: ${socket.id} id ${socket.handshake.query.userId}`);
   const userId = socket.handshake.query.userId;
   userSocketIdMap.set(userId, socket.id);
+  io.sockets.sockets.get(socket.id).emit("unread_quest", 10); 
   
   var uploader = new SocketIOFile(socket, {
         // uploadDir: {			// multiple directories

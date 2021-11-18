@@ -34,7 +34,7 @@ class QuestService {
     }
 
     async getQuest(req) {
-        const {id} = req.body
+        const {id,userId} = req.body
         
         const questions = await QuestModel.find({Ask:id,Host:null});
         const result = await Promise.all(questions.map(async (item)=>{   
@@ -51,6 +51,8 @@ class QuestService {
             }
             return newitem;
         }));
+
+        const unread = await UnreadQuestModel.deleteMany({Message:questions,To:userId})
 
         return result; 
     }
