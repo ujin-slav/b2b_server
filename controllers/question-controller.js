@@ -31,7 +31,14 @@ class QuestionController {
         }
     }
 
-
+    async getUnreadQuest(req, res, next) {
+        try {
+            const result = await questService.getUnreadQuest(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 module.exports = new QuestionController();

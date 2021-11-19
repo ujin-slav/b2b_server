@@ -9,7 +9,6 @@ const IOconnect = (socket,io) =>{
   console.log(`User Connected: ${socket.id} id ${socket.handshake.query.userId}`);
   const userId = socket.handshake.query.userId;
   userSocketIdMap.set(userId, socket.id);
-  io.sockets.sockets.get(socket.id).emit("unread_quest", 10); 
   
   var uploader = new SocketIOFile(socket, {
         // uploadDir: {			// multiple directories
@@ -66,6 +65,12 @@ const IOconnect = (socket,io) =>{
       }
   });
 
+  socket.on("unread_quest", async (data) => {
+    console.log(data)
+    if(userSocketIdMap.has(data.id)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_quest");
+    }
+  })
   socket.on("get_unread", async () => {
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread());
   })

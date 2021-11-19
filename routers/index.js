@@ -46,6 +46,7 @@ router.post('/delcontr', contrController.delContr);
 
 router.post('/addquest', questionController.addQuest);
 router.post('/getquest', questionController.getQuest);
+router.post('/getunreadquest', questionController.getUnreadQuest);
 router.post('/delquest', questionController.delQuest);
 
 router.get('/download/:file', loadController.download);

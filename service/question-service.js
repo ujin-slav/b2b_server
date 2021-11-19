@@ -63,7 +63,11 @@ class QuestService {
         return result;
     }
 
-
+    async getUnreadQuest(req) {
+        const {id} = req.body
+        const count = await UnreadQuestModel.find({To:id}).countDocuments();
+        return count
+    }
 }
 
 module.exports = new QuestService()
