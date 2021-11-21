@@ -91,14 +91,6 @@ const IOconnect = (socket,io) =>{
         To: await UserModel.findOne({_id:data.Recevier}),
         From: await UserModel.findOne({_id:data.Author})
       }) 
-      //io.sockets.sockets.get(socket.id).emit("new_message", data);
-      // if(userSocketIdMap.has(data.RecevierId)) {
-      //     let setId = userSocketIdMap.get(data.RecevierId);
-      //     for (let value of setId) {
-      //       console.log(value)
-      //       io.sockets.sockets.get(value).emit("new_message", data);
-      //     }
-      // }
       if(userSocketIdMap.has(data.Recevier)) {
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread());
@@ -109,6 +101,7 @@ const IOconnect = (socket,io) =>{
   });
 
   socket.on("get_message", async (data)=>{
+      console.log(data)
       try {
           const messages = await ChatModel.find({
           "$or": [{
@@ -119,12 +112,10 @@ const IOconnect = (socket,io) =>{
               Author: await UserModel.findOne({_id:data.UserId})
           }]
           });
-          messages.map(async (item)=>{
-            await UnreadModel.deleteOne({
-              To: await UserModel.findOne({_id:data.UserId}),
-              Message: await ChatModel.findOne({_id:item._id})
-            }) 
-          });
+          await UnreadModel.deleteMany({
+            To: await UserModel.findOne({_id:data.UserId}),
+            From: await UserModel.findOne({_id:data.RecevierId})
+          }) 
           io.sockets.sockets.get(socket.id).emit("receive_message", messages);
       } catch (error) {
         console.log(error)
