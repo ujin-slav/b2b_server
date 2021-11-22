@@ -4,6 +4,7 @@ const UnreadModel = require('../models/unread-model')
 const UserModel =require('../models/user-model')
 const SocketIOFile = require('socket.io-file');
 const path = require('path');
+const fs = require("fs");
 
 const IOconnect = (socket,io) =>{
   console.log(`User Connected: ${socket.id} id ${socket.handshake.query.userId}`);
@@ -45,7 +46,6 @@ const IOconnect = (socket,io) =>{
 
   uploader.on('complete', async (fileInfo) => {
     console.log('Upload Complete.');
-    console.log(fileInfo);
     const data = fileInfo.data
     const message = await ChatModel.create({
       To: await UserModel.findOne({_id:data.Recevier}),
@@ -58,11 +58,11 @@ const IOconnect = (socket,io) =>{
         To: await UserModel.findOne({_id:data.Recevier}),
         From: await UserModel.findOne({_id:data.Author})
       })
-      io.sockets.sockets.get(socket.id).emit("new_message", data); 
       if(userSocketIdMap.has(data.Recevier)) {
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread());
       }
+      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("new_file_message", fileInfo.name);
   });
 
   socket.on("unread_quest", async (data) => {
@@ -74,8 +74,14 @@ const IOconnect = (socket,io) =>{
   socket.on("get_unread", async () => {
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread());
   })
-  socket.on("delete_message", async (id) => {
-    await ChatModel.deleteOne({_id:id})
+  socket.on("delete_message", async (data) => {
+    await ChatModel.deleteOne({_id:data._id})
+    if(userSocketIdMap.has(data.To)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("delete_message",{Author:data.iD});
+    }
+    if(userSocketIdMap.has(data.Author)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("delete_message",{Author:data.iD});
+    }
   })
 
   socket.on("send_message", async (data) => {
@@ -101,7 +107,6 @@ const IOconnect = (socket,io) =>{
   });
 
   socket.on("get_message", async (data)=>{
-      console.log(data)
       try {
           const messages = await ChatModel.find({
           "$or": [{
