@@ -62,7 +62,7 @@ const IOconnect = (socket,io) =>{
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread());
       }
-      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("new_file_message", fileInfo.name);
+      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("new_message", data);
   });
 
   socket.on("unread_quest", async (data) => {
@@ -74,13 +74,25 @@ const IOconnect = (socket,io) =>{
   socket.on("get_unread", async () => {
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread());
   })
-  socket.on("delete_message", async (data) => {
+  socket.on("delete_message", async (data) => { 
+    if("File" in data){
+      if (fs.existsSync(__dirname+'\\..\\' + '\\uploads\\'+data.File)) {
+        fs.unlink(__dirname+'\\..\\' + '\\uploads\\'+data.File, function(err){
+          if (err) {
+              console.log(err);
+          } else {
+              console.log("Файл удалён");
+          }
+      })
+      }
+    }
     await ChatModel.deleteOne({_id:data._id})
+    console.log(data) 
     if(userSocketIdMap.has(data.To)) {
-      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("delete_message",{Author:data.iD});
+      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("delete_message",{Author:data.To});
     }
     if(userSocketIdMap.has(data.Author)) {
-      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("delete_message",{Author:data.iD});
+      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("delete_message",{Author:data.Author});
     }
   })
 
