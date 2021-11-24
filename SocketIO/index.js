@@ -1,6 +1,7 @@
 const userSocketIdMap = new Map()
 const ChatModel = require('../models/chat-model')
 const UnreadModel = require('../models/unread-model')
+const UnreadQuestModel = require('../models/unreadQuest-model')
 const UserModel =require('../models/user-model')
 const SocketIOFile = require('socket.io-file');
 const path = require('path');
@@ -11,6 +12,10 @@ const IOconnect = (socket,io) =>{
   const userId = socket.handshake.query.userId;
   userSocketIdMap.set(userId, socket.id);
   
+  if (socket.handshake.query.userId===undefined){
+    return null
+  }
+
   var uploader = new SocketIOFile(socket, {
         // uploadDir: {			// multiple directories
         // 	music: 'data/music',
@@ -30,6 +35,8 @@ const IOconnect = (socket,io) =>{
     });
 
   const getUnread = async()=>{
+    try {
+    if(socket.handshake.query.userId!==undefined){
       var unreadMessage = [];
       const from = await UnreadModel.find({
         To:socket.handshake.query.userId
@@ -42,9 +49,14 @@ const IOconnect = (socket,io) =>{
             unreadMessage.push({ID:item,count})
       }))
       return unreadMessage;
+    }
+    } catch (error) {
+      console.log(error) 
+    }
   }
 
   uploader.on('complete', async (fileInfo) => {
+    try {
     console.log('Upload Complete.');
     const data = fileInfo.data
     const message = await ChatModel.create({
@@ -63,12 +75,18 @@ const IOconnect = (socket,io) =>{
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread());
       }
       io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("new_message", data);
+    }catch (error) {
+     console.log(error) 
+    }
   });
 
   socket.on("unread_quest", async (data) => {
     console.log(data)
+    const unreadQuest = await UnreadQuestModel.find({To:data.id}).countDocuments()
+    
     if(userSocketIdMap.has(data.id)) {
-      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_quest");
+      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_quest",unreadQuest);
+      console.log(unreadQuest)
     }
   })
   socket.on("get_unread", async () => {
