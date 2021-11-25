@@ -14,6 +14,9 @@ const {graphqlHTTP} = require('express-graphql')
 const schema = require('./graphql/schema')
 const root = require('./graphql/index')
 const app = express()
+const jwt = require('jsonwebtoken')
+const tokenService = require('./service/token-service');
+const ApiError = require('./exceptions/api-error');
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -22,7 +25,20 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket)=>IOconnect(socket,io));
+io.use(function(socket, next){
+    if (socket.handshake.query && socket.handshake.query.token){
+        const userData = tokenService.validateAccessToken(socket.handshake.query.token);
+        if (userData===null) {
+            return next(ApiError.UnauthorizedError());
+        }
+        socket.user = userData;
+        next();
+    }
+    else {
+      next(ApiError.UnauthorizedError());
+    }    
+  })
+  .on("connection", (socket)=>IOconnect(socket,io));
 
 app.use('/graphql', graphqlHTTP({
     graphiql:true,

@@ -8,13 +8,9 @@ const path = require('path');
 const fs = require("fs");
 
 const IOconnect = (socket,io) =>{
-  console.log(`User Connected: ${socket.id} id ${socket.handshake.query.userId}`);
-  const userId = socket.handshake.query.userId;
+  console.log(`User Connected: ${socket.id} id ${socket.user.id}`);
+  const userId = socket.user.id;
   userSocketIdMap.set(userId, socket.id);
-  
-  if (socket.handshake.query.userId===undefined){
-    return null
-  }
 
   var uploader = new SocketIOFile(socket, {
         // uploadDir: {			// multiple directories
@@ -81,9 +77,7 @@ const IOconnect = (socket,io) =>{
   });
 
   socket.on("unread_quest", async (data) => {
-    console.log(data)
     const unreadQuest = await UnreadQuestModel.find({To:data.id}).countDocuments()
-    
     if(userSocketIdMap.has(data.id)) {
       io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_quest",unreadQuest);
       console.log(unreadQuest)
