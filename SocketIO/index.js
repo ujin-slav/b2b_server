@@ -30,22 +30,20 @@ const IOconnect = (socket,io) =>{
      } 							
     });
 
-  const getUnread = async()=>{
+  const getUnread = async(id)=>{
     try {
-    if(socket.handshake.query.userId!==undefined){
       var unreadMessage = [];
       const from = await UnreadModel.find({
-        To:socket.handshake.query.userId
+        To:id
       }).distinct("From")
       await Promise.all(from.map(async (item)=>{
           const count = await UnreadModel.find({
-              To:socket.handshake.query.userId,
+              To:id,
               From: item
             }).countDocuments()
             unreadMessage.push({ID:item,count})
       }))
       return unreadMessage;
-    }
     } catch (error) {
       console.log(error) 
     }
@@ -68,7 +66,7 @@ const IOconnect = (socket,io) =>{
       })
       if(userSocketIdMap.has(data.Recevier)) {
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
-        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread());
+        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread(data.Recevier));
       }
       io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("new_message", data);
     }catch (error) {
@@ -84,7 +82,8 @@ const IOconnect = (socket,io) =>{
     }
   })
   socket.on("get_unread", async () => {
-    io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread());
+    console.log(userId)
+    io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread(userId));
   })
   socket.on("delete_message", async (data) => { 
     if("File" in data){
@@ -123,7 +122,7 @@ const IOconnect = (socket,io) =>{
       }) 
       if(userSocketIdMap.has(data.Recevier)) {
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
-        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread());
+        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread(data.Recevier));
       }
     } catch (error) {
       console.log(error);
