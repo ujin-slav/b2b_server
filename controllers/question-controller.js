@@ -21,6 +21,15 @@ class QuestionController {
         }
     }
 
+    async getQuestUser(req, res, next) {
+        try {
+            const result = await questService.getQuestUser(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
     
     async delQuest(req, res, next) {
         try {

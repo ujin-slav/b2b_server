@@ -57,6 +57,15 @@ class QuestService {
         return result; 
     }
 
+    async getQuestUser(req) {
+        const {userId,page,limit} = req.body
+        var options = {
+            limit,
+            page};
+        const result = await QuestModel.paginate({Destination:userId,Host:null},options);
+        return result
+    }
+
     async delQuest(req) {
         const {id} = req.body
         const result = QuestModel.deleteOne({_id:id});
