@@ -6,7 +6,8 @@ const OfferSchema = new Schema({
     Price: {type: Schema.Types.Number},
     Text: {type: String},
     Ask: {type: Schema.Types.ObjectId, ref: 'Ask'},
-    Files:[]
+    Files:[],
+    Date: {type: Date},
 })
 
 OfferSchema.plugin(mongoosePaginate);

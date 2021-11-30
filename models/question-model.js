@@ -7,6 +7,7 @@ const Question = new Schema({
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
     Text: {type: String},
     Ask: {type: Schema.Types.ObjectId, ref: 'Ask'},
+    Date: {type: Date}
 })
 
 Question.plugin(mongoosePaginate);

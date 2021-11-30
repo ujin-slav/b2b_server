@@ -59,10 +59,25 @@ class QuestService {
 
     async getQuestUser(req) {
         const {userId,page,limit} = req.body
+        var abc = (
+            {path:'Author',select:"name nameOrg inn"}
+        );
         var options = {
+            populate: abc,
             limit,
             page};
-        const result = await QuestModel.paginate({Destination:userId,Host:null},options);
+        console.log(userId)    
+        const quest = await QuestModel.paginate({Destination:userId,Host:null},options);
+        const questResult = await Promise.all(quest.docs.map(async (item)=>{
+            const Status = await QuestModel.findOne({Host:item._id})
+            const newItem = {
+                Author:item.Author,
+                Text:item.Text,
+                Status
+            }
+            return newItem
+        }))
+        const result = {docs:questResult,totalPages:quest.total};
         return result
     }
 
