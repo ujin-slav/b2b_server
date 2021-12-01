@@ -19,7 +19,8 @@ class OfferService {
             Price,
             Text,
             Ask,
-            Files:req.files
+            Files:req.files,
+            Date: new Date()
         })
         
         return {offer}

@@ -22,7 +22,8 @@ class QuestService {
                 Destination:destination,
                 Author:author,
                 Text,
-                Ask:ask});
+                Ask:ask,
+                Date: new Date()});
         
         const unread = await UnreadQuestModel.create
         ({
@@ -70,14 +71,17 @@ class QuestService {
         const quest = await QuestModel.paginate({Destination:userId,Host:null},options);
         const questResult = await Promise.all(quest.docs.map(async (item)=>{
             const Status = await QuestModel.findOne({Host:item._id})
+            await UnreadQuestModel.deleteOne({Message:Ask}) 
             const newItem = {
+                Ask:item.Ask,
                 Author:item.Author,
                 Text:item.Text,
-                Status
+                Status,
+                Date:item.Date
             }
             return newItem
         }))
-        const result = {docs:questResult,totalPages:quest.total};
+        const result = {docs:questResult,totalPages:quest.totalPages};
         return result
     }
 
