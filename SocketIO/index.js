@@ -131,7 +131,7 @@ const IOconnect = (socket,io) =>{
 
   socket.on("get_message", async (data)=>{
       try {
-          const messages = await ChatModel.find({
+          const messages = await ChatModel.paginate({
           "$or": [{
               To: await UserModel.findOne({_id:data.UserId}),
               Author: await UserModel.findOne({_id:data.RecevierId})
@@ -139,7 +139,7 @@ const IOconnect = (socket,io) =>{
               To: await UserModel.findOne({_id:data.RecevierId}),
               Author: await UserModel.findOne({_id:data.UserId})
           }]
-          });
+          },{page:1,limit:5});
           await UnreadModel.deleteMany({
             To: await UserModel.findOne({_id:data.UserId}),
             From: await UserModel.findOne({_id:data.RecevierId})

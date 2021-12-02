@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const Chat = new Schema({
     Text: {type: String},
@@ -7,5 +8,7 @@ const Chat = new Schema({
     Date: {type: Date},
     File: {type: String},
 })
+
+Chat.plugin(mongoosePaginate);
 
 module.exports = model('Chat', Chat);

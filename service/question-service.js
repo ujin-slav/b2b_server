@@ -71,7 +71,7 @@ class QuestService {
         const quest = await QuestModel.paginate({Destination:userId,Host:null},options);
         const questResult = await Promise.all(quest.docs.map(async (item)=>{
             const Status = await QuestModel.findOne({Host:item._id})
-            await UnreadQuestModel.deleteOne({Message:Ask}) 
+            await UnreadQuestModel.deleteOne({Message:item.Ask}) 
             const newItem = {
                 Ask:item.Ask,
                 Author:item.Author,
