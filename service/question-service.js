@@ -59,16 +59,20 @@ class QuestService {
     }
 
     async getQuestUser(req) {
-        const {userId,page,limit} = req.body
+        let quest
+        const {userId,page,limit,dest} = req.body
         var abc = (
             {path:'Author',select:"name nameOrg inn"}
         );
         var options = {
             populate: abc,
             limit,
-            page};
-        console.log(userId)    
-        const quest = await QuestModel.paginate({Destination:userId,Host:null},options);
+            page};  
+        if(dest==="1"){
+            quest = await QuestModel.paginate({Destination:userId,Host:null},options);
+        } else {
+            quest = await QuestModel.paginate({Author:userId,Host:null},options);  
+        } 
         const questResult = await Promise.all(quest.docs.map(async (item)=>{
             const Status = await QuestModel.findOne({Host:item._id})
             await UnreadQuestModel.deleteOne({Message:item.Ask}) 

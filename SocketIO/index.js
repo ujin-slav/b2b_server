@@ -139,12 +139,16 @@ const IOconnect = (socket,io) =>{
               To: await UserModel.findOne({_id:data.RecevierId}),
               Author: await UserModel.findOne({_id:data.UserId})
           }]
-          },{page:1,limit:5});
+          },{page:data.page,limit:data.limit});
           await UnreadModel.deleteMany({
             To: await UserModel.findOne({_id:data.UserId}),
             From: await UserModel.findOne({_id:data.RecevierId})
           }) 
-          io.sockets.sockets.get(socket.id).emit("receive_message", messages);
+          if(!data.history){
+            io.sockets.sockets.get(socket.id).emit("receive_message", messages)
+          } else {
+            io.sockets.sockets.get(socket.id).emit("receive_message_history", messages)
+          }
       } catch (error) {
         console.log(error)
       }
