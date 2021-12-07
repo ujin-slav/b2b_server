@@ -108,6 +108,7 @@ const IOconnect = (socket,io) =>{
   })
 
   socket.on("send_message", async (data) => {
+    console.log(data)
     try {    
       const message = await ChatModel.create({
       Text: data.Text,  
@@ -139,16 +140,13 @@ const IOconnect = (socket,io) =>{
               To: await UserModel.findOne({_id:data.RecevierId}),
               Author: await UserModel.findOne({_id:data.UserId})
           }]
-          },{page:data.page,limit:data.limit});
+          },{page:1,limit:data.limit,sort:{Date:1}});
           await UnreadModel.deleteMany({
             To: await UserModel.findOne({_id:data.UserId}),
             From: await UserModel.findOne({_id:data.RecevierId})
           }) 
-          if(!data.history){
-            io.sockets.sockets.get(socket.id).emit("receive_message", messages)
-          } else {
-            io.sockets.sockets.get(socket.id).emit("receive_message_history", messages)
-          }
+          console.log(data)
+          io.sockets.sockets.get(socket.id).emit("receive_message", messages)
       } catch (error) {
         console.log(error)
       }
