@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const UserSchema = new Schema({
     email: {type: String, unique: true, required: true},
@@ -16,4 +17,5 @@ const UserSchema = new Schema({
     fiz:{type:Boolean}
 })
 
+UserSchema.plugin(mongoosePaginate);
 module.exports = model('User', UserSchema);

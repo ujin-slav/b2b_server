@@ -42,13 +42,12 @@ class QuestService {
             const author = await UserModel.findOne({ _id: item.Author },{id:true,name:true,nameOrg:true,email:true});
             const destination = await UserModel.findOne({ _id: item.Destination },{id:true,name:true,nameOrg:true,email:true});
             const answer =  await QuestModel.find({Host:item._id});
-            const answerText = answer.map((item)=>item.Text)
             const newitem = {
                 ID: item._id,
                 Text:item?.Text,
                 Author: author,
                 Destination: destination,
-                Answer:answerText
+                Answer:answer
             }
             return newitem;
         }));
@@ -93,6 +92,13 @@ class QuestService {
         const {id} = req.body
         const result = QuestModel.deleteOne({_id:id});
         const unread = UnreadQuestModel.deleteOne({Message:id});
+        return result;
+    }
+
+    async delAnswer(req) {
+        const {id} = req.body
+        console.log(id)
+        const result = QuestModel.deleteOne({_id:id});
         return result;
     }
 

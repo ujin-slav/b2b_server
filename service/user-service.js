@@ -145,7 +145,14 @@ class UserService {
     }
 
     async getUsers() {
-        const result = await UserModel.find({},{id:true,name:true,nameOrg:true,email:true});
+        const option = {
+            id:true,
+            name:true,
+            nameOrg:true,
+            email:true,
+            limit:8,
+            page:1}
+        const result = await UserModel.paginate({},option);
         return result;
     }
 

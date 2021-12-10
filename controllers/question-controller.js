@@ -39,6 +39,14 @@ class QuestionController {
             next(e);
         }
     }
+    async delAnswer(req, res, next) {
+        try {
+            const result = await questService.delAnswer(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 
     async getUnreadQuest(req, res, next) {
         try {
