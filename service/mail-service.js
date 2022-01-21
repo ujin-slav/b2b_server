@@ -19,11 +19,27 @@ class MailService {
             from: process.env.SMTP_USER,
             to,
             subject: 'Активация аккаунта на ' + process.env.API_URL,
-            text: 'Привет',
+            text: 'Здравствуйте',
             html:
                 `
                     <div>
                         <h1>Для активации перейдите по ссылке</h1>
+                        <a href="${link}">${link}</a>
+                    </div>
+                `
+        })
+    }
+
+    async sendRecoveryMail(to, link) {
+        await this.transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to,
+            subject: 'Восстановление пароля на ' + process.env.API_URL,
+            text: 'Здравствуйте',
+            html:
+                `
+                    <div>
+                        <h1>Для установки нового пароля перейдите по ссылке</h1>
                         <a href="${link}">${link}</a>
                     </div>
                 `

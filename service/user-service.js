@@ -98,7 +98,7 @@ class UserService {
         const token = jwt.sign({ _id: user._id }, process.env.JWT_RESET_SECRET, {
             expiresIn: "20m",
           });
-        await mailService.sendActivationMail(email, `${process.env.CLIENT_URL}/reset/${token}`); 
+        await mailService.sendRecoveryMail(email, `${process.env.CLIENT_URL}/reset/${token}`); 
         user.resetLink = token;
         await user.save();
         return {result:true}
