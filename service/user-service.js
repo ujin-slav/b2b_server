@@ -139,7 +139,9 @@ class UserService {
             email:user.email,
             name:user.name,
             nameOrg:user.nameOrg,
-            telefon:user.telefon
+            telefon:user.telefon,
+            adressOrg: user.adressOrg,
+            inn: user.inn
         }
         return result;
     }
