@@ -154,8 +154,8 @@ class UserService {
             name:true,
             nameOrg:true,
             email:true,
-            limit:8,
-            page:1}
+            limit,
+            page}
         const result = await UserModel.paginate({},option);
         return result;
     }
