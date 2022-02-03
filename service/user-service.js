@@ -148,7 +148,6 @@ class UserService {
 
     async getUsers(req) {
         const {page,limit} = req.body
-        console.log(page,limit)
         const option = {
             id:true,
             name:true,
