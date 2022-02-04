@@ -3,6 +3,7 @@ const ChatModel = require('../models/chat-model')
 const UnreadModel = require('../models/unread-model')
 const UnreadQuestModel = require('../models/unreadQuest-model')
 const UserModel =require('../models/user-model')
+const ContactsModel =require('../models/contacts-model')
 const SocketIOFile = require('socket.io-file');
 const path = require('path');
 const fs = require("fs");
@@ -125,6 +126,14 @@ const IOconnect = (socket,io) =>{
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread(data.Recevier));
       }
+      let contactRecevier = await ContactsModel.findOne({owner:data.Recevier,contact:data.Author})
+      if(contactRecevier===null){
+        await ContactsModel.create({owner:data.Recevier,contact:data.Author})
+      }
+      let contactAuthor = await ContactsModel.findOne({owner:data.Author,contact:data.Recevier})
+      if(contactAuthor===null){
+        await ContactsModel.create({owner:data.Author,contact:data.Recevier})
+      }
     } catch (error) {
       console.log(error);
     }
@@ -146,6 +155,7 @@ const IOconnect = (socket,io) =>{
             From: await UserModel.findOne({_id:data.RecevierId})
           }) 
           io.sockets.sockets.get(socket.id).emit("receive_message", messages)
+          console.log(data)
       } catch (error) {
         console.log(error)
       }

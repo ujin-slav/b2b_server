@@ -1,4 +1,6 @@
 const UserModel =require('../models/user-model')
+const ChatModel = require('../models/chat-model')
+const ContactsModel =require('../models/contacts-model')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
@@ -147,15 +149,20 @@ class UserService {
     }
 
     async getUsers(req) {
-        const {page,limit} = req.body
+        const {page,limit,user} = req.body
+        var abc = ({ path: 'contact', select: 'name nameOrg email' });
         const option = {
             id:true,
             name:true,
             nameOrg:true,
             email:true,
+            populate: abc, 
             limit,
             page}
-        const result = await UserModel.paginate({},option);
+        const result = await ContactsModel.paginate(
+            {owner:user},
+            option);
+        console.log(user)    
         return result;
     }
 

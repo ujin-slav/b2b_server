@@ -20,6 +20,16 @@ class AskController {
         }
     }
 
+    
+    async getFilterAsk(req, res, next) {
+        try {
+            const result = await askService.getFilterAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async getOneAsk(req, res, next) {
         try {
             const id = req.body.id

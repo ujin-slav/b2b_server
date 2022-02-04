@@ -53,6 +53,26 @@ class AskService {
         }    
     }
 
+    async getFilterAsk(req) {
+        const {
+            limit,
+            page,
+            region,
+            category,
+            inn,
+            nameAsk,
+            filter
+        } = req.body.formData 
+        var options = {
+            limit,
+            page};
+        const result = await AskModel.paginate(
+            {Category: {$in : filter}}
+            ,options);
+        console.log(filter)
+        return result;  
+    }
+
     async getOneAsk(id) {
         const ask = await AskModel.findOne({_id:id}).populate({path:'Author', select:'name nameOrg inn telefon'});
         return ask;
