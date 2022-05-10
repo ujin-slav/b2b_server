@@ -50,6 +50,7 @@ class OfferService {
         select:'Author Text'
         });
             var options = {
+                sort:{"_id":-1},
                 populate: abc, 
                 limit,
                 page};

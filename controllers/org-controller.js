@@ -12,7 +12,14 @@ class OrgController {
         }
     }
 
-   
+    async getOrgCat(req, res, next) {
+        try {
+            const result = await orgService.getOrgCat(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 
 }
 

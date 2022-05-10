@@ -14,6 +14,9 @@ const Ask = new Schema({
     Category: [],
     Region: [],
     Files: [],
+    Private: {type: Boolean},
+    Send: {type: Boolean},
+    Party:{type: String},
     Date: {type: Date},
 })
 

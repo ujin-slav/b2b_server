@@ -135,7 +135,6 @@ class UserService {
 
     async getUser(req) {
         const {id} = req.body
-        console.log(id)
         const user = await UserModel.findOne({_id:id});
         const result = {
             email:user.email,

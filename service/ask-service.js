@@ -15,7 +15,10 @@ class AskService {
             Text,
             Category,
             Region,
-            Date
+            Date,
+            Private,
+            Send,
+            Party,
         } = req.body
          const ask = await AskModel.create({
             Author,
@@ -28,7 +31,10 @@ class AskService {
             Category:JSON.parse(Category),
             Region:JSON.parse(Region),
             Date,
-            Files:req.files
+            Files:req.files,
+            Private,
+            Send,
+            Party
         })
         return {ask} 
     }
@@ -40,11 +46,12 @@ class AskService {
         } = req.body.formData
         if(authorId){
             const user = await UserModel.findOne({_id:authorId});
-            const result = await AskModel.paginate({Author:user}, {page,limit});
+            const result = await AskModel.paginate({Author:user}, {page,limit,sort:{"_id":-1}});
             return result;
         } else {
             var abc = ({ path: 'Author', select: 'name nameOrg inn' });
             var options = {
+                sort:{"_id":-1},
                 populate: abc, 
                 limit,
                 page};
@@ -54,6 +61,7 @@ class AskService {
     }
 
     async getFilterAsk(req) {
+        let searchParam = {}
         const {
             limit,
             page,
@@ -61,15 +69,35 @@ class AskService {
             category,
             inn,
             nameAsk,
-            filter
+            filterCat,
+            filterRegion
         } = req.body.formData 
         var options = {
+            sort:{"_id":-1}, 
             limit,
             page};
+        if(filterCat.length==0 && filterRegion.length==0){
+            searchParam = {}
+        }
+        if(filterCat.length>0 && filterRegion.length==0){
+            searchParam = {
+                Category: {$in : filterCat}
+            }
+        }
+        if(filterCat.length==0 && filterRegion.length>0){
+            searchParam = {
+                Region: {$in : filterRegion}
+            }
+        }
+        if(filterCat.length>0 && filterRegion.length>0){
+            searchParam = {
+                Category: {$in : filterCat},
+                Region: {$in : filterRegion}
+            }
+        }
         const result = await AskModel.paginate(
-            {Category: {$in : filter}}
-            ,options);
-        console.log(filter)
+            searchParam, 
+            options);
         return result;  
     }
 

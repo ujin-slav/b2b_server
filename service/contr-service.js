@@ -7,7 +7,8 @@ class ContrService {
     async addContr(req) {
         const {
             userid,
-            email
+            email,
+            name,
         } = req.body
         const user = await UserModel.findOne({ _id: userid });
         const candidate = await ContrModel.findOne({
@@ -17,9 +18,11 @@ class ContrService {
         if (candidate){
             throw ApiError.BadRequest(`Такой email уже существует`)
         }   
+        console.log(name)
         const contr = await ContrModel.create({
             User:user, 
-            Email:email
+            Email:email,
+            Name:name
         })
         return contr
     }
