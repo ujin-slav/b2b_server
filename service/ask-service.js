@@ -72,8 +72,10 @@ class AskService {
             filterCat,
             filterRegion
         } = req.body.formData 
+        var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
+            populate: abc,
             limit,
             page};
         if(filterCat.length==0 && filterRegion.length==0){

@@ -9,14 +9,15 @@ const Ask = new Schema({
     Telefon: {type: String},
     MaxDate: {type: Schema.Types.Number},
     EndDateOffers: {type: Date},
-    Comment: {type:String},
     Text: {type: String},
     Category: [],
     Region: [],
     Files: [],
     Private: {type: Boolean},
     Send: {type: Boolean},
+    Hiden: {type: Boolean},
     Party:{type: String},
+    Comment: {type:String},
     Date: {type: Date},
 })
 
