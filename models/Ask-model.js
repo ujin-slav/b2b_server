@@ -16,7 +16,7 @@ const Ask = new Schema({
     Private: {type: Boolean},
     Send: {type: Boolean},
     Hiden: {type: Boolean},
-    Party:{type: String},
+    Party:[],
     Comment: {type:String},
     Date: {type: Date},
 })

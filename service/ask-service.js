@@ -34,7 +34,7 @@ class AskService {
             Files:req.files,
             Private,
             Send,
-            Party
+            Party:JSON.parse(Party)
         })
         return {ask} 
     }
@@ -146,7 +146,7 @@ class AskService {
 
     async modifyAsk(req) {
         const {
-            id,
+            Id,
             Author,
             Name,
             Telefon,
@@ -155,7 +155,11 @@ class AskService {
             Category,
             Region,
             Date,
-            DeletedFiles
+            DeletedFiles,
+            Private,
+            Send,
+            Comment,
+            Party,
         } = req.body
         JSON.parse(DeletedFiles).map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
@@ -167,7 +171,7 @@ class AskService {
                 }
             })};
         })
-        const ask = await AskModel.replaceOne({_id:id},{
+        const ask = await AskModel.updateOne({_id:Id},{$set:{
             Author,
             Name,
             Telefon,
@@ -176,8 +180,12 @@ class AskService {
             Category:JSON.parse(Category),
             Region:JSON.parse(Region),
             Date,
-            Files:req.files
-        });
+            Files:req.files,
+            Private,
+            Send,
+            Party:JSON.parse(Party),
+            Comment,
+        }});
         return ask
     }
 }
