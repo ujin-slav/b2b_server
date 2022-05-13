@@ -11,19 +11,30 @@ class OfferService {
             Text,
             Ask,
         } = req.body
-        const ask = await AskModel.findOne({ _id: Ask });
-        const user = await UserModel.findOne({ _id: UserId });
-
-        const offer = await OfferModel.create({
-            Author:user, 
-            Price,
-            Text,
-            Ask,
-            Files:req.files,
-            Date: new Date()
-        })
+        const findOffer = await OfferModel.findOne({Author:UserId,Ask})
         
-        return {offer}
+        if(!findOffer){
+            const offer = await OfferModel.create({
+                Author:UserId, 
+                Price,
+                Text,
+                Ask,
+                Files:req.files,
+                Date: new Date()
+            })
+            return {offer}
+        } else {
+            const updateOffer = await OfferModel.updateOne({Author:UserId,Ask},{$set:{
+                Author:UserId, 
+                Price,
+                Text,
+                Ask,
+                Files:req.files,
+                Date: new Date()
+            }})
+            return {updateOffer}  
+        }        
+             
     }
 
     async getOffers(req) {
@@ -34,9 +45,12 @@ class OfferService {
             const newitem = {
                 Text:item?.Text,
                 AuthorID: user?._id,
-                Author: user?.email,
+                AuthorName: user?.name,
+                AuthorInn: user?.inn,
+                AuthorOrg: user?.nameOrg,
                 Price: item?.Price,
-                Files: item?.Files
+                Files: item?.Files,
+                Date: item?.Date
             }
             return newitem;
         }));
