@@ -5,6 +5,8 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const Ask = new Schema({
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
     Name: {type: String},
+    NameOrg: {type: String},
+    Inn: {type: String},
     MaxPrice: {type: Schema.Types.Number},
     Telefon: {type: String},
     MaxDate: {type: Schema.Types.Number},

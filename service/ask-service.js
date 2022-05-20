@@ -70,7 +70,9 @@ class AskService {
             inn,
             nameAsk,
             filterCat,
-            filterRegion
+            filterRegion,
+            searchText,
+            searchInn,
         } = req.body.formData 
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
@@ -79,7 +81,24 @@ class AskService {
             limit,
             page};
         if(filterCat.length==0 && filterRegion.length==0){
-            searchParam = {}
+            searchParam = {
+                $or: [
+                    {Name: {
+                    $regex: searchText,
+                    $options: 'i'
+                }}, {Text: {
+                    $regex: searchText,
+                    $options: 'i'
+                }}],
+                $or: [
+                    {NameOrg: {
+                    $regex: searchInn,
+                    $options: 'i'
+                }}, {Inn: {
+                    $regex: searchInn,
+                    $options: 'i'
+                }}]
+            }
         }
         if(filterCat.length>0 && filterRegion.length==0){
             searchParam = {
@@ -171,6 +190,7 @@ class AskService {
                 }
             })};
         })
+        const user = await UserModel.findOne({_id:Author});
         const ask = await AskModel.updateOne({_id:Id},{$set:{
             Author,
             Name,
@@ -185,6 +205,8 @@ class AskService {
             Send,
             Party:JSON.parse(Party),
             Comment,
+            NameOrg: user.nameOrg,
+            Inn: user.inn
         }});
         return ask
     }
