@@ -73,48 +73,53 @@ class AskService {
             filterRegion,
             searchText,
             searchInn,
-        } = req.body.formData 
+        } = req.body.formData
+        console.log("Text " + searchText) 
+        console.log("inn " + searchInn) 
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
             populate: abc,
             limit,
             page};
-        if(filterCat.length==0 && filterRegion.length==0){
-            searchParam = {
-                $or: [
+        var textInnParam = {
+            $and:[
+                {$or: [
                     {Name: {
                     $regex: searchText,
                     $options: 'i'
                 }}, {Text: {
                     $regex: searchText,
                     $options: 'i'
-                }}],
-                $or: [
+                }}]},
+                {$or: [
                     {NameOrg: {
                     $regex: searchInn,
                     $options: 'i'
                 }}, {Inn: {
                     $regex: searchInn,
                     $options: 'i'
-                }}]
-            }
+                }}]}
+            ]
+        }    
+        if(filterCat.length==0 && filterRegion.length==0){
+            searchParam = textInnParam
         }
         if(filterCat.length>0 && filterRegion.length==0){
-            searchParam = {
+            searchParam = Object.assign({
                 Category: {$in : filterCat}
-            }
+            },textInnParam)
         }
         if(filterCat.length==0 && filterRegion.length>0){
-            searchParam = {
+            searchParam = Object.assign({
                 Region: {$in : filterRegion}
-            }
+            },textInnParam)
         }
         if(filterCat.length>0 && filterRegion.length>0){
-            searchParam = {
+            searchParam = Object.assign({
                 Category: {$in : filterCat},
                 Region: {$in : filterRegion}
-            }
+            },textInnParam)
         }
         const result = await AskModel.paginate(
             searchParam, 
@@ -180,6 +185,7 @@ class AskService {
             Comment,
             Party,
         } = req.body
+        console.log("Text " + Text)
         JSON.parse(DeletedFiles).map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
             fs.unlink(__dirname+'\\..\\'+item.path, function(err){
