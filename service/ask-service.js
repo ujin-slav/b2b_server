@@ -20,6 +20,7 @@ class AskService {
             Send,
             Party,
         } = req.body
+        const user = await UserModel.findOne({_id:Author});
          const ask = await AskModel.create({
             Author,
             Name,
@@ -34,7 +35,9 @@ class AskService {
             Files:req.files,
             Private,
             Send,
-            Party:JSON.parse(Party)
+            Party:JSON.parse(Party),
+            NameOrg: user.nameOrg,
+            Inn: user.inn
         })
         return {ask} 
     }
