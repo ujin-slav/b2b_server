@@ -21,6 +21,17 @@ class UploadController {
         }
     }
 
+    async getStatic(req, res, next) {
+        console.log(req.params.path)
+        console.log(req.params.file)
+        try {
+            let file = __dirname + '/../static/' + req.params.path + "/" + req.params.file;
+            res.download(file);
+        } catch (e) {
+            next(e);
+        }
+    }
+
     // async parsing(req, res, next) {
     //     try {
     //         var array = [];

@@ -54,6 +54,7 @@ router.post('/delquest', questionController.delQuest);
 router.post('/delanswer', questionController.delAnswer);
 
 router.get('/download/:file', loadController.download);
+router.get('/static/:path/:file', loadController.getStatic);
 
 router.get('/parsing', loadController.parsing);
 
