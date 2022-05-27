@@ -39,7 +39,7 @@ class OfferService {
 
     async getOffers(req) {
         const {id} = req.body
-        const offer = await OfferModel.find({Ask:id})
+        const offer = await OfferModel.find({Ask:id}).sort({"_id":-1})
         const result = await Promise.all(offer.map(async (item)=>{   
             const user = await UserModel.findOne({ _id: item.Author });
             const newitem = {

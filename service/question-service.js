@@ -37,7 +37,7 @@ class QuestService {
     async getQuest(req) {
         const {id,userId} = req.body
         
-        const questions = await QuestModel.find({Ask:id,Host:null});
+        const questions = await QuestModel.find({Ask:id,Host:null}).sort({"_id":-1});
         const result = await Promise.all(questions.map(async (item)=>{   
             const author = await UserModel.findOne({ _id: item.Author },{id:true,name:true,nameOrg:true,email:true});
             const destination = await UserModel.findOne({ _id: item.Destination },{id:true,name:true,nameOrg:true,email:true});
@@ -65,6 +65,7 @@ class QuestService {
         );
         var options = {
             populate: abc,
+            sort:{"_id":-1},
             limit,
             page};  
         if(dest==="1"){
