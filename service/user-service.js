@@ -154,6 +154,7 @@ class UserService {
             id:true,
             name:true,
             nameOrg:true,
+            sort:{"_id":-1},
             email:true,
             populate: abc, 
             limit,
@@ -161,7 +162,6 @@ class UserService {
         const result = await ContactsModel.paginate(
             {owner:user},
             option);
-        console.log(user)    
         return result;
     }
 
