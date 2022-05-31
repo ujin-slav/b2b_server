@@ -20,7 +20,7 @@ router.post('/login', userController.login);
 router.post('/logout', userController.logout);
 router.post('/forgot', userController.forgot);
 router.post('/reset', userController.reset);
-router.get('/activate/:link', userController.activate);
+router.post('/activate', userController.activate);
 router.get('/refresh', userController.refresh);
 router.post('/getuser',userController.getUser);
 router.post('/getuserbyid',userController.getUserById);
