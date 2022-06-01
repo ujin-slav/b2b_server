@@ -18,6 +18,7 @@ class AskService {
             Date,
             Private,
             Send,
+            Hiden,
             Party,
         } = req.body
         const user = await UserModel.findOne({_id:Author});
@@ -35,6 +36,7 @@ class AskService {
             Files:req.files,
             Private,
             Send,
+            Hiden,
             Party:JSON.parse(Party),
             NameOrg: user.nameOrg,
             Inn: user.inn
@@ -184,7 +186,7 @@ class AskService {
             Date,
             DeletedFiles,
             Private,
-            Send,
+            Hiden,
             Comment,
             Party,
         } = req.body
@@ -211,7 +213,7 @@ class AskService {
             Date,
             Files:req.files,
             Private,
-            Send,
+            Hiden,
             Party:JSON.parse(Party),
             Comment,
             NameOrg: user.nameOrg,

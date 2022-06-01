@@ -15,10 +15,12 @@ class UserService {
                 password,
                 name,
                 nameOrg,
-                INN,
+                inn,
                 adressOrg,
                 fiz,
-                telefon} = req.body.data;
+                telefon,
+                region,
+                category} = req.body.data;
   
         const candidate = await UserModel.findOne({email})
         if (candidate){
@@ -28,8 +30,17 @@ class UserService {
         const activationLink = uuid.v4()
 
         const user = await UserModel.create(
-            {email,password: hashPassword,
-             activationLink, name, nameOrg, INN,adressOrg, fiz, telefon}) 
+                {email,
+                password: hashPassword,
+                activationLink,
+                name, 
+                nameOrg, 
+                inn,
+                adressOrg, 
+                fiz, 
+                telefon,
+                region:JSON.parse(region),
+                category:JSON.parse(category)}) 
         await mailService.sendActivationMail(email, `${process.env.CLIENT_URL}/activate/${activationLink}`);
         const userDto = new UserDto(user)
 
