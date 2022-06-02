@@ -190,7 +190,7 @@ class AskService {
             Comment,
             Party,
         } = req.body
-        console.log("Text " + Text)
+        console.log(req.body)
         JSON.parse(DeletedFiles).map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
             fs.unlink(__dirname+'\\..\\'+item.path, function(err){
