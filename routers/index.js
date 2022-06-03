@@ -33,7 +33,7 @@ router.post('/getfilterask', askController.getFilterAsk);
 router.post('/getoneask', askController.getOneAsk);
 router.post('/deleteask', askController.deleteAsk);
 router.post('/fillask', askController.fillAsk);
-router.post('/modifyask', upload.array("file"),askController.modifyAsk);
+router.post('/modifyask', authMiddleware,upload.array("file"),askController.modifyAsk);
 
 router.post('/getoffers', offerController.getOffers);
 router.post('/deleteoffer', offerController.deleteOffer);

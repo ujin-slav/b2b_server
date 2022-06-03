@@ -1,5 +1,8 @@
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
+const roleService = require('./role-service')
+const ApiError = require('../exceptions/api-error');
+const mailService =require('./mail-service')
 const fs = require("fs");
 
 class AskService {
@@ -19,29 +22,32 @@ class AskService {
             Private,
             Send,
             Hiden,
-            Party,
         } = req.body
+        const Party =  JSON.parse(req.body.Party)
         const user = await UserModel.findOne({_id:Author});
-         const ask = await AskModel.create({
-            Author,
-            Name,
-            MaxPrice:MaxPrice.toString(),
-            Telefon,
-            EndDateOffers,
-            Comment,
-            Text,
-            Category:JSON.parse(Category),
-            Region:JSON.parse(Region),
-            Date,
-            Files:req.files,
-            Private,
-            Send,
-            Hiden,
-            Party:JSON.parse(Party),
-            NameOrg: user.nameOrg,
-            Inn: user.inn
-        })
-        return {ask} 
+        //  const ask = await AskModel.create({
+        //     Author,
+        //     Name,
+        //     MaxPrice:MaxPrice.toString(),
+        //     Telefon,
+        //     EndDateOffers,
+        //     Comment,
+        //     Text,
+        //     Category:JSON.parse(Category),
+        //     Region:JSON.parse(Region),
+        //     Date,
+        //     Files:req.files,
+        //     Private,
+        //     Send,
+        //     Hiden,
+        //     Party:JSON.parse(Party),
+        //     NameOrg: user.nameOrg,
+        //     Inn: user.inn
+        // })
+        if(Send){
+            Party.map((item)=>console.log(item.Email))
+        }
+        //return {ask} 
     }
     async getAsk(req) {
         const {
@@ -190,7 +196,6 @@ class AskService {
             Comment,
             Party,
         } = req.body
-        console.log(req.body)
         JSON.parse(DeletedFiles).map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
             fs.unlink(__dirname+'\\..\\'+item.path, function(err){
@@ -201,25 +206,30 @@ class AskService {
                 }
             })};
         })
-        const user = await UserModel.findOne({_id:Author});
-        const ask = await AskModel.updateOne({_id:Id},{$set:{
-            Author,
-            Name,
-            Telefon,
-            EndDateOffers,
-            Text,
-            Category:JSON.parse(Category),
-            Region:JSON.parse(Region),
-            Date,
-            Files:req.files,
-            Private,
-            Hiden,
-            Party:JSON.parse(Party),
-            Comment,
-            NameOrg: user.nameOrg,
-            Inn: user.inn
-        }});
-        return ask
+        const user = await UserModel.findOne({_id:Author})
+        const authorAsk =  await AskModel.findOne({_id:Id}).populate({path:'Author', select:'id'})
+        if(req.user.id===authorAsk.Author.id){
+            const ask = await AskModel.updateOne({_id:Id},{$set:{
+                Author,
+                Name,
+                Telefon,
+                EndDateOffers,
+                Text,
+                Category:JSON.parse(Category),
+                Region:JSON.parse(Region),
+                Date,
+                Files:req.files,
+                Private,
+                Hiden,
+                Party:JSON.parse(Party),
+                Comment,
+                NameOrg: user.nameOrg,
+                Inn: user.inn
+            }})
+            return ask
+        }else{
+            throw ApiError.BadRequest('Нет прав на изменение') 
+        }
     }
 }
 
