@@ -129,9 +129,15 @@ const IOconnect = (socket,io) =>{
       let contactRecevier = await ContactsModel.findOne({owner:data.Recevier,contact:data.Author})
       if(contactRecevier===null){
         await ContactsModel.create({owner:data.Recevier,contact:data.Author})
+      }else{
+        await ContactsModel.deleteOne({owner:data.Recevier,contact:data.Author})
+        await ContactsModel.create({owner:data.Recevier,contact:data.Author})
       }
       let contactAuthor = await ContactsModel.findOne({owner:data.Author,contact:data.Recevier})
       if(contactAuthor===null){
+        await ContactsModel.create({owner:data.Author,contact:data.Recevier})
+      }else{
+        await ContactsModel.deleteOne({owner:data.Author,contact:data.Recevier})
         await ContactsModel.create({owner:data.Author,contact:data.Recevier})
       }
     } catch (error) {
