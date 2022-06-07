@@ -2,6 +2,7 @@ const userSocketIdMap = new Map()
 const ChatModel = require('../models/chat-model')
 const UnreadModel = require('../models/unread-model')
 const UnreadQuestModel = require('../models/unreadQuest-model')
+const UnreadInvitedModel = require('../models/unreadInvited-model')
 const UserModel =require('../models/user-model')
 const ContactsModel =require('../models/contacts-model')
 const SocketIOFile = require('socket.io-file');
@@ -79,8 +80,16 @@ const IOconnect = (socket,io) =>{
     const unreadQuest = await UnreadQuestModel.find({To:data.id}).countDocuments()
     if(userSocketIdMap.has(data.id)) {
       io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_quest",unreadQuest);
-      console.log(unreadQuest)
     }
+  })
+  socket.on("unread_invited", async (data) => {
+    await Promise.all(data.checkedEmail.map(async (item)=>{
+        const user = await UserModel.find({email:item.Email})
+        if(user){
+          const unreadInvited = await UnreadInvitedModel.find({To:user.id}).countDocuments()
+          io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invited",unreadInvited);
+        }
+    }))
   })
   socket.on("get_unread", async () => {
     console.log(userId)
