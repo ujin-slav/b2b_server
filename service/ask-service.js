@@ -25,28 +25,28 @@ class AskService {
         } = req.body
         const Party =  JSON.parse(req.body.Party)
         const user = await UserModel.findOne({_id:Author});
-        //  const ask = await AskModel.create({
-        //     Author,
-        //     Name,
-        //     MaxPrice:MaxPrice.toString(),
-        //     Telefon,
-        //     EndDateOffers,
-        //     Comment,
-        //     Text,
-        //     Category:JSON.parse(Category),
-        //     Region:JSON.parse(Region),
-        //     Date,
-        //     Files:req.files,
-        //     Private,
-        //     Send,
-        //     Hiden,
-        //     Party:JSON.parse(Party),
-        //     NameOrg: user.nameOrg,
-        //     Inn: user.inn
-        // })
-        if(Send){
-            Party.map((item)=>console.log(item.Email))
-        }
+         const ask = await AskModel.create({
+            Author,
+            Name,
+            MaxPrice:MaxPrice.toString(),
+            Telefon,
+            EndDateOffers,
+            Comment,
+            Text,
+            Category:JSON.parse(Category),
+            Region:JSON.parse(Region),
+            Date,
+            Files:req.files,
+            Private,
+            Send,
+            Hiden,
+            Party,
+            NameOrg: user.nameOrg,
+            Inn: user.inn
+        })
+        // if(Send){
+        //     Party.map((item)=>console.log(item.Email))
+        // }
         //return {ask} 
     }
     async getAsk(req) {
@@ -85,8 +85,6 @@ class AskService {
             searchText,
             searchInn,
         } = req.body.formData
-        console.log("Text " + searchText) 
-        console.log("inn " + searchInn) 
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
@@ -137,6 +135,28 @@ class AskService {
             options);
         return result;  
     }
+
+    async getInvitedAsk(req) {
+        const {
+            limit,
+            page,
+            email
+        } = req.body.formData
+        var abc = ({ path: 'Author', select: 'name nameOrg inn' });
+        var options = {
+            sort:{"_id":-1}, 
+            populate: abc,
+            limit,
+            page};
+        var searchParam = {
+            Party: {$elemMatch: {Email:email}}
+        }    
+        const result = await AskModel.paginate(
+            searchParam, 
+            options);    
+        return result;  
+    }
+
 
     async getOneAsk(id) {
         const ask = await AskModel.findOne({_id:id}).populate({path:'Author', select:'name nameOrg inn telefon'});

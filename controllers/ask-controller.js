@@ -30,6 +30,16 @@ class AskController {
         }
     }
 
+        
+    async getInvitedAsk(req, res, next) {
+        try {
+            const result = await askService.getInvitedAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
     async getOneAsk(req, res, next) {
         try {
             const id = req.body.id

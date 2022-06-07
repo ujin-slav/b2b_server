@@ -30,6 +30,7 @@ router.post('/changeuser',userController.changeuser);
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/getask', askController.getAsk);
 router.post('/getfilterask', askController.getFilterAsk);
+router.post('/getinvitedask', askController.getInvitedAsk);
 router.post('/getoneask', askController.getOneAsk);
 router.post('/deleteask', askController.deleteAsk);
 router.post('/fillask', askController.fillAsk);
