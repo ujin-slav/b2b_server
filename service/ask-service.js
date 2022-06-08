@@ -44,10 +44,7 @@ class AskService {
             NameOrg: user.nameOrg,
             Inn: user.inn
         })
-        // if(Send){
-        //     Party.map((item)=>console.log(item.Email))
-        // }
-        //return {ask} 
+        return {ask} 
     }
     async getAsk(req) {
         const {

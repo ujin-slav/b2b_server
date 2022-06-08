@@ -92,7 +92,6 @@ const IOconnect = (socket,io) =>{
     }))
   })
   socket.on("get_unread", async () => {
-    console.log(userId)
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread(userId));
   })
   socket.on("delete_message", async (data) => { 
