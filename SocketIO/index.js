@@ -84,15 +84,21 @@ const IOconnect = (socket,io) =>{
   })
   socket.on("unread_invited", async (data) => {
     await Promise.all(data.checkedEmail.map(async (item)=>{
-        const user = await UserModel.find({email:item.Email})
+        const user = await UserModel.findOne({email:item.Email})
         if(user){
-          const unreadInvited = await UnreadInvitedModel.find({To:user.id}).countDocuments()
-          io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invited",unreadInvited);
+          if(userSocketIdMap.has(user.id)) {
+            const unreadInvited = await UnreadInvitedModel.find({To:user.id}).countDocuments()
+            io.sockets.sockets.get(userSocketIdMap.get(user.id)).emit("get_unread_invited",unreadInvited);
+          }
         }
     }))
   })
   socket.on("get_unread", async () => {
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread(userId));
+    const unreadQuest = await UnreadQuestModel.find({To:userId}).countDocuments()
+    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_quest",unreadQuest);
+    const unreadInvited = await UnreadInvitedModel.find({To:userId}).countDocuments()
+    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invited",unreadInvited);
   })
   socket.on("delete_message", async (data) => { 
     if("File" in data){

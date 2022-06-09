@@ -1,5 +1,6 @@
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
+const UnreadInvitedModel = require("../models/unreadInvited-model")
 const roleService = require('./role-service')
 const ApiError = require('../exceptions/api-error');
 const mailService =require('./mail-service')
@@ -44,8 +45,18 @@ class AskService {
             NameOrg: user.nameOrg,
             Inn: user.inn
         })
+        await Promise.all(Party.map(async (item)=>{
+            const user = await UserModel.findOne({email:item.Email})
+            if(user){
+               await UnreadInvitedModel.create({
+                Ask: ask,
+                To: user,
+               })
+            }
+        }))
         return {ask} 
     }
+
     async getAsk(req) {
         const {
             limit,
@@ -137,7 +148,8 @@ class AskService {
         const {
             limit,
             page,
-            email
+            email,
+            userId
         } = req.body.formData
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
@@ -148,6 +160,9 @@ class AskService {
         var searchParam = {
             Party: {$elemMatch: {Email:email}}
         }    
+        await UnreadInvitedModel.deleteMany({
+            To: userId,
+        })
         const result = await AskModel.paginate(
             searchParam, 
             options);    

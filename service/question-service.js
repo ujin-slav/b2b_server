@@ -91,8 +91,8 @@ class QuestService {
 
     async delQuest(req) {
         const {id} = req.body
-        const result = QuestModel.deleteOne({_id:id});
-        const unread = UnreadQuestModel.deleteOne({Message:id});
+        const result = await QuestModel.deleteOne({_id:id});
+        await UnreadQuestModel.deleteOne({Message:id});
         return result;
     }
 
