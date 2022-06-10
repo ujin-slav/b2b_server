@@ -53,6 +53,10 @@ class AskService {
                 To: user,
                })
             }
+            if(Send){
+                mailService.sendInvited(item.Email)
+                console.log(item.Email)
+            }
         }))
         return {ask} 
     }

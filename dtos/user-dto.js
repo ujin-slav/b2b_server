@@ -15,5 +15,8 @@ module.exports = class UserDto {
         this.inn = model.inn;
         this.region = model.region;
         this.category = model.category;
+        this.notiInvited = model.notiInvited;
+        this.notiMessage = model.notiMessage;
+        this.notiQuest = model.notiQuest;
     }
 }

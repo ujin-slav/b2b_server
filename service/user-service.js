@@ -40,7 +40,10 @@ class UserService {
                 fiz, 
                 telefon,
                 region:JSON.parse(region),
-                category:JSON.parse(category)}) 
+                category:JSON.parse(category),
+                notiInvited:true,
+                notiMessage:true,
+                notiQuest:true}) 
         await mailService.sendActivationMail(email, `${process.env.CLIENT_URL}/activate/${activationLink}`);
         const userDto = new UserDto(user)
 
@@ -186,7 +189,10 @@ class UserService {
             inn,
             fiz,
             region,
-            category
+            category,
+            notiInvited,
+            notiMessage,
+            notiQuest
         } = req.body.data.data
         const user = await UserModel.updateOne({_id:id},{$set: 
                 {name,
@@ -196,9 +202,13 @@ class UserService {
                 inn,
                 fiz,  
                 region:JSON.parse(region),
-                category:JSON.parse(category)
+                category:JSON.parse(category),
+                notiInvited,
+                notiMessage,
+                notiQuest
         }});
         const userDto = new UserDto(user);
+        console.log(req.body.data.data)
         return {user: userDto}
     }
 

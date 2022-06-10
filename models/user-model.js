@@ -14,7 +14,10 @@ const UserSchema = new Schema({
     adressOrg: {type: String},
     category: [],
     region: [],
-    fiz:{type:Boolean}
+    fiz:{type:Boolean},
+    notiInvited:{type:Boolean},
+    notiMessage:{type:Boolean},
+    notiQuest:{type:Boolean},
 })
 
 UserSchema.plugin(mongoosePaginate);
