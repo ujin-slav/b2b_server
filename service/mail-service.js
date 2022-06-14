@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer')
 const logo = require('../utils/LogoCode')
+const format = require('date-format');
 
 class MailService {
     
@@ -16,7 +17,6 @@ class MailService {
     }
 
     async sendActivationMail(to, link) {
-        console.log("Отправлен mail")
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
             to,
@@ -24,10 +24,19 @@ class MailService {
             text: 'Здравствуйте',
             html:
                 `
-                    <div>
-                        <h1>Для активации перейдите по ссылке</h1>
+                <div style="display: flex;">
+                <div>
+                ${logo.logo}
+                </div>
+
+                <div style="width:100%;">
+                <span style="text-align: center;">
+                    <h3>Для активации аккаунта перейдите по ссылке</h3>
+                </span>    
+                <hr style=" border: none; background-color: #a2ebfd; height: 10px">
                         <a href="${link}">${link}</a>
-                    </div>
+                </div>
+                </div>            
                 `
         })
     }
@@ -40,19 +49,28 @@ class MailService {
             text: 'Здравствуйте',
             html:
                 `
-                    <div>
-                        <h1>Для установки нового пароля перейдите по ссылке</h1>
+                <div style="display: flex;">
+                <div>
+                ${logo.logo}
+                </div>
+
+                <div style="width:100%;">
+                <span style="text-align: center;">
+                    <h3>Для установки нового пароля перейдите по ссылке.</h3>
+                </span>    
+                <hr style=" border: none; background-color: #a2ebfd; height: 10px">
                         <a href="${link}">${link}</a>
-                    </div>
+                </div>
+                </div>            
                 `
         })
     }
 
-    async sendInvited(to) {
+    async sendInvited(to,ask,user) {
         await this.transporter.sendMail({
             from: process.env.SMTP_USER,
             to,
-            subject: 'Приглашение на участие в закупке',
+            subject: 'Приглашение на участие в закупке.',
             html:
                 `
                 <div style="display: flex;">
@@ -61,10 +79,49 @@ class MailService {
                 </div>
 
                 <div style="width:100%;">
-                <h3>
-                Приглашение на участие в закупке
-                </h3>
+                <span style="text-align: center;">
+                    <h3>Приглашение на участие в закупке.</h3>
+                </span>    
                 <hr style=" border: none; background-color: #a2ebfd; height: 10px">
+                <div style="line-height: 2;">
+                    <div><span style="font-weight: bold;">Название: </span>${ask.Name}</div>
+                    <div><span style="font-weight: bold;">Автор: </span>${user.name}</div>
+                    <div><span style="font-weight: bold;">Организация: </span>${user.nameOrg}</div>
+                    <div><span style="font-weight: bold;">Текст: </span>${ask.Text}</div>
+                    <div><span style="font-weight: bold;">Дата окончания предложений: </span>${format.asString("dd/MM/yyyy hh:mm:ss",ask.EndDateOffers)}</div>
+                    <div><span style="font-weight: bold;">Ссылка: </span>
+                        <a href="${process.env.CLIENT_URL}/cardask/${ask.id}">${process.env.CLIENT_URL}/cardask/${ask.id}</a>
+                    </div>
+                </div>
+                </div>
+                </div>
+                
+                `
+        })
+    }
+    async sendMessage(user,data) {
+        const to = user.email
+        await this.transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to,
+            subject: 'Новое сообщение.',
+            html:
+                `
+                <div style="display: flex;">
+                <div>
+                ${logo.logo}
+                </div>
+
+                <div style="width:100%;">
+                <span style="text-align: center;">
+                    <h3>Новое непрочитанное сообщение.</h3>
+                </span>    
+                <hr style=" border: none; background-color: #a2ebfd; height: 10px">
+                <div style="line-height: 2;">
+                    <div><span style="font-weight: bold;">Автор: </span>${user.name}</div>
+                    <div><span style="font-weight: bold;">Текст: </span>${data.Text}</div>
+                    <a href="${process.env.CLIENT_URL}/chat">${process.env.CLIENT_URL}/chat</a>
+                </div>
                 </div>
                 </div>
                 

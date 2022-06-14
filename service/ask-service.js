@@ -46,16 +46,17 @@ class AskService {
             Inn: user.inn
         })
         await Promise.all(Party.map(async (item)=>{
-            const user = await UserModel.findOne({email:item.Email})
-            if(user){
+            const userParty = await UserModel.findOne({email:item.Email})
+            if(userParty){
                await UnreadInvitedModel.create({
                 Ask: ask,
-                To: user,
+                To: userParty,
                })
-            }
-            if(Send){
-                mailService.sendInvited(item.Email)
-                console.log(item.Email)
+               if(userParty.notiInvited!==false){
+                mailService.sendInvited(item.Email,ask,user)           
+               }
+            }else if(Send){
+                mailService.sendInvited(item.Email,ask,user)        
             }
         }))
         return {ask} 

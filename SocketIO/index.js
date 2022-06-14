@@ -6,6 +6,7 @@ const UnreadInvitedModel = require('../models/unreadInvited-model')
 const UserModel =require('../models/user-model')
 const ContactsModel =require('../models/contacts-model')
 const SocketIOFile = require('socket.io-file');
+const mailService =require('../service/mail-service')
 const path = require('path');
 const fs = require("fs");
 
@@ -124,6 +125,7 @@ const IOconnect = (socket,io) =>{
 
   socket.on("send_message", async (data) => {
     try {    
+      const userRecevier = await UserModel.findOne({_id:data.Recevier})
       const message = await ChatModel.create({
       Text: data.Text,  
       To: await UserModel.findOne({_id:data.Recevier}),
@@ -136,9 +138,10 @@ const IOconnect = (socket,io) =>{
         From: await UserModel.findOne({_id:data.Author})
       }) 
       if(userSocketIdMap.has(data.Recevier)) {
-        console.log(data)
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread(data.Recevier));
+      }else if(userRecevier.notiMessage){
+        mailService.sendMessage(userRecevier,data) 
       }
       let contactRecevier = await ContactsModel.findOne({owner:data.Recevier,contact:data.Author})
       if(contactRecevier===null){
