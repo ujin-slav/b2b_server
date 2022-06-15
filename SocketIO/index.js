@@ -83,6 +83,16 @@ const IOconnect = (socket,io) =>{
       io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_quest",unreadQuest);
     }
   })
+  socket.on("unread_quest_mail", async (data) => {
+    const unreadQuest = await UnreadQuestModel.find({To:data.data.Destination}).countDocuments()
+    const user = await UserModel.findOne({_id:data.data.Destination})
+    const author = await UserModel.findOne({_id:data.data.Author})
+    if(userSocketIdMap.has(data.data.Destination)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.data.Destination)).emit("get_unread_quest",unreadQuest);
+    }else if(user.notiQuest){
+      mailService.sendQuest(user.email,author,data.data.Text,data.data.Location)
+    }
+  })
   socket.on("unread_invited", async (data) => {
     await Promise.all(data.checkedEmail.map(async (item)=>{
         const user = await UserModel.findOne({email:item.Email})
@@ -114,7 +124,6 @@ const IOconnect = (socket,io) =>{
       }
     }
     await ChatModel.deleteOne({_id:data._id})
-    console.log(data) 
     if(userSocketIdMap.has(data.To)) {
       io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("delete_message",{Author:data.To});
     }

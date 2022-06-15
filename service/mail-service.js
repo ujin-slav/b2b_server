@@ -119,8 +119,39 @@ class MailService {
                 <hr style=" border: none; background-color: #a2ebfd; height: 10px">
                 <div style="line-height: 2;">
                     <div><span style="font-weight: bold;">Автор: </span>${user.name}</div>
+                    <div><span style="font-weight: bold;">Организация: </span>${user.nameOrg}</div>
                     <div><span style="font-weight: bold;">Текст: </span>${data.Text}</div>
                     <a href="${process.env.CLIENT_URL}/chat">${process.env.CLIENT_URL}/chat</a>
+                </div>
+                </div>
+                </div>
+                
+                `
+        })
+    }
+    async sendQuest(to,author,text,path) {
+        console.log(to)
+        await this.transporter.sendMail({
+            from: process.env.SMTP_USER,
+            to,
+            subject: 'Новый вопрос.',
+            html:
+                `
+                <div style="display: flex;">
+                <div>
+                ${logo.logo}
+                </div>
+
+                <div style="width:100%;">
+                <span style="text-align: center;">
+                    <h3>Новый непрочитанный вопрос.</h3>
+                </span>    
+                <hr style=" border: none; background-color: #a2ebfd; height: 10px">
+                <div style="line-height: 2;">
+                    <div><span style="font-weight: bold;">Автор: </span>${author.name}</div>
+                    <div><span style="font-weight: bold;">Организация: </span>${author.nameOrg}</div>
+                    <div><span style="font-weight: bold;">Текст: </span>${text}</div>
+                    <a href="${process.env.CLIENT_URL}/quest">${process.env.CLIENT_URL}/quest</a>
                 </div>
                 </div>
                 </div>
