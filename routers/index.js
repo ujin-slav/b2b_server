@@ -4,9 +4,11 @@ const askController = require('../controllers/ask-controller');
 const loadController = require('../controllers/load-controller');
 const offerController = require('../controllers/offer-controller');
 const orgController = require('../controllers/org-controller');
+const priceController = require('../controllers/price-controller');
 const contrController = require('../controllers/contr-controller')
 const questionController = require('../controllers/question-controller')
 const upload = require('../config/load-config');
+const uploadPrice = require('../config/load-config-price');
 const router = new Router();
 const {body} = require('express-validator');
 const authMiddleware = require('../middleware/auth-midleware');
@@ -26,6 +28,8 @@ router.post('/getuser',userController.getUser);
 router.post('/getuserbyid',userController.getUserById);
 router.post('/getusers',userController.getUsers);
 router.post('/changeuser',userController.changeuser);
+
+router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/getask', askController.getAsk);

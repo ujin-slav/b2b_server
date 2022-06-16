@@ -37,7 +37,6 @@ class OrgService {
            {Category: {$in : searchCat},
            City: {$in : searchRegion}},
         {page:1,limit:100});
-        console.log(result)
         return result
     }
 }
