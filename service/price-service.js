@@ -1,19 +1,30 @@
-const xlsx = require("xlsx");
 const fs = require("fs");
+const PriceModel = require('../models/price-model')
 
 class PriceService {
 
     async addPrice(req) {
-        const {userID,filename} = req.body
-        const workbook = xlsx.readFile('./tempFile/' + req.filename);
-        const sheetNames = workbook.SheetNames;
-        const data = xlsx.utils.sheet_to_json(workbook.Sheets[sheetNames[0]])
-        data.map((item)=>{item})
-        fs.unlink('./tempFile/' + req.filename, (err) => {
-            if (err) throw err;
-            console.log('Deleted');
-        });
-        return {result:data}
+        const {userID} = req.body
+        const price = JSON.parse(req.body.price)
+        if(userID&&price.length>0){
+            await PriceModel.deleteMany({User:userID})
+        }      
+        await Promise.all(price.map(async (item)=>{
+            const code = item[0]
+            const nameItem = item[1]
+            const priceItem = Number(item[2])
+            if(nameItem!==null&&priceItem!==NaN){
+                await PriceModel.create({
+                    Code:code,
+                    Name: nameItem,
+                    Price: priceItem,
+                    Balance: item[3],
+                    User:userID,
+                    Date: Date.now()
+                })
+            }
+        }))
+        return {result:true}
     }
 
 
