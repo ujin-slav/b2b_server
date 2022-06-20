@@ -56,9 +56,12 @@ app.use(errorMiddleware)
 
 const start = async () => {
     try {
+        mongoose.Promise = global.Promise;
         await mongoose.connect(process.env.DB_URL, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            useFindAndModify: false,
+            useCreateIndex: true,
         })
         server.listen(PORT,()=>{
             console.log("Server run in port 5000")

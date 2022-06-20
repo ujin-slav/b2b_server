@@ -1,7 +1,11 @@
 const fs = require("fs");
 const PriceModel = require('../models/price-model')
 
+
 class PriceService {
+    escapeRegex(text){
+        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+    };
 
     async addPrice(req) {
         const {userID} = req.body
@@ -25,6 +29,30 @@ class PriceService {
             }
         }))
         return {result:true}
+    }
+
+    async getPrice(req) {
+        const {page,limit,search,org} = req.body
+        let reg = "" + search + "";
+        const regex = new RegExp(this.escapeRegex(search), 'gi');
+        var abc = ({ path: 'User', select: 'nameOrg id' });
+        let searchParam = 
+                    { $or: [
+                        {Name: {
+                        $regex: reg,
+                        $options: 'i'
+                    }}, {Code: {
+                        $regex: reg,
+                        $options: 'i'
+                    }}]}
+                    console.log(org)
+        if(org){
+            searchParam = Object.assign(searchParam,{$and:{User:org}})
+        }
+        const result = await PriceModel.paginate(
+            searchParam, 
+            {page,limit,populate:abc});
+        return result
     }
 
 
