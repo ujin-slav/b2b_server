@@ -3,9 +3,6 @@ const PriceModel = require('../models/price-model')
 
 
 class PriceService {
-    escapeRegex(text){
-        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-    };
 
     async addPrice(req) {
         const {userID} = req.body
@@ -16,13 +13,14 @@ class PriceService {
         await Promise.all(price.map(async (item)=>{
             const code = item[0]
             const nameItem = item[1]
-            const priceItem = Number(item[2])
-            if(nameItem!==null&&priceItem!==NaN){
+            //const priceItem = Number(item[2])
+            const balance = Number(item[3])
+            if(nameItem!==null&&balance!==NaN){
                 await PriceModel.create({
                     Code:code,
                     Name: nameItem,
-                    Price: priceItem,
-                    Balance: item[3],
+                    Price: item[2],
+                    Balance: balance,
                     User:userID,
                     Date: Date.now()
                 })
@@ -33,26 +31,30 @@ class PriceService {
 
     async getPrice(req) {
         const {page,limit,search,org} = req.body
-        let reg = "" + search + "";
-        const regex = new RegExp(this.escapeRegex(search), 'gi');
+        const regex = search.replace(/ /g, '*.*')
         var abc = ({ path: 'User', select: 'nameOrg id' });
         let searchParam = 
                     { $or: [
                         {Name: {
-                        $regex: reg,
+                        $regex: regex,
                         $options: 'i'
                     }}, {Code: {
-                        $regex: reg,
+                        $regex: regex,
                         $options: 'i'
                     }}]}
-                    console.log(org)
         if(org){
-            searchParam = Object.assign(searchParam,{$and:{User:org}})
+            searchParam = Object.assign(searchParam,{User:org})
         }
         const result = await PriceModel.paginate(
             searchParam, 
             {page,limit,populate:abc});
         return result
+    }
+
+    async clearPrice(req) {
+       const result = await PriceModel.deleteMany({User:req.user.id})
+       console.log(req.user.id)
+       return result
     }
 
 

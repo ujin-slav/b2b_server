@@ -156,6 +156,7 @@ class AskService {
             email,
             userId
         } = req.body.formData
+        console.log("get inv" + userId)
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
