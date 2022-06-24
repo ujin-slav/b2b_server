@@ -57,7 +57,10 @@ class PriceService {
        return result
     }
 
-
+    async saveAsk(req) {
+        console.log(req.body.doc)
+        return true
+     }
 }
 
 module.exports = new PriceService()

@@ -27,6 +27,14 @@ class PriceController {
             next(e);
         }
     }
+    async saveAsk(req, res, next) {
+        try {
+            const result = await priceService.saveAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 
