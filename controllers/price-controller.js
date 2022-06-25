@@ -35,6 +35,14 @@ class PriceController {
             next(e);
         }
     }
+    async getAskPrice(req, res, next) {
+        try {
+            const result = await priceService.getAskPrice(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 

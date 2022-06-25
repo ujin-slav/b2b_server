@@ -1,5 +1,6 @@
 const fs = require("fs");
 const PriceModel = require('../models/price-model')
+const PriceAskModel = require('../models/priceAsk-model')
 
 
 class PriceService {
@@ -58,9 +59,40 @@ class PriceService {
     }
 
     async saveAsk(req) {
-        console.log(req.body.doc)
-        return true
+        const {Author,
+            To,
+            Table,
+            Comment} = req.body
+        const result = await PriceAskModel.create({
+            Author,
+            To,
+            Table,
+            Comment,
+            Date: new Date()
+        })
+        return result
      }
+
+     async getAskPrice(req) {
+        const {
+            limit,
+            page,
+            authorId
+        } = req.body
+        if(authorId){
+            const result = await PriceAskModel.paginate({Author:authorId}, {page,limit,sort:{"_id":-1}});
+            return result;
+        } else {
+            var abc = ({ path: 'Author', select: 'name nameOrg inn' });
+            var options = {
+                sort:{"_id":-1},
+                populate: abc, 
+                limit,
+                page};
+            const result = await PriceAskModel.paginate({}, options);
+            return result;
+        }    
+    }
 }
 
 module.exports = new PriceService()
