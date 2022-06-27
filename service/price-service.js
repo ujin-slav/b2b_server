@@ -62,12 +62,14 @@ class PriceService {
         const {Author,
             To,
             Table,
-            Comment} = req.body
+            Comment,
+            Sum} = req.body
         const result = await PriceAskModel.create({
             Author,
             To,
             Table,
             Comment,
+            Sum,
             Date: new Date()
         })
         return result
@@ -79,19 +81,41 @@ class PriceService {
             page,
             authorId
         } = req.body
-        if(authorId){
-            const result = await PriceAskModel.paginate({Author:authorId}, {page,limit,sort:{"_id":-1}});
-            return result;
-        } else {
-            var abc = ({ path: 'Author', select: 'name nameOrg inn' });
-            var options = {
-                sort:{"_id":-1},
-                populate: abc, 
-                limit,
-                page};
-            const result = await PriceAskModel.paginate({}, options);
-            return result;
-        }    
+        var abc = ({ path: 'To', select: 'name nameOrg inn' });
+        var options = {
+            sort:{"_id":-1},
+            populate: abc, 
+            limit,
+            page};
+        const result = await PriceAskModel.paginate({}, options);
+        return result; 
+    }
+    async getAskPriceId(req) {
+        const {id} = req.body
+        const result = await PriceAskModel.findOne({_id:id}).populate({path: 'To', select: 'name nameOrg inn'})
+        return result
+    }
+    async deletePriceAsk(req) {
+        const {id} = req.body  
+        const result = await PriceAskModel.deleteOne({_id:id}); 
+        return result
+    }
+    async updatePriceAsk(req) {
+        const {Author,
+            To,
+            Table,
+            Comment,
+            Sum,
+            id} = req.body
+        const result = await PriceAskModel.updateOne({_id:id},{$set:{
+            Author,
+            To,
+            Table,
+            Comment,
+            Sum,
+            Date: new Date()
+        }})
+        return result
     }
 }
 

@@ -43,6 +43,30 @@ class PriceController {
             next(e);
         }
     }
+    async getAskPriceId(req, res, next) {
+        try {
+            const result = await priceService.getAskPriceId(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+    async deletePriceAsk(req, res, next) {
+        try {
+            const result = await priceService.deletePriceAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+    async updatePriceAsk(req, res, next) {
+        try {
+            const result = await priceService.updatePriceAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 

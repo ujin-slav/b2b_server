@@ -35,6 +35,9 @@ router.post('/clearprice',authMiddleware, priceController.clearPrice);
 
 router.post('/saveask', priceController.saveAsk);
 router.post('/getaskprice', priceController.getAskPrice);
+router.post('/getaskpriceid', priceController.getAskPriceId);
+router.post('/deletepriceask', priceController.deletePriceAsk);
+router.post('/updatepriceask', priceController.updatePriceAsk);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/getask', askController.getAsk);

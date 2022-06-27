@@ -6,7 +6,9 @@ const PriceAsk = new Schema({
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
     To: {type: Schema.Types.ObjectId, ref: 'User'},
     Table:[],
+    Sum:{type:Number},
     Comment: {type:String},
+    Sent:{type:Boolean},
     Date: {type: Date},
 })
 
