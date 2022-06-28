@@ -31,6 +31,7 @@ router.post('/changeuser',userController.changeuser);
 
 router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);
 router.post('/getprice', priceController.getPrice);
+router.post('/getpriceunit', priceController.getPriceUnit);
 router.post('/clearprice',authMiddleware, priceController.clearPrice);
 
 router.post('/saveask', priceController.saveAsk);

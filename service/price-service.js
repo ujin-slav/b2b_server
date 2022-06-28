@@ -51,6 +51,11 @@ class PriceService {
             {page,limit,populate:abc});
         return result
     }
+    async getPriceUnit(req) {
+        const {id} = req.body
+        const result = PriceModel.findOne({_id:id})
+        return result
+    }
 
     async clearPrice(req) {
        const result = await PriceModel.deleteMany({User:req.user.id})
@@ -81,7 +86,8 @@ class PriceService {
             page,
             authorId
         } = req.body
-        var abc = ({ path: 'To', select: 'name nameOrg inn' });
+        var abc = ([{ path: 'To', select: 'name nameOrg inn' },
+        {path: 'Author', select: 'name nameOrg inn'}]);
         var options = {
             sort:{"_id":-1},
             populate: abc, 
@@ -106,6 +112,7 @@ class PriceService {
             Table,
             Comment,
             Sum,
+            Sent,
             id} = req.body
         const result = await PriceAskModel.updateOne({_id:id},{$set:{
             Author,
@@ -113,6 +120,7 @@ class PriceService {
             Table,
             Comment,
             Sum,
+            Sent,
             Date: new Date()
         }})
         return result
