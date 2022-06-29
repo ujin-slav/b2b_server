@@ -27,6 +27,7 @@ router.get('/refresh', userController.refresh);
 router.post('/getuser',userController.getUser);
 router.post('/getuserbyid',userController.getUserById);
 router.post('/getusers',userController.getUsers);
+router.post('/getuserlist',userController.getUserList);
 router.post('/changeuser',userController.changeuser);
 
 router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);

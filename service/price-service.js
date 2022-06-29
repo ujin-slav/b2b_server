@@ -98,7 +98,10 @@ class PriceService {
     }
     async getAskPriceId(req) {
         const {id} = req.body
-        const result = await PriceAskModel.findOne({_id:id}).populate({path: 'To', select: 'name nameOrg inn'})
+        const result = await PriceAskModel.findOne({_id:id}).
+        populate([{path: 'To', select: 'name nameOrg inn'},
+                {path: 'Author', select: 'name nameOrg inn'}
+        ])
         return result
     }
     async deletePriceAsk(req) {

@@ -178,6 +178,25 @@ class UserService {
             option);
         return result;
     }
+    async getUserList(req) {
+        const {page,limit,search} = req.body
+        let searchParam = 
+        { $or: [
+            {nameOrg: {
+            $regex: search,
+            $options: 'i'
+        }}, {inn: {
+            $regex: search,
+            $options: 'i'
+        }}]}
+        const option = {
+            select:'name nameOrg email',
+            limit,
+            page}
+        const result = await UserModel.paginate(searchParam,option)
+        console.log(req.body)
+        return result;
+    }
 
     async changeuser(req) {
         const {
