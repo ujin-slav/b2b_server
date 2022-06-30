@@ -180,13 +180,14 @@ class UserService {
     }
     async getUserList(req) {
         const {page,limit,search} = req.body
+        const regex = search.replace(/ /g, '*.*')
         let searchParam = 
         { $or: [
             {nameOrg: {
-            $regex: search,
+            $regex: regex,
             $options: 'i'
         }}, {inn: {
-            $regex: search,
+            $regex: regex,
             $options: 'i'
         }}]}
         const option = {
@@ -194,7 +195,6 @@ class UserService {
             limit,
             page}
         const result = await UserModel.paginate(searchParam,option)
-        console.log(req.body)
         return result;
     }
 
