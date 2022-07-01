@@ -10,6 +10,10 @@ const PriceAsk = new Schema({
     Comment: {type:String},
     Sent:{type:Boolean},
     Date: {type: Date},
+    FIZ:{type:Boolean},
+    NameFiz: {type:String},
+    EmailFiz: {type:String},
+    TelefonFiz: {type:String},
 })
 
 PriceAsk.plugin(mongoosePaginate);

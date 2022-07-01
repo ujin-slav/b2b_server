@@ -68,15 +68,30 @@ class PriceService {
             To,
             Table,
             Comment,
-            Sum} = req.body
-        const result = await PriceAskModel.create({
-            Author,
-            To,
-            Table,
-            Comment,
             Sum,
-            Date: new Date()
-        })
+            FIZ} = req.body
+        if(!FIZ){
+            const result = await PriceAskModel.create({
+                Author,
+                To,
+                Table,
+                Comment,
+                Sum,
+                Date: new Date()
+            })
+        }else{
+            const result = await PriceAskModel.create({
+                To,
+                Table,
+                Comment,
+                Sum,
+                FIZ:true,
+                NameFiz,
+                EmailFiz,
+                TelefonFiz,
+                Date: new Date()
+            })
+        }
         return result
      }
 
