@@ -69,7 +69,10 @@ class PriceService {
             Table,
             Comment,
             Sum,
-            FIZ} = req.body
+            FIZ,
+            NameFiz,
+            EmailFiz,
+            TelefonFiz} = req.body
         if(!FIZ){
             const result = await PriceAskModel.create({
                 Author,
@@ -79,6 +82,7 @@ class PriceService {
                 Sum,
                 Date: new Date()
             })
+            return result
         }else{
             const result = await PriceAskModel.create({
                 To,
@@ -91,15 +95,15 @@ class PriceService {
                 TelefonFiz,
                 Date: new Date()
             })
+            return result
         }
-        return result
      }
 
      async getAskPrice(req) {
         const {
             limit,
             page,
-            authorId
+            to
         } = req.body
         var abc = ([{ path: 'To', select: 'name nameOrg inn' },
         {path: 'Author', select: 'name nameOrg inn'}]);
@@ -108,7 +112,7 @@ class PriceService {
             populate: abc, 
             limit,
             page};
-        const result = await PriceAskModel.paginate({}, options);
+        const result = await PriceAskModel.paginate({To:to}, options);
         return result; 
     }
     async getAskPriceId(req) {
