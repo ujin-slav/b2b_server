@@ -151,6 +151,7 @@ class UserService {
         const {id} = req.body
         const user = await UserModel.findOne({_id:id});
         const result = {
+            _id:user._id,
             email:user.email,
             name:user.name,
             nameOrg:user.nameOrg,
