@@ -100,10 +100,12 @@ class PriceService {
      }
 
      async getAskPrice(req) {
+        let result
         const {
             limit,
             page,
-            to
+            to,
+            authorId
         } = req.body
         var abc = ([{ path: 'To', select: 'name nameOrg inn' },
         {path: 'Author', select: 'name nameOrg inn'}]);
@@ -112,8 +114,12 @@ class PriceService {
             populate: abc, 
             limit,
             page};
-        const result = await PriceAskModel.paginate({To:to}, options);
-        return result; 
+        if(to){
+            result = await PriceAskModel.paginate({To:to}, options);
+        }else if(authorId){
+            result = await PriceAskModel.paginate({Author:authorId}, options);
+        }      
+         return result; 
     }
     async getAskPriceId(req) {
         const {id} = req.body
