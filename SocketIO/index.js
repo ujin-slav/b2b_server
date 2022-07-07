@@ -3,6 +3,7 @@ const ChatModel = require('../models/chat-model')
 const UnreadModel = require('../models/unread-model')
 const UnreadQuestModel = require('../models/unreadQuest-model')
 const UnreadInvitedModel = require('../models/unreadInvited-model')
+const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
 const UserModel =require('../models/user-model')
 const ContactsModel =require('../models/contacts-model')
 const SocketIOFile = require('socket.io-file');
@@ -10,7 +11,19 @@ const mailService =require('../service/mail-service')
 const path = require('path');
 const fs = require("fs");
 
+const IOconnectNotAuth = (socket,io)=>{
+  socket.on("unread_invitedPrice", async (data) => {
+    const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
+    if(userSocketIdMap.has(data.To)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+    }
+  })
+}
+
 const IOconnect = (socket,io) =>{
+  if(socket.notAuth){
+    return IOconnectNotAuth(socket,io)
+  }
   console.log(`User Connected: ${socket.id} id ${socket.user.id}`);
   const userId = socket.user.id;
   userSocketIdMap.set(userId, socket.id);
@@ -104,12 +117,20 @@ const IOconnect = (socket,io) =>{
         }
     }))
   })
+  socket.on("unread_invitedPrice", async (data) => {
+    const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
+    if(userSocketIdMap.has(data.To)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+    }
+  })
   socket.on("get_unread", async () => {
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread(userId));
     const unreadQuest = await UnreadQuestModel.find({To:userId}).countDocuments()
     io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_quest",unreadQuest);
     const unreadInvited = await UnreadInvitedModel.find({To:userId}).countDocuments()
     io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invited",unreadInvited);
+    const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:userId}).countDocuments()
+    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invitedPrice",unreadInvitedPrice);
   })
   socket.on("delete_message", async (data) => { 
     if("File" in data){

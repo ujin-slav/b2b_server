@@ -26,16 +26,17 @@ const io = new Server(server, {
 });
 
 io.use(function(socket, next){
-    if (socket.handshake.query && socket.handshake.query.token){
+    if (socket.handshake.query.token){
         const userData = tokenService.validateAccessToken(socket.handshake.query.token);
         if (userData===null) {
-            return next(ApiError.UnauthorizedError());
+            //return next(ApiError.UnauthorizedError());
+            socket.notAuth = true;
         }
         socket.user = userData;
         next();
     }
     else {
-      next(ApiError.UnauthorizedError());
+        socket.notAuth = true;
     }    
   })
   .on("connection", (socket)=>IOconnect(socket,io));

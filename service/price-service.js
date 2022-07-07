@@ -1,6 +1,7 @@
 const fs = require("fs");
 const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
+const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
 
 
 class PriceService {
@@ -94,7 +95,11 @@ class PriceService {
                 EmailFiz,
                 TelefonFiz,
                 Date: new Date()
-            })
+        })
+        UnreadInvitedPriceModel.create({
+            PriceAsk:result,
+            To
+        })
             return result
         }
      }
@@ -116,6 +121,9 @@ class PriceService {
             page};
         if(to){
             result = await PriceAskModel.paginate({To:to}, options);
+            await UnreadInvitedPriceModel.deleteMany({
+                To: to,
+            })
         }else if(authorId){
             result = await PriceAskModel.paginate({Author:authorId}, options);
         }      
