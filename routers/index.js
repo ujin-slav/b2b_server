@@ -3,6 +3,7 @@ const userController = require('../controllers/user-controller');
 const askController = require('../controllers/ask-controller');
 const loadController = require('../controllers/load-controller');
 const offerController = require('../controllers/offer-controller');
+const specOfferController = require('../controllers/specOffer-controller');
 const orgController = require('../controllers/org-controller');
 const priceController = require('../controllers/price-controller');
 const contrController = require('../controllers/contr-controller')
@@ -34,6 +35,8 @@ router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);
 router.post('/getprice', priceController.getPrice);
 router.post('/getpriceunit', priceController.getPriceUnit);
 router.post('/clearprice',authMiddleware, priceController.clearPrice);
+
+router.post('/addspecoffer',  upload.array("file"),specOfferController.addSpecOffer);
 
 router.post('/saveask', priceController.saveAsk);
 router.post('/getaskprice', priceController.getAskPrice);
