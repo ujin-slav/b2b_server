@@ -9,6 +9,7 @@ const priceController = require('../controllers/price-controller');
 const contrController = require('../controllers/contr-controller')
 const questionController = require('../controllers/question-controller')
 const upload = require('../config/load-config');
+const uploadPic = require('../config/load-config-pic');
 const uploadPrice = require('../config/load-config-price');
 const router = new Router();
 const {body} = require('express-validator');
@@ -36,7 +37,8 @@ router.post('/getprice', priceController.getPrice);
 router.post('/getpriceunit', priceController.getPriceUnit);
 router.post('/clearprice',authMiddleware, priceController.clearPrice);
 
-router.post('/addspecoffer',  upload.array("file"),specOfferController.addSpecOffer);
+router.post('/addspecoffer',  uploadPic.array("file"),specOfferController.addSpecOffer);
+router.post('/getfilterspecoffer', specOfferController.getFilterSpecOffer);
 
 router.post('/saveask', priceController.saveAsk);
 router.post('/getaskprice', priceController.getAskPrice);
@@ -71,6 +73,7 @@ router.post('/getunreadquest', questionController.getUnreadQuest);
 router.post('/delquest', questionController.delQuest);
 router.post('/delanswer', questionController.delAnswer);
 
+router.get('/getpic/:file', loadController.getPic);
 router.get('/download/:file', loadController.download);
 router.get('/static/:path/:file', loadController.getStatic);
 

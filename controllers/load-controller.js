@@ -11,6 +11,14 @@ var parse = require('csv-parse')
 
 class UploadController {
     
+    async getPic(req, res, next) {
+        try {
+            let file = __dirname + '/../uploadsPic/' + req.params.file;
+            res.download(file);
+        } catch (e) {
+            next(e);
+        }
+    }
 
     async download(req, res, next) {
         try {
