@@ -92,6 +92,13 @@ class specOfferService {
             options);
         return result;  
     }
+    async getSpecOfferId(req) {
+        const {
+            id
+        } = req.body
+        const result = await SpecOfferModel.findOne({_id:id})
+        return result;  
+    }
 }
 
 

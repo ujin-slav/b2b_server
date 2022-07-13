@@ -19,6 +19,14 @@ class PriceController {
             next(e);
         }
     }
+    async getSpecOfferId(req, res, next) {
+        try {
+            const result = await specOfferService.getSpecOfferId(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 
