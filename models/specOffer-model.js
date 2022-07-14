@@ -8,6 +8,7 @@ const SpecOffer = new Schema({
     Price:{type:Number},
     NameOrg: {type: String},
     Inn: {type: String},
+    Contact:{type: String},
     Telefon: {type: String},
     MaxDate: {type: Schema.Types.Number},
     EndDateOffers: {type: Date},
