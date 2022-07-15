@@ -1,5 +1,6 @@
 const SpecOfferModel = require("../models/specOffer-model")
 const UserModel =require('../models/user-model')
+const fs = require("fs");
 
 class specOfferService {
 
@@ -100,6 +101,37 @@ class specOfferService {
         } = req.body
         const result = await SpecOfferModel.findOne({_id:id})
         return result;  
+    }
+    async getSpecOfferUser(req) {
+        const {
+            id,
+            limit,
+            page,
+        } = req.body
+        var options = {
+            sort:{"_id":-1}, 
+            limit,
+            page};
+        const result = await SpecOfferModel.paginate({Author:id},options);
+        return result;   
+    }
+
+    async deleteSpecOffer(req) {
+        const {id} = req.body        
+        const specOffer = await SpecOfferModel.findOne({_id:id});      
+        if(specOffer){
+            specOffer.Files.map((item)=>{
+                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Файл удалён");
+                    }
+                });
+            })
+        }
+        await SpecOfferModel.deleteOne({_id:id}); 
+        return specOffer
     }
 }
 

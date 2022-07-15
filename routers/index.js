@@ -39,7 +39,9 @@ router.post('/clearprice',authMiddleware, priceController.clearPrice);
 
 router.post('/addspecoffer',  uploadPic.array("file"),specOfferController.addSpecOffer);
 router.post('/getfilterspecoffer', specOfferController.getFilterSpecOffer);
+router.post('/getspecofferuser', specOfferController.getSpecOfferUser);
 router.post('/getspecofferid', specOfferController.getSpecOfferId);
+router.post('/deletespecoffer', specOfferController.deleteSpecOffer);
 
 router.post('/saveask', priceController.saveAsk);
 router.post('/getaskprice', priceController.getAskPrice);
