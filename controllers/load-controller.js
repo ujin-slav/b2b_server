@@ -14,7 +14,11 @@ class UploadController {
     async getPic(req, res, next) {
         try {
             let file = __dirname + '/../uploadsPic/' + req.params.file;
-            res.download(file);
+            if(fs.existsSync(file)){
+                res.download(file)
+            }else{
+                res.download(__dirname + '/../serviceImage/noImage.png')
+            }
         } catch (e) {
             next(e);
         }
