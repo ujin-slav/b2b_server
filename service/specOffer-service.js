@@ -15,6 +15,7 @@ class specOfferService {
             Category,
             Region,
             Price,
+            FileArray,
         } = req.body
         const user = await UserModel.findOne({_id:Author});
         const result = await SpecOfferModel.create({
@@ -32,6 +33,49 @@ class specOfferService {
             NameOrg: user.nameOrg,
             Inn: user.inn
         })
+        console.log(JSON.parse(FileArray))
+        return result 
+    }
+    async modifySpecOffer(req) {
+        const {
+            Author,
+            Name,
+            Telefon,
+            EndDateOffers,
+            Contact,
+            Text,
+            Category,
+            Region,
+            Price,
+            ID
+        } = req.body
+        const user = await UserModel.findOne({_id:Author});
+        const existOffer = await SpecOfferModel.findOne({_id:ID})
+        existOffer.Files.map((item)=>{
+            if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Файл удалён");
+                    }
+                })};
+        })
+        const result = await SpecOfferModel.updateOne({_id:ID},{$set:{
+            Author,
+            Name,
+            Telefon,
+            Contact,
+            EndDateOffers,
+            Text,
+            Price,
+            Category:JSON.parse(Category),
+            Region:JSON.parse(Region),
+            Date: Date.now(),
+            Files:req.files,
+            NameOrg: user.nameOrg,
+            Inn: user.inn
+        }})
         return result 
     }
 
