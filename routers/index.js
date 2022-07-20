@@ -42,7 +42,9 @@ router.post('/modifyspecoffer',  uploadPic.array("file"),specOfferController.mod
 router.post('/getfilterspecoffer', specOfferController.getFilterSpecOffer);
 router.post('/getspecofferuser', specOfferController.getSpecOfferUser);
 router.post('/getspecofferid', specOfferController.getSpecOfferId);
+router.post('/getspecaskuser', specOfferController.getSpecAskUser);
 router.post('/deletespecoffer', specOfferController.deleteSpecOffer);
+router.post('/specaskfiz', specOfferController.specAskFiz);
 
 router.post('/saveask', priceController.saveAsk);
 router.post('/getaskprice', priceController.getAskPrice);

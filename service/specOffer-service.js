@@ -1,6 +1,9 @@
 const SpecOfferModel = require("../models/specOffer-model")
+const SpecAskModel = require("../models/specAsk-model")
+const UnreadSpecAskModel = require("../models/unreadSpecAsk-model")
 const UserModel =require('../models/user-model')
 const fs = require("fs");
+const { ifError } = require("assert");
 
 class specOfferService {
 
@@ -176,6 +179,48 @@ class specOfferService {
         }
         await SpecOfferModel.deleteOne({_id:id}); 
         return specOffer
+    }
+    async specAskFiz(req) {
+        const {
+            Name,
+            Email,
+            Telefon,
+            City,
+            Comment,
+            Amount,
+            Receiver,
+            SpecOffer
+        } = req.body
+        const result = await SpecAskModel.create({
+            Name,
+            Email,
+            Telefon,
+            City,
+            Comment,
+            Amount,
+            Receiver,
+            SpecOffer
+        })
+        if(result){
+            await UnreadSpecAskModel.create({
+                SpecOffer,
+                To: Receiver,
+            })
+        }
+        return result
+    }
+    async getSpecAskUser(req) {
+        const {
+            to,
+            limit,
+            page,
+        } = req.body
+        var options = {
+            sort:{"_id":-1}, 
+            limit,
+            page};
+        const result = await SpecAskModel.paginate({Receiver:to},options);
+        return result;   
     }
 }
 

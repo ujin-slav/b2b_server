@@ -1,7 +1,7 @@
 const ApiError = require('../exceptions/api-error');
 const specOfferService = require('../service/specOffer-service');
 
-class PriceController {
+class SpecOfferController {
 
     async addSpecOffer(req, res, next) {
         try {
@@ -51,7 +51,23 @@ class PriceController {
             next(e);
         }
     }
+    async specAskFiz(req, res, next) {
+        try {
+            const result = await specOfferService.specAskFiz(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getSpecAskUser(req, res, next) {
+        try {
+            const result = await specOfferService.getSpecAskUser(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 
-module.exports = new PriceController();
+module.exports = new SpecOfferController();

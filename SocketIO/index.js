@@ -4,6 +4,7 @@ const UnreadModel = require('../models/unread-model')
 const UnreadQuestModel = require('../models/unreadQuest-model')
 const UnreadInvitedModel = require('../models/unreadInvited-model')
 const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
+const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
 const UserModel =require('../models/user-model')
 const ContactsModel =require('../models/contacts-model')
 const SocketIOFile = require('socket.io-file');
@@ -121,6 +122,12 @@ const IOconnect = (socket,io) =>{
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
     if(userSocketIdMap.has(data.To)) {
       io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+    }
+  })
+  socket.on("unread_specOfferAsk", async (data) => {
+    const UnreadSpecAsk = await UnreadSpecAskModel.find({To:data.To}).countDocuments()
+    if(userSocketIdMap.has(data.To)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_specOfferAsk",UnreadSpecAsk);
     }
   })
   socket.on("get_unread", async () => {
