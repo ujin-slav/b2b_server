@@ -16,7 +16,13 @@ const IOconnectNotAuth = (socket,io)=>{
   socket.on("unread_invitedPrice", async (data) => {
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
     if(userSocketIdMap.has(data.To)) {
-      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+    }
+  })
+  socket.on("unread_specOfferAsk", async (data) => {
+    const UnreadSpecAsk = await UnreadSpecAskModel.find({To:data.To}).countDocuments()
+    if(userSocketIdMap.has(data.To)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_specOfferAsk",UnreadSpecAsk);
     }
   })
 }
@@ -124,12 +130,6 @@ const IOconnect = (socket,io) =>{
       io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invitedPrice",unreadInvitedPrice);
     }
   })
-  socket.on("unread_specOfferAsk", async (data) => {
-    const UnreadSpecAsk = await UnreadSpecAskModel.find({To:data.To}).countDocuments()
-    if(userSocketIdMap.has(data.To)) {
-      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_specOfferAsk",UnreadSpecAsk);
-    }
-  })
   socket.on("get_unread", async () => {
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread(userId));
     const unreadQuest = await UnreadQuestModel.find({To:userId}).countDocuments()
@@ -138,6 +138,8 @@ const IOconnect = (socket,io) =>{
     io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invited",unreadInvited);
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:userId}).countDocuments()
     io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+    const UnreadSpecAsk = await UnreadSpecAskModel.find({To:userId}).countDocuments()
+    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_specOfferAsk",UnreadSpecAsk);
   })
   socket.on("delete_message", async (data) => { 
     if("File" in data){

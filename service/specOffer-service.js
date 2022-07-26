@@ -220,6 +220,9 @@ class specOfferService {
             limit,
             page};
         const result = await SpecAskModel.paginate({Receiver:to},options);
+        await UnreadSpecAskModel.deleteMany({
+            To: to,
+        })
         return result;   
     }
 }
