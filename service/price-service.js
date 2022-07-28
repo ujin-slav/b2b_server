@@ -135,6 +135,8 @@ class PriceService {
         populate([{path: 'To', select: 'name nameOrg inn'},
                 {path: 'Author', select: 'name nameOrg inn'}
         ])
+        console.log(req.body)
+        console.log(result)
         return result
     }
     async deletePriceAsk(req) {
