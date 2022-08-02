@@ -77,6 +77,14 @@ class AskController {
             next(e);
         }
     }   
+    async getUserAsks(req, res, next) {
+        try {
+            const result = await askService.getUserAsks(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }  
 }
 
 

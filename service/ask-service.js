@@ -216,6 +216,19 @@ class AskService {
         await AskModel.deleteOne({_id:id}); 
         return ask
     }
+    async getUserAsks(req) {
+        const {
+            id,
+            limit,
+            page,
+        } = req.body.formData
+        var options = {
+            sort:{"_id":-1}, 
+            limit,
+            page};
+        const result = await AskModel.paginate({Author:id},options);
+        return result;   
+    }
 
     async modifyAsk(req) {
         const {
