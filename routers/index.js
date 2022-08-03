@@ -8,6 +8,7 @@ const orgController = require('../controllers/org-controller');
 const priceController = require('../controllers/price-controller');
 const contrController = require('../controllers/contr-controller')
 const questionController = require('../controllers/question-controller')
+const reviewOrgController = require('../controllers/reviewOrg-controller')
 const upload = require('../config/load-config');
 const uploadPic = require('../config/load-config-pic');
 const uploadPrice = require('../config/load-config-price');
@@ -79,6 +80,9 @@ router.post('/getquestuser', questionController.getQuestUser);
 router.post('/getunreadquest', questionController.getUnreadQuest);
 router.post('/delquest', questionController.delQuest);
 router.post('/delanswer', questionController.delAnswer);
+
+router.post('/addrevieworg', reviewOrgController.addQuest);
+router.post('/getrevieworg', reviewOrgController.getQuest);
 
 router.get('/getpic/:file', loadController.getPic);
 router.get('/download/:file', loadController.download);
