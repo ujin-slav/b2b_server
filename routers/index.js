@@ -83,6 +83,7 @@ router.post('/delanswer', questionController.delAnswer);
 
 router.post('/addrevieworg', reviewOrgController.addQuest);
 router.post('/getrevieworg', reviewOrgController.getQuest);
+router.post('/delrevieworg', reviewOrgController.delReviewOrg);
 
 router.get('/getpic/:file', loadController.getPic);
 router.get('/download/:file', loadController.download);

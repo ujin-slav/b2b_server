@@ -36,7 +36,9 @@ class ReviewOrgService {
                 ID: item._id,
                 Text:item?.Text,
                 Author: author,
-                Answer:answer
+                Answer:answer,
+                Org:item?.Org,
+                Date:item?.Date
             }
             return newitem;
         }));
@@ -45,6 +47,14 @@ class ReviewOrgService {
 
         return result; 
     }
+
+    async delReviewOrg(req) {
+        const {id} = req.body
+        const result = await ReviewOrgModel.deleteOne({_id:id});
+        await UnreadReviewOrgModel.deleteOne({Message:id});
+        return result;
+    }
+
 }
 
 module.exports = new ReviewOrgService()
