@@ -8,7 +8,7 @@ const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
 const UserModel =require('../models/user-model')
 const ContactsModel =require('../models/contacts-model')
 const SocketIOFile = require('socket.io-file');
-const mailService =require('../service/mail-service')
+const mailService = require('../service/mail-service')
 const path = require('path');
 const fs = require("fs");
 
@@ -223,10 +223,17 @@ const IOconnect = (socket,io) =>{
       }
   })
 
-  socket.on("disconnect", () => {
+  socket.on("disconnect",async () => {
     userSocketIdMap.delete(userId);
     console.log("User Disconnected", socket.id);
     console.log(userSocketIdMap)
+
+    const contacts = await ContactsModel.find({contact:userId}).populate({path:'owner', select:'id'})
+    contacts.map((item)=>{
+      if(userSocketIdMap.has(item.owner.id)){
+        io.sockets.sockets.get(userSocketIdMap.get(item.owner.id)).emit("user_disconnected", userId)
+      }
+    })
   });
 };
 
@@ -248,3 +255,4 @@ function addClientToMap(userName, socketId){
   }
 
 module.exports = IOconnect;
+module.exports.userSocketIdMap = userSocketIdMap

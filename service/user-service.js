@@ -8,6 +8,7 @@ const mailService =require('./mail-service')
 const tokenService = require('./token-service')
 const UserDto = require('../dtos/user-dto')
 const ApiError = require('../exceptions/api-error');
+const SocketIO =  require('../SocketIO/index');
 
 class UserService {
     async registration(req) { 
@@ -164,21 +165,39 @@ class UserService {
 
     async getUsers(req) {
         const {page,limit,user} = req.body
-        var abc = ({ path: 'contact', select: 'name nameOrg email' });
+        var abc = ({ path: 'contact', select: 'id name nameOrg email' });
         const option = {
             id:true,
             name:true,
             nameOrg:true,
             sort:{"_id":-1},
             email:true,
-            populate: abc, 
+            populate: abc,
             limit,
             page}
-        const result = await ContactsModel.paginate(
+        const search = await ContactsModel.paginate(
             {owner:user},
             option);
-        return result;
+        const contacts = search.docs
+        const result = await Promise.all(contacts.map(async (item)=>{
+            let newItem = 
+            {
+                _id: item._id,
+                owner: item.owner,
+                contact: {
+                  id: item.contact.id,
+                  email: item.contact.email,
+                  name: item.contact.name,
+                  nameOrg: item.contact.nameOrg,
+                  statusLine: SocketIO.userSocketIdMap.has(item.contact.id)
+                }
+            }
+            return newItem
+        })) 
+        search.docs = result
+        return search
     }
+
     async getUserList(req) {
         const {page,limit,search} = req.body
         const regex = search.replace(/ /g, '*.*')

@@ -6,6 +6,7 @@ const offerController = require('../controllers/offer-controller');
 const specOfferController = require('../controllers/specOffer-controller');
 const orgController = require('../controllers/org-controller');
 const priceController = require('../controllers/price-controller');
+const chatController = require('../controllers/chat-controller');
 const contrController = require('../controllers/contr-controller')
 const questionController = require('../controllers/question-controller')
 const reviewOrgController = require('../controllers/reviewOrg-controller')
@@ -90,5 +91,7 @@ router.get('/download/:file', loadController.download);
 router.get('/static/:path/:file', loadController.getStatic);
 
 router.get('/parsing', loadController.parsing);
+
+router.post('/getconnectedfriend', chatController.getStatus);
 
 module.exports = router
