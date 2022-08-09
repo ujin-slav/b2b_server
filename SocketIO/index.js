@@ -7,6 +7,7 @@ const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
 const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
 const UserModel =require('../models/user-model')
 const ContactsModel =require('../models/contacts-model')
+const LastVisitModel =require('../models/lastVisit-model')
 const SocketIOFile = require('socket.io-file');
 const mailService = require('../service/mail-service')
 const path = require('path');
@@ -27,13 +28,20 @@ const IOconnectNotAuth = (socket,io)=>{
   })
 }
 
-const IOconnect = (socket,io) =>{
+const IOconnect = async (socket,io) =>{
   if(socket.notAuth){
     return IOconnectNotAuth(socket,io)
   }
   console.log(`User Connected: ${socket.id} id ${socket.user.id}`);
   const userId = socket.user.id;
   userSocketIdMap.set(userId, socket.id);
+
+  const contacts = await ContactsModel.find({contact:userId}).populate({path:'owner', select:'id'})
+  contacts.map((item)=>{
+    if(userSocketIdMap.has(item.owner.id)){
+      io.sockets.sockets.get(userSocketIdMap.get(item.owner.id)).emit("user_connected", userId)
+    }
+  })
 
   var uploader = new SocketIOFile(socket, {
         // uploadDir: {			// multiple directories
@@ -234,6 +242,12 @@ const IOconnect = (socket,io) =>{
         io.sockets.sockets.get(userSocketIdMap.get(item.owner.id)).emit("user_disconnected", userId)
       }
     })
+    const lastVisit = await LastVisitModel.findOne({User:userId})
+    if(lastVisit===null){
+        await LastVisitModel.create({User:userId,Date: new Date()})
+    }else{
+        await LastVisitModel.updateOne({User:userId},{$set:{Date: new Date()}})
+    }
   });
 };
 

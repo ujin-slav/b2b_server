@@ -1,6 +1,7 @@
 const UserModel =require('../models/user-model')
 const ChatModel = require('../models/chat-model')
-const ContactsModel =require('../models/contacts-model')
+const ContactsModel = require('../models/contacts-model')
+const LastVisitModel = require('../models/lastVisit-model') 
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const uuid = require('uuid')
@@ -180,19 +181,10 @@ class UserService {
             option);
         const contacts = search.docs
         const result = await Promise.all(contacts.map(async (item)=>{
-            let newItem = 
-            {
-                _id: item._id,
-                owner: item.owner,
-                contact: {
-                  id: item.contact.id,
-                  email: item.contact.email,
-                  name: item.contact.name,
-                  nameOrg: item.contact.nameOrg,
-                  statusLine: SocketIO.userSocketIdMap.has(item.contact.id)
-                }
-            }
-            return newItem
+            const contact = item.contact
+            const status = {statusLine:SocketIO.userSocketIdMap.has(item.contact.id)}
+            const lastVisit = await LastVisitModel.findOne({User:item.contact.id})
+            return {...status,lastVisit,contact};
         })) 
         search.docs = result
         return search
