@@ -12,6 +12,6 @@ const fileStorageEngine = multer.diskStorage({
     }
   });
 
-module.exports = multer({ storage: fileStorageEngine,limits: { fileSize: 26214400 }});
+module.exports = multer({ storage: fileStorageEngine,limits: { fileSize: 6214400 }});
  
  

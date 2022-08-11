@@ -23,6 +23,18 @@ class UploadController {
             next(e);
         }
     }
+    async getLogo(req, res, next) {
+        try {
+            let file = __dirname + '/../uploadsLogo/' + req.params.file;
+            if(fs.existsSync(file)){
+                res.download(file)
+            }else{
+                res.download(__dirname + '/../serviceImage/noImage.png')
+            }
+        } catch (e) {
+            next(e);
+        }
+    }
 
     async download(req, res, next) {
         try {

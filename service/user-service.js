@@ -10,6 +10,7 @@ const tokenService = require('./token-service')
 const UserDto = require('../dtos/user-dto')
 const ApiError = require('../exceptions/api-error');
 const SocketIO =  require('../SocketIO/index');
+const fs = require("fs");
 
 class UserService {
     async registration(req) { 
@@ -216,6 +217,7 @@ class UserService {
             name,
             nameOrg,
             adressOrg,
+            file,
             telefon,
             inn,
             fiz,
@@ -224,7 +226,17 @@ class UserService {
             notiInvited,
             notiMessage,
             notiQuest
-        } = req.body.data.data
+        } = req.body
+        let logo
+        const existProfile = await UserModel.findOne({_id:id})
+        if(fs.existsSync(__dirname+'\\..\\'+ existProfile.logo?.path)){
+            fs.unlink(__dirname+'\\..\\'+ existProfile.logo?.path, function(err){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Файл удалён");
+                }
+        })};
         const user = await UserModel.updateOne({_id:id},{$set: 
                 {name,
                 nameOrg,
@@ -232,6 +244,7 @@ class UserService {
                 telefon,
                 inn,
                 fiz,  
+                logo:req.file,
                 region:JSON.parse(region),
                 category:JSON.parse(category),
                 notiInvited,
@@ -239,7 +252,6 @@ class UserService {
                 notiQuest
         }});
         const userDto = new UserDto(user);
-        console.log(req.body.data.data)
         return {user: userDto}
     }
 

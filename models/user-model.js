@@ -15,6 +15,7 @@ const UserSchema = new Schema({
     category: [],
     region: [],
     fiz:{type:Boolean},
+    logo:{type:Object},
     notiInvited:{type:Boolean},
     notiMessage:{type:Boolean},
     notiQuest:{type:Boolean},

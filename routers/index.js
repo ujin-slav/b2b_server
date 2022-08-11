@@ -13,6 +13,7 @@ const reviewOrgController = require('../controllers/reviewOrg-controller')
 const upload = require('../config/load-config');
 const uploadPic = require('../config/load-config-pic');
 const uploadPrice = require('../config/load-config-price');
+const uploadLogo = require('../config/load-config-logo');
 const router = new Router();
 const {body} = require('express-validator');
 const authMiddleware = require('../middleware/auth-midleware');
@@ -32,7 +33,7 @@ router.post('/getuser',userController.getUser);
 router.post('/getuserbyid',userController.getUserById);
 router.post('/getusers',userController.getUsers);
 router.post('/getuserlist',userController.getUserList);
-router.post('/changeuser',userController.changeuser);
+router.post('/changeuser', uploadLogo.single("file"),userController.changeuser);
 
 router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);
 router.post('/getprice', priceController.getPrice);
@@ -87,6 +88,7 @@ router.post('/getrevieworg', reviewOrgController.getQuest);
 router.post('/delrevieworg', reviewOrgController.delReviewOrg);
 
 router.get('/getpic/:file', loadController.getPic);
+router.get('/getlogo/:file', loadController.getLogo);
 router.get('/download/:file', loadController.download);
 router.get('/static/:path/:file', loadController.getStatic);
 
