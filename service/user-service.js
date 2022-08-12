@@ -237,7 +237,7 @@ class UserService {
                     console.log("Файл удалён");
                 }
         })};
-        const user = await UserModel.updateOne({_id:id},{$set: 
+        await UserModel.updateOne({_id:id},{$set: 
                 {name,
                 nameOrg,
                 adressOrg,
@@ -251,6 +251,7 @@ class UserService {
                 notiMessage,
                 notiQuest
         }});
+        const user = await UserModel.findOne({_id:id})
         const userDto = new UserDto(user);
         return {user: userDto}
     }
