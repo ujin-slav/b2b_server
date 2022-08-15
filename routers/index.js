@@ -10,6 +10,7 @@ const chatController = require('../controllers/chat-controller');
 const contrController = require('../controllers/contr-controller')
 const questionController = require('../controllers/question-controller')
 const reviewOrgController = require('../controllers/reviewOrg-controller')
+const carouselController = require('../controllers/carousel-controller')
 const upload = require('../config/load-config');
 const uploadPic = require('../config/load-config-pic');
 const uploadPrice = require('../config/load-config-price');
@@ -95,5 +96,7 @@ router.get('/static/:path/:file', loadController.getStatic);
 router.get('/parsing', loadController.parsing);
 
 router.post('/getconnectedfriend', chatController.getStatus);
+
+router.post('/getcarousel', carouselController.getCarousel);
 
 module.exports = router
