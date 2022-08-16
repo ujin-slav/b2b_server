@@ -15,7 +15,7 @@ class CarouselService {
             $options: 'i'
         }}]}
         const option = {
-            select:'name nameOrg email inn logo id',
+            select:'name nameOrg email inn logo _id',
             limit,
             page}
         const result = await UserModel.paginate(searchParam,option)

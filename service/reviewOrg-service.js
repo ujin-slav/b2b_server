@@ -26,13 +26,15 @@ class ReviewOrgService {
     }
 
     async getReviewOrg(req) {
-        const {id} = req.body
+        const {id,skip,limit} = req.body
         
-        const reviewOrg = await ReviewOrgModel.find({Org:id,Host:null}).sort({"_id":-1});
-        const result = await Promise.all(reviewOrg.map(async (item)=>{   
+        let query = {Org:id,Host:null}
+        let reviewOrg = await ReviewOrgModel.find({Org:id,Host:null}).skip(skip).limit(limit).sort({"_id":-1});
+        let count = await ReviewOrgModel.find({Org:id,Host:null}).countDocuments(); 
+        const docs = await Promise.all(reviewOrg.map(async (item)=>{   
             const author = await UserModel.findOne({ _id: item.Author },{id:true,name:true,nameOrg:true,email:true});
             const answer =  await ReviewOrgModel.find({Host:item._id});
-            const newitem = {
+            const newitem ={
                 ID: item._id,
                 Text:item?.Text,
                 Author: author,
@@ -42,6 +44,10 @@ class ReviewOrgService {
             }
             return newitem;
         }));
+        const result = {
+            docs,
+            totalPages:Math.ceil(count/limit)
+        }
 
         const unread = await UnreadReviewOrgModel.deleteMany({To:id})
 
