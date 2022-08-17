@@ -92,7 +92,6 @@ class specOfferService {
             searchText,
             searchInn,
         } = req.body
-        console.log(typeof(filterRegion))
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
