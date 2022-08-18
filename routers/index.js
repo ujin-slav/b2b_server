@@ -49,6 +49,7 @@ router.post('/getspecofferid', specOfferController.getSpecOfferId);
 router.post('/getspecaskuser', specOfferController.getSpecAskUser);
 router.post('/deletespecoffer', specOfferController.deleteSpecOffer);
 router.post('/specaskfiz', specOfferController.specAskFiz);
+router.post('/specaskorg', specOfferController.specAskOrg);
 
 router.post('/saveask', priceController.saveAsk);
 router.post('/getaskprice', priceController.getAskPrice);

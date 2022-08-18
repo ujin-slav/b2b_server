@@ -197,6 +197,31 @@ class specOfferService {
             Telefon,
             City,
             Comment,
+            FIZ:true,
+            Amount,
+            Receiver,
+            SpecOffer
+        })
+        if(result){
+            await UnreadSpecAskModel.create({
+                SpecOffer,
+                To: Receiver,
+            })
+        }
+        return result
+    }
+    async specAskOrg(req) {
+        const {
+            Author,
+            Comment,
+            Amount,
+            Receiver,
+            SpecOffer
+        } = req.body
+        const result = await SpecAskModel.create({
+            Author,
+            Comment,
+            FIZ:false,
             Amount,
             Receiver,
             SpecOffer

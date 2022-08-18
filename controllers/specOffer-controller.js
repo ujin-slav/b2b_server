@@ -59,6 +59,14 @@ class SpecOfferController {
             next(e);
         }
     }
+    async specAskOrg(req, res, next) {
+        try {
+            const result = await specOfferService.specAskOrg(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
     async getSpecAskUser(req, res, next) {
         try {
             const result = await specOfferService.getSpecAskUser(req);
