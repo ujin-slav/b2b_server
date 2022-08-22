@@ -75,6 +75,14 @@ class PriceController {
             next(e);
         }
     }
+    async setStatusPriceAsk(req, res, next) {
+        try {
+            const result = await priceService.setStatusPriceAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 

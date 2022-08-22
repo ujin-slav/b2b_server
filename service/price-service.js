@@ -163,6 +163,8 @@ class PriceService {
         }})
         return result
     }
+    async setStatusPriceAsk(req) {
+       console.log(req)
+    }
 }
-
 module.exports = new PriceService()

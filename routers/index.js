@@ -15,6 +15,7 @@ const upload = require('../config/load-config');
 const uploadPic = require('../config/load-config-pic');
 const uploadPrice = require('../config/load-config-price');
 const uploadLogo = require('../config/load-config-logo');
+const uploadStatus = require('../config/load-config-status');
 const router = new Router();
 const {body} = require('express-validator');
 const authMiddleware = require('../middleware/auth-midleware');
@@ -56,6 +57,7 @@ router.post('/getaskprice', priceController.getAskPrice);
 router.post('/getaskpriceid', priceController.getAskPriceId);
 router.post('/deletepriceask', priceController.deletePriceAsk);
 router.post('/updatepriceask', priceController.updatePriceAsk);
+router.post('/setstatuspriceask',uploadStatus.array("file"), priceController.setStatusPriceAsk);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/getask', askController.getAsk);
