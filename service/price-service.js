@@ -1,6 +1,7 @@
 const fs = require("fs");
 const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
+const StatusPriceAskModel = require('../models/statusPriceAsk-model')
 const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
 
 
@@ -135,8 +136,6 @@ class PriceService {
         populate([{path: 'To', select: 'name nameOrg inn'},
                 {path: 'Author', select: 'name nameOrg inn'}
         ])
-        console.log(req.body)
-        console.log(result)
         return result
     }
     async deletePriceAsk(req) {
@@ -163,8 +162,43 @@ class PriceService {
         }})
         return result
     }
+    fileNameToObject(files,reqFiles){
+        let filesTemp = []  
+        if(Array.isArray(files)){
+            files.map((item)=>{
+                const el = reqFiles.find(file => file.originalname === item)
+                if(el){
+                    filesTemp.push(el)
+                }
+            })
+        }else if(files){
+            filesTemp.push(reqFiles[0])
+        }
+        return filesTemp
+    }
     async setStatusPriceAsk(req) {
-       console.log(req)
+        const {
+            Bilsfiles,
+            Paidfiles,
+            Shipmentfiles,
+            Receivedfiles,
+            PriceAskId,
+            Status
+            } = req.body
+        const status = await StatusPriceAskModel.create({
+            Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
+            Paidfiles:this.fileNameToObject(Paidfiles,req.files),
+            Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
+            Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
+            PriceAskId:PriceAskId,
+            Status:JSON.parse(Status)
+        })
+        return status
+    }
+    async getStatusPriceAsk(req) {
+        const {id} = req.body
+        const status = await StatusPriceAskModel.findOne({PriceAskId:id})
+        return status
     }
 }
 module.exports = new PriceService()
