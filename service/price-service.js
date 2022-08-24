@@ -127,7 +127,8 @@ class PriceService {
             })
         }else if(authorId){
             result = await PriceAskModel.paginate({Author:authorId}, options);
-        }      
+        }     
+        console.log(result)
          return result; 
     }
     async getAskPriceId(req) {
@@ -183,17 +184,40 @@ class PriceService {
             Shipmentfiles,
             Receivedfiles,
             PriceAskId,
+            DeletedFiles,
             Status
             } = req.body
-        const status = await StatusPriceAskModel.create({
-            Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
-            Paidfiles:this.fileNameToObject(Paidfiles,req.files),
-            Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
-            Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
-            PriceAskId:PriceAskId,
-            Status:JSON.parse(Status)
-        })
-        return status
+        const exist = await StatusPriceAskModel.findOne({PriceAskId})
+        if(!exist){
+            const status = await StatusPriceAskModel.create({
+                Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
+                Paidfiles:this.fileNameToObject(Paidfiles,req.files),
+                Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
+                Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
+                PriceAskId:PriceAskId,
+                Status:JSON.parse(Status)
+            })
+            return status
+        }else{
+            JSON.parse(DeletedFiles).map((item)=>{
+                if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Файл удалён");
+                    }
+                })};
+            })
+            const status = await StatusPriceAskModel.updateOne({PriceAskId},{
+                Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
+                Paidfiles:this.fileNameToObject(Paidfiles,req.files),
+                Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
+                Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
+                Status:JSON.parse(Status)
+            })
+            return status
+        }
     }
     async getStatusPriceAsk(req) {
         const {id} = req.body

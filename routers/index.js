@@ -95,6 +95,7 @@ router.post('/delrevieworg', reviewOrgController.delReviewOrg);
 router.get('/getpic/:file', loadController.getPic);
 router.get('/getlogo/:file', loadController.getLogo);
 router.get('/download/:file', loadController.download);
+router.get('/getstatusfile/:file', loadController.getStatusFile);
 router.get('/static/:path/:file', loadController.getStatic);
 
 router.get('/parsing', loadController.parsing);
