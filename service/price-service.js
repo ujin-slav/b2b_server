@@ -121,15 +121,51 @@ class PriceService {
             limit,
             page};
         if(to){
-            result = await PriceAskModel.paginate({To:to}, options);
+            const aggregate = PriceAskModel.aggregate([
+                {
+                  $project: {
+                    _id: {
+                      $toString: "$_id"
+                    },
+                    "Author":true,
+                    "Sum":true
+                  }
+                },
+                {
+                  $lookup: {
+                    from: "statuspriceasks",
+                    localField: "_id",
+                    foreignField: "PriceAskId",
+                    as: "status"
+                  }
+                }
+            ])
+            result = await PriceAskModel.aggregatePaginate(aggregate, options);
             await UnreadInvitedPriceModel.deleteMany({
                 To: to,
             })
         }else if(authorId){
-            result = await PriceAskModel.paginate({Author:authorId}, options);
-        }     
-        console.log(result)
-         return result; 
+            const aggregate = PriceAskModel.aggregate([
+                { $match: { Author:authorId } },
+                {
+                  $project: {
+                    _id: {
+                      $toString: "$_id"
+                    }
+                  }
+                },
+                {
+                  $lookup: {
+                    from: "statuspriceasks",
+                    localField: "_id",
+                    foreignField: "PriceAskId",
+                    as: "status"
+                  }
+                }
+            ])
+            result = await PriceAskModel.aggregatePaginate(aggregate, options);
+        }   
+        return result; 
     }
     async getAskPriceId(req) {
         const {id} = req.body
@@ -226,3 +262,26 @@ class PriceService {
     }
 }
 module.exports = new PriceService()
+
+// {
+//     $project: {
+//       _id: {
+//         $toString: "$_id"
+//       }
+//     }
+//   },
+//   {
+//     $lookup: {
+//       from: "statuspriceasks",
+//       localField: "_id",
+//       foreignField: "PriceAskId",
+//       as: "status"
+//     }
+//   },
+//   {
+//     $facet: {
+//         paginatedResults: [{ $skip: page }, { $limit: limit }],
+//         totalCount:[{$count: 'count'}]
+//     } 
+//   }
+// ])
