@@ -9,6 +9,7 @@ const Price = new Schema({
     Balance: {type: Number},
     Measure:{type: String},
     User:{type: Schema.Types.ObjectId, ref: 'User'},
+    SpecOffer:{type: Schema.Types.ObjectId, ref: 'SpecOffer'},
     Date: {type: Date}
 })
 

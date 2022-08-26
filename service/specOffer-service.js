@@ -1,5 +1,6 @@
 const SpecOfferModel = require("../models/specOffer-model")
 const SpecAskModel = require("../models/specAsk-model")
+const PriceModel = require('../models/price-model')
 const UnreadSpecAskModel = require("../models/unreadSpecAsk-model")
 const UserModel =require('../models/user-model')
 const fs = require("fs");
@@ -18,6 +19,8 @@ class specOfferService {
             Category,
             Region,
             Price,
+            Code,
+            Balance,
             FileArray,
         } = req.body
         const user = await UserModel.findOne({_id:Author});
@@ -36,7 +39,15 @@ class specOfferService {
             NameOrg: user.nameOrg,
             Inn: user.inn
         })
-        console.log(JSON.parse(FileArray))
+        const price = await PriceModel.create({
+            Code,
+            Name,
+            Price,
+            Balance,
+            User:Author,
+            Date: Date.now(),
+            SpecOffer:result
+        })
         return result 
     }
     async modifySpecOffer(req) {
@@ -177,8 +188,9 @@ class specOfferService {
                 });
             })
         }
-        await SpecOfferModel.deleteOne({_id:id}); 
-        return specOffer
+        const result = await SpecOfferModel.deleteOne({_id:id}); 
+        await PriceModel.deleteOne({SpecOffer:id}); 
+        return result
     }
     async specAskFiz(req) {
         const {

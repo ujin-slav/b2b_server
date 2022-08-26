@@ -1,7 +1,6 @@
 const fs = require("fs");
 const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
-const StatusPriceAskModel = require('../models/statusPriceAsk-model')
 const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
 
 
@@ -121,57 +120,20 @@ class PriceService {
             limit,
             page};
         if(to){
-            const aggregate = PriceAskModel.aggregate([
-                {
-                  $project: {
-                    _id: {
-                      $toString: "$_id"
-                    },
-                    "Author":true,
-                    "Sum":true
-                  }
-                },
-                {
-                  $lookup: {
-                    from: "statuspriceasks",
-                    localField: "_id",
-                    foreignField: "PriceAskId",
-                    as: "status"
-                  }
-                }
-            ])
-            result = await PriceAskModel.aggregatePaginate(aggregate, options);
+            result = await PriceAskModel.paginate({To:to}, options);
             await UnreadInvitedPriceModel.deleteMany({
                 To: to,
             })
         }else if(authorId){
-            const aggregate = PriceAskModel.aggregate([
-                { $match: { Author:authorId } },
-                {
-                  $project: {
-                    _id: {
-                      $toString: "$_id"
-                    }
-                  }
-                },
-                {
-                  $lookup: {
-                    from: "statuspriceasks",
-                    localField: "_id",
-                    foreignField: "PriceAskId",
-                    as: "status"
-                  }
-                }
-            ])
-            result = await PriceAskModel.aggregatePaginate(aggregate, options);
-        }   
-        return result; 
+            result = await PriceAskModel.paginate({Author:authorId}, options);
+        }      
+         return result; 
     }
     async getAskPriceId(req) {
         const {id} = req.body
         const result = await PriceAskModel.findOne({_id:id}).
         populate([{path: 'To', select: 'name nameOrg inn'},
-                {path: 'Author', select: 'name nameOrg inn'}
+                {path: 'Author', select: 'name nameOrg inn _id'}
         ])
         return result
     }
@@ -222,42 +184,31 @@ class PriceService {
             PriceAskId,
             DeletedFiles,
             Status
-            } = req.body
-        const exist = await StatusPriceAskModel.findOne({PriceAskId})
-        if(!exist){
-            const status = await StatusPriceAskModel.create({
-                Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
-                Paidfiles:this.fileNameToObject(Paidfiles,req.files),
-                Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
-                Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
-                PriceAskId:PriceAskId,
-                Status:JSON.parse(Status)
-            })
-            return status
-        }else{
-            JSON.parse(DeletedFiles).map((item)=>{
-                if(fs.existsSync(__dirname+'\\..\\'+item.path)){
-                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Файл удалён");
-                    }
-                })};
-            })
-            const status = await StatusPriceAskModel.updateOne({PriceAskId},{
+        } = req.body
+        JSON.parse(DeletedFiles).map((item)=>{
+            if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+            fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Файл удалён");
+                }
+            })};
+        })
+        const status = await PriceAskModel.updateOne({_id:PriceAskId},{
+            Status:{
                 Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
                 Paidfiles:this.fileNameToObject(Paidfiles,req.files),
                 Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
                 Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
                 Status:JSON.parse(Status)
-            })
-            return status
-        }
+            }
+        })
+        return status
     }
     async getStatusPriceAsk(req) {
         const {id} = req.body
-        const status = await StatusPriceAskModel.findOne({PriceAskId:id})
+        const status = await PriceAskModel.findOne({_id:id})
         return status
     }
 }
