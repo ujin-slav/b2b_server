@@ -157,7 +157,9 @@ class specOfferService {
         const {
             id
         } = req.body
-        const result = await SpecOfferModel.findOne({_id:id})
+        const specoffer = await SpecOfferModel.findOne({_id:id})
+        const price = await PriceModel.findOne({SpecOffer:specoffer})
+        const result = {...{priceId:price?._id},specoffer}
         return result;  
     }
     async getSpecOfferUser(req) {
