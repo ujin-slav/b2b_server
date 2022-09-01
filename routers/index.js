@@ -61,6 +61,7 @@ router.post('/setstatuspriceask',uploadStatus.array("file"), priceController.set
 router.post('/getstatuspriceask',priceController.getStatusPriceAsk);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
+router.post('/setwinner', askController.setWinner);
 router.post('/getask', askController.getAsk);
 router.post('/getfilterask', askController.getFilterAsk);
 router.post('/getinvitedask', askController.getInvitedAsk);

@@ -3,8 +3,12 @@ const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
 const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
 
+String.prototype.replaceAll = function(search, replace){
+    return this.split(search).join(replace);
+}
 
 class PriceService {
+
 
     async addPrice(req) {
         const {userID} = req.body
@@ -32,8 +36,8 @@ class PriceService {
     }
 
     async getPrice(req) {
-        const {page,limit,search,org} = req.body
-        const regex = search.replace(/ /g, '*.*')
+        const {page,limit,search,org,onlySpec} = req.body
+        const regex = search.replace(/\s{20000,}/g, '*.*')
         var abc = ({ path: 'User', select: 'nameOrg id' });
         let searchParam = 
                     { $or: [
@@ -47,6 +51,10 @@ class PriceService {
         if(org){
             searchParam = Object.assign(searchParam,{User:org})
         }
+        if(onlySpec && org){
+            searchParam = Object.assign(searchParam,{User:org,SpecOffer : {$ne : null}})
+        }
+        console.log(onlySpec)
         const result = await PriceModel.paginate(
             searchParam, 
             {page,limit,populate:abc});

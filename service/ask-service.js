@@ -62,6 +62,15 @@ class AskService {
         return {ask} 
     }
 
+    async setWinner(req) {
+        const {
+          winnerDTO,
+          id
+        } = req.body
+        const ask =  await AskModel.updateOne({_id:id},{$set:{Winner:winnerDTO.AuthorID}})
+        return ask
+    }
+
     async getAsk(req) {
         const {
             limit,

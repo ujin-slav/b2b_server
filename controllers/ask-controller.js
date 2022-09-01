@@ -10,6 +10,14 @@ class AskController {
             next(e);
         }
     }
+    async setWinner(req, res, next) {
+        try {
+            const result = await askService.setWinner(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 
     async getAsk(req, res, next) {
         try {
