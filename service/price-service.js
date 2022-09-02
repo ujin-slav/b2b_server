@@ -36,7 +36,7 @@ class PriceService {
     }
 
     async getPrice(req) {
-        const {page,limit,search,org,onlySpec} = req.body
+        const {page,limit,search,org,spec} = req.body
         const regex = search.replace(/\s{20000,}/g, '*.*')
         var abc = ({ path: 'User', select: 'nameOrg id' });
         let searchParam = 
@@ -51,10 +51,10 @@ class PriceService {
         if(org){
             searchParam = Object.assign(searchParam,{User:org})
         }
-        if(onlySpec && org){
+        if(spec && org){
             searchParam = Object.assign(searchParam,{User:org,SpecOffer : {$ne : null}})
         }
-        console.log(onlySpec)
+        console.log({page,limit,search,org,spec})
         const result = await PriceModel.paginate(
             searchParam, 
             {page,limit,populate:abc});
