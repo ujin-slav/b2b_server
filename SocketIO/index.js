@@ -210,14 +210,18 @@ const IOconnect = async (socket,io) =>{
   });
 
   socket.on("get_message", async (data)=>{
+      const {SearchText} = data
+      const regex = SearchText.replace(/\s{20000,}/g, '*.*')
       try {
           const messages = await ChatModel.paginate({
           "$or": [{
               To: await UserModel.findOne({_id:data.UserId}),
-              Author: await UserModel.findOne({_id:data.RecevierId})
+              Author: await UserModel.findOne({_id:data.RecevierId}),
+              Text: {$regex: regex,$options: 'i'}
           }, {
               To: await UserModel.findOne({_id:data.RecevierId}),
-              Author: await UserModel.findOne({_id:data.UserId})
+              Author: await UserModel.findOne({_id:data.UserId}),
+              Text: {$regex: regex,$options: 'i'}
           }]
           },{page:1,limit:data.limit,sort:{Date:-1}});
           await UnreadModel.deleteMany({
