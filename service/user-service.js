@@ -160,14 +160,26 @@ class UserService {
             nameOrg:user.nameOrg,
             telefon:user.telefon,
             adressOrg: user.adressOrg,
-            inn: user.inn
+            inn: user.inn,
+            logo:user?.logo
         }
         return result;
     }
 
     async getUsers(req) {
-        const {page,limit,user} = req.body
-        var abc = ({ path: 'contact', select: 'id name nameOrg email' });
+        const {page,limit,user,searchUser} = req.body
+        const regex = searchUser.replace(/\s{20000,}/g, '*.*')
+        var abc = ({ path: 'contact', select: 'id name nameOrg email',
+        match:{
+            $or: [
+                {nameOrg: {
+                $regex: regex,
+                $options: 'i'
+            }}, {name: {
+                $regex: regex,
+                $options: 'i'
+            }}] 
+        }});
         const option = {
             id:true,
             name:true,
@@ -181,11 +193,14 @@ class UserService {
             {owner:user},
             option);
         const contacts = search.docs
-        const result = await Promise.all(contacts.map(async (item)=>{
-            const contact = item.contact
-            const status = {statusLine:SocketIO.userSocketIdMap.has(item.contact.id)}
-            const lastVisit = await LastVisitModel.findOne({User:item.contact.id})
-            return {...status,lastVisit,contact};
+        let result = []
+        await Promise.all(contacts.map(async (item)=>{
+            if(item.contact!==null){
+                const contact = item.contact
+                const status = {statusLine:SocketIO.userSocketIdMap.has(item?.contact?.id)}
+                const lastVisit = await LastVisitModel.findOne({User:item?.contact?.id})
+                result.push({...status,lastVisit,contact})
+            }
         })) 
         search.docs = result
         return search
