@@ -5,8 +5,8 @@ const StatusPriceAsk = new Schema({
     Paidfiles:[],
     Shipmentfiles:[],
     Receivedfiles:[],
-    PriceAskId:{type: Schema.Types.ObjectId, ref: 'PriceAsk'},
+    AskId:{type: Schema.Types.ObjectId, ref: 'Ask'},
     Status:{}
 })
 
-module.exports = model('StatusPriceAsk', StatusPriceAsk);
+module.exports = model('StatusAsk', StatusAsk);

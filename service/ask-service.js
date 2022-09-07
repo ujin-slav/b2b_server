@@ -290,6 +290,43 @@ class AskService {
             throw ApiError.BadRequest('Нет прав на изменение') 
         }
     }
+
+    async setStatusAsk(req) {
+        const {
+            Bilsfiles,
+            Paidfiles,
+            Shipmentfiles,
+            Receivedfiles,
+            AskId,
+            DeletedFiles,
+            Status
+        } = req.body
+        JSON.parse(DeletedFiles).map((item)=>{
+            if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+            fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Файл удалён");
+                }
+            })};
+        })
+        const status = await AskModel.updateOne({_id:AskId},{
+            Status:{
+                Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
+                Paidfiles:this.fileNameToObject(Paidfiles,req.files),
+                Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
+                Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
+                Status:JSON.parse(Status)
+            }
+        })
+        return status
+    }
+    async getStatusAsk(req) {
+        const {id} = req.body
+        const status = await AskModel.findOne({_id:id})
+        return status
+    }
 }
 
 module.exports = new AskService()

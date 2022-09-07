@@ -63,6 +63,15 @@ class UploadController {
         }
     }
 
+    async getStatusAskFile(req, res, next) {
+        try {
+            let file = __dirname + '/../uploadsStatusAsk/' + req.params.file;
+            res.download(file);
+        } catch (e) {
+            next(e);
+        }
+    }
+
     // async parsing(req, res, next) {
     //     try {
     //         var array = [];

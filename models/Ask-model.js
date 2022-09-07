@@ -21,7 +21,8 @@ const Ask = new Schema({
     Party:[],
     Comment: {type:String},
     Date: {type: Date},
-    Winner: {type: Schema.Types.ObjectId, ref: 'User'}
+    Winner: {type: Schema.Types.ObjectId, ref: 'User'},
+    Status:{}
 })
 
 Ask.plugin(mongoosePaginate);

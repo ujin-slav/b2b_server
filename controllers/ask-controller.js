@@ -93,6 +93,22 @@ class AskController {
             next(e);
         }
     }  
+    async setStatusAsk(req, res, next) {
+        try {
+            const result = await askService.setStatusAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getStatusAsk(req, res, next) {
+        try {
+            const result = await askService.getStatusAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 

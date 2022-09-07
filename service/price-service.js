@@ -203,6 +203,7 @@ class PriceService {
                 }
             })};
         })
+        console.log(Status)
         const status = await PriceAskModel.updateOne({_id:PriceAskId},{
             Status:{
                 Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),

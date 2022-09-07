@@ -17,6 +17,7 @@ const uploadPic = require('../config/load-config-pic');
 const uploadPrice = require('../config/load-config-price');
 const uploadLogo = require('../config/load-config-logo');
 const uploadStatus = require('../config/load-config-status');
+const uploadStatusAsk = require('../config/load-config-statusAsk');
 const router = new Router();
 const {body} = require('express-validator');
 const authMiddleware = require('../middleware/auth-midleware');
@@ -73,6 +74,8 @@ router.post('/getuserasks', askController.getUserAsks);
 router.post('/deleteask', askController.deleteAsk);
 router.post('/fillask', askController.fillAsk);
 router.post('/modifyask', authMiddleware,upload.array("file"),askController.modifyAsk);
+router.post('/setstatusask',uploadStatusAsk.array("file"), askController.setStatusAsk);
+router.post('/getstatusask',askController.getStatusAsk);
 
 router.post('/getoffers', offerController.getOffers);
 router.post('/deleteoffer', offerController.deleteOffer);
@@ -100,6 +103,7 @@ router.get('/getpic/:file', loadController.getPic);
 router.get('/getlogo/:file', loadController.getLogo);
 router.get('/download/:file', loadController.download);
 router.get('/getstatusfile/:file', loadController.getStatusFile);
+router.get('/getstatusaskfile/:file', loadController.getStatusAskFile);
 router.get('/static/:path/:file', loadController.getStatic);
 
 router.get('/parsing', loadController.parsing);
