@@ -324,6 +324,7 @@ class AskService {
     }
     async getStatusAsk(req) {
         const {id} = req.body
+        console.log(id)
         const status = await AskModel.findOne({_id:id})
         return status
     }
