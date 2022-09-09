@@ -1,6 +1,7 @@
 const fs = require("fs");
 const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
+const LentStatusModel =require('../models/lentStatus-model')
 const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
 
 String.prototype.replaceAll = function(search, replace){
@@ -213,6 +214,7 @@ class PriceService {
                 Status:JSON.parse(Status)
             }
         })
+        await LentStatusModel.create({PriceAsk:PriceAskId,Date:Date.now()})
         return status
     }
     async getStatusPriceAsk(req) {

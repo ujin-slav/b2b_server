@@ -1,5 +1,6 @@
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
+const LentStatusModel =require('../models/lentStatus-model')
 const UnreadInvitedModel = require("../models/unreadInvited-model")
 const roleService = require('./role-service')
 const ApiError = require('../exceptions/api-error');
@@ -290,6 +291,20 @@ class AskService {
             throw ApiError.BadRequest('Нет прав на изменение') 
         }
     }
+    fileNameToObject(files,reqFiles){
+        let filesTemp = []  
+        if(Array.isArray(files)){
+            files.map((item)=>{
+                const el = reqFiles.find(file => file.originalname === item)
+                if(el){
+                    filesTemp.push(el)
+                }
+            })
+        }else if(files){
+            filesTemp.push(reqFiles[0])
+        }
+        return filesTemp
+    }
 
     async setStatusAsk(req) {
         const {
@@ -320,11 +335,12 @@ class AskService {
                 Status:JSON.parse(Status)
             }
         })
+        console.log(AskId)
+        await LentStatusModel.create({Ask:AskId,Date:Date.now()})
         return status
     }
     async getStatusAsk(req) {
         const {id} = req.body
-        console.log(id)
         const status = await AskModel.findOne({_id:id})
         return status
     }
