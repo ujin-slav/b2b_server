@@ -12,6 +12,7 @@ const questionController = require('../controllers/question-controller')
 const reviewOrgController = require('../controllers/reviewOrg-controller')
 const messageController = require('../controllers/message-controller')
 const carouselController = require('../controllers/carousel-controller')
+const lentController = require('../controllers/lent-controller')
 const upload = require('../config/load-config');
 const uploadPic = require('../config/load-config-pic');
 const uploadPrice = require('../config/load-config-price');
@@ -40,6 +41,8 @@ router.post('/getuserlist',userController.getUserList);
 router.post('/changeuser', uploadLogo.single("file"),userController.changeuser);
 
 router.post('/getmessage', messageController.getMessage);
+
+router.post('/getlent', lentController.getLent);
 
 router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);
 router.post('/getprice', priceController.getPrice);

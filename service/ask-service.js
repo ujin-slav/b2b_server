@@ -314,7 +314,10 @@ class AskService {
             Receivedfiles,
             AskId,
             DeletedFiles,
-            Status
+            Status,
+            PrevStatus,
+            Author,
+            Winner
         } = req.body
         JSON.parse(DeletedFiles).map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
@@ -335,8 +338,13 @@ class AskService {
                 Status:JSON.parse(Status)
             }
         })
-        console.log(AskId)
-        await LentStatusModel.create({Ask:AskId,Date:Date.now()})
+        await LentStatusModel.create({
+            Ask:AskId,
+            PrevStatus:JSON.parse(PrevStatus),
+            Author,
+            Winner,
+            Date:Date.now()
+        })
         return status
     }
     async getStatusAsk(req) {
