@@ -9,9 +9,9 @@ class LentService {
             limit,
             page
         } = req.body.formData  
-        var abc = ([{ path: 'Ask', select: '_id Status' },
-        {path: 'PriceAsk', select: 'Status'},
-        { path: 'Author', select: 'inn nameOrg' }]);
+        var abc = ([{ path: 'Ask', select: '_id Status Date' },
+        {path: 'PriceAsk', select: '_id Status Date'},
+        { path: 'Author', select: 'name nameOrg' }]);
         var options = {
             sort:{"_id":-1}, 
             populate:abc,

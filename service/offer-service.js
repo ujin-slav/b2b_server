@@ -59,16 +59,11 @@ class OfferService {
 
     async getUserOffers(req) {
         const {authorId,page,limit} = req.body;
-        var abc = ({ path: 'Ask', populate:
-        {path:'Author',select:"name nameOrg inn"},
-        select:'Author Text'
-        });
             var options = {
                 sort:{"_id":-1},
-                populate: abc, 
                 limit,
                 page};
-        console.log(authorId)        
+        console.log("555658")        
         const offer = await OfferModel.paginate({Author:authorId},options);
         return offer
     }
