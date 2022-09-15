@@ -2,6 +2,7 @@ const {Schema, model} = require('mongoose');
 
 const ContrSchema = new Schema({
     User: {type: Schema.Types.ObjectId, ref: 'User'},
+    Contragent:{type: Schema.Types.ObjectId, ref: 'User'},
     Name: {type: String},
     Email: {type: String},
 })

@@ -62,8 +62,7 @@ class OfferService {
             var options = {
                 sort:{"_id":-1},
                 limit,
-                page};
-        console.log("555658")        
+                page};     
         const offer = await OfferModel.paginate({Author:authorId},options);
         return offer
     }
