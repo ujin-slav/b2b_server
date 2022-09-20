@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 
 
 const ContrSchema = new Schema({
@@ -10,4 +11,5 @@ const ContrSchema = new Schema({
 })
 
 ContrSchema.plugin(mongoosePaginate);
+ContrSchema.plugin(aggregatePaginate);
 module.exports = model('Contr', ContrSchema);

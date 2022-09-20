@@ -27,37 +27,40 @@ class ContrService {
     async getContr(req) {
         const {page,limit,user,search} = req.body
         const regex = search.replace(/\s{20000,}/g, '*.*')
-        var abc = ({ path: 'Contragent', select: 'id name nameOrg email',
-        match:{
-            $or: [
-                {nameOrg: {
-                $regex: regex,
-                $options: 'i'
-            }}, {name: {
-                $regex: regex,
-                $options: 'i'
-            }}] 
-        }});
-        const option = {
-            sort:{"_id":-1},
-            populate: abc,
-            limit,
-            page}
-        const contr = await ContrModel.paginate(
-            {User:user,Contragent:{$ne:null}},
-            option);
+        const options = {
+            page: 1,
+            limit: 10,
+        }        
+        const aggregate = ContrModel.aggregate([
+            { $lookup:
+                {
+                   from: "users",
+                   localField: "Contragent",
+                   foreignField: "_id",
+                   as: "out"
+                }
+            },
+            {$unwind:'$out'},
+            {$project:
+                {
+                 name:'$out.name',
+                 nameOrg: '$out.nameOrg',
+                 inn: '$out.inn', 
+                }
+            },
+            {$match:{
+                $or: [
+                    {nameOrg: {
+                    $regex: regex,
+                    $options: 'i'
+                }}, {name: {
+                    $regex: regex,
+                    $options: 'i'
+                }}] 
+            }}
+        ])
+        const contr = await ContrModel.aggregatePaginate(aggregate, options)
         return contr
-        // const {page,limit,search,user} = req.body
-
-        // var options = {
-        //     sort:{"_id":-1},
-        //     populate: abc,
-        //     limit,
-        //     page};
-        // console.log(search)    
-        // const contr = await ContrModel.paginate({User:user}, options)
-
-        // return contr
     }
 
     async delContr(req) {

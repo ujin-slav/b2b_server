@@ -209,7 +209,7 @@ class UserService {
     async getUserList(req) {
         const {page,limit,search} = req.body
         const regex = search.replace(/ /g, '*.*')
-        console.log(search)
+        console.log(page)
         let searchParam = 
         { $or: [
             {nameOrg: {
