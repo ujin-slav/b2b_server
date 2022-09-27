@@ -9,7 +9,6 @@ class ContrService {
             userid,
             contragent
         } = req.body
-        console.log(contragent)
         const candidate = await ContrModel.findOne({
             User:userid, 
             Contragent:contragent
@@ -26,10 +25,11 @@ class ContrService {
 
     async getContr(req) {
         const {page,limit,user,search} = req.body
+        console.log(req.body)
         const regex = search.replace(/\s{20000,}/g, '*.*')
         const options = {
-            page: 1,
-            limit: 10,
+            page,
+            limit,
         }        
         const aggregate = ContrModel.aggregate([
             { $lookup:
@@ -45,18 +45,22 @@ class ContrService {
                 {
                  name:'$out.name',
                  nameOrg: '$out.nameOrg',
-                 inn: '$out.inn', 
+                 inn: '$out.inn',
+                 user: {$toString: "$User"} 
                 }
             },
             {$match:{
-                $or: [
-                    {nameOrg: {
-                    $regex: regex,
-                    $options: 'i'
-                }}, {name: {
-                    $regex: regex,
-                    $options: 'i'
-                }}] 
+                $and:[
+                    {$or: [
+                        {nameOrg: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}, {name: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}]},
+                    {user}
+                ]
             }}
         ])
         const contr = await ContrModel.aggregatePaginate(aggregate, options)
@@ -65,12 +69,9 @@ class ContrService {
 
     async delContr(req) {
         const {
-            userid,
-            email
+            id
         } = req.body
-        const user = await UserModel.findOne({ _id: userid });
-
-        const contr = await ContrModel.deleteOne({User:user, Email:email})
+        const contr = await ContrModel.deleteOne({_id:id})
         return contr
     }
 
