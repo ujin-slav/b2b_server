@@ -55,10 +55,11 @@ class ContrService {
                         {nameOrg: {
                         $regex: regex,
                         $options: 'i'
-                    }}, {name: {
+                    }}, {inn: {
                         $regex: regex,
                         $options: 'i'
-                    }}]},
+                    }},
+                ]},
                     {user}
                 ]
             }}
