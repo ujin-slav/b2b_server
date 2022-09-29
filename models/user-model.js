@@ -18,7 +18,7 @@ const UserSchema = new Schema({
     logo:{type:Object},
     notiInvited:{type:Boolean},
     notiMessage:{type:Boolean},
-    notiQuest:{type:Boolean},
+    notiAsk:{type:Boolean},
 })
 
 UserSchema.plugin(mongoosePaginate);

@@ -46,6 +46,7 @@ class ContrService {
                  name:'$out.name',
                  nameOrg: '$out.nameOrg',
                  inn: '$out.inn',
+                 logo: '$out.logo',
                  user: {$toString: "$User"} 
                 }
             },

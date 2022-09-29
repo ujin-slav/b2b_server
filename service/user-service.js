@@ -169,7 +169,7 @@ class UserService {
     async getUsers(req) {
         const {page,limit,user,searchUser} = req.body
         const regex = searchUser.replace(/\s{20000,}/g, '*.*')
-        var abc = ({ path: 'contact', select: 'id name nameOrg email',
+        var abc = ({ path: 'contact', select: 'id name nameOrg email logo',
         match:{
             $or: [
                 {nameOrg: {
@@ -219,7 +219,7 @@ class UserService {
             $options: 'i'
         }}]}
         const option = {
-            select:'name nameOrg email',
+            select:'name nameOrg email logo',
             limit,
             page}
         const result = await UserModel.paginate(searchParam,option)
@@ -240,7 +240,7 @@ class UserService {
             category,
             notiInvited,
             notiMessage,
-            notiQuest
+            notiAsk
         } = req.body
         let logo
         const existProfile = await UserModel.findOne({_id:id})
@@ -264,7 +264,7 @@ class UserService {
                 category:JSON.parse(category),
                 notiInvited,
                 notiMessage,
-                notiQuest
+                notiAsk
         }});
         const user = await UserModel.findOne({_id:id})
         const userDto = new UserDto(user);
