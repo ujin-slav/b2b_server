@@ -1,7 +1,8 @@
 const {Schema, model} = require('mongoose');
 
 const StatusPriceAsk = new Schema({
-    Bilsfiles:[],
+    CrContract:[],
+    SiContract:[],
     Paidfiles:[],
     Shipmentfiles:[],
     Receivedfiles:[],
@@ -9,4 +10,4 @@ const StatusPriceAsk = new Schema({
     Status:{}
 })
 
-module.exports = model('StatusAsk', StatusAsk);
+module.exports = model('StatusAsk', StatusPriceAsk);

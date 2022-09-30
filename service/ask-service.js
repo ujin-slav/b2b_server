@@ -308,7 +308,8 @@ class AskService {
 
     async setStatusAsk(req) {
         const {
-            Bilsfiles,
+            CrContractfiles,
+            SiContractfiles,
             Paidfiles,
             Shipmentfiles,
             Receivedfiles,
@@ -331,7 +332,8 @@ class AskService {
         })
         const status = await AskModel.updateOne({_id:AskId},{
             Status:{
-                Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
+                CrContractfiles:this.fileNameToObject(SiContractfiles,req.files),
+                SiContractfiles:this.fileNameToObject(SiContractfiles,req.files),
                 Paidfiles:this.fileNameToObject(Paidfiles,req.files),
                 Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
                 Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
