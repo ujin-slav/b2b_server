@@ -1,4 +1,5 @@
 const cheerio = require('cheerio');
+const loadService = require('../service/load-service');
 const fs = require('fs');
 const needle = require('needle');
 var results = [];
@@ -67,6 +68,15 @@ class UploadController {
         try {
             let file = __dirname + '/../uploadsStatusAsk/' + req.params.file;
             res.download(file);
+        } catch (e) {
+            next(e);
+        }
+    }
+
+    async deleteFile(req, res, next) {
+        try {
+            const result = await loadService.deleteFile(req);
+            return res.json(result)
         } catch (e) {
             next(e);
         }
