@@ -314,22 +314,11 @@ class AskService {
             Shipmentfiles,
             Receivedfiles,
             AskId,
-            DeletedFiles,
             Status,
             PrevStatus,
             Author,
             Winner
         } = req.body
-        JSON.parse(DeletedFiles).map((item)=>{
-            if(fs.existsSync(__dirname+'\\..\\'+item.path)){
-            fs.unlink(__dirname+'\\..\\'+item.path, function(err){
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Файл удалён");
-                }
-            })};
-        })
         const status = await AskModel.updateOne({_id:AskId},{
             Status:{
                 CrContractfiles:this.fileNameToObject(CrContractfiles,req.files,Author),
@@ -349,10 +338,35 @@ class AskService {
         })
         return status
     }
+
     async getStatusAsk(req) {
         const {id} = req.body
         const status = await AskModel.findOne({_id:id})
         return status
+    }
+
+    async deleteStatusAskFile(req) {
+        const 
+            {askId,
+            nameArray,
+            file
+            } = req.body
+        const ask = await AskModel.findOne({_id:askId})
+        if(fs.existsSync(__dirname+'\\..\\'+file.path)){
+            fs.unlink(__dirname+'\\..\\'+file.path, function(err){
+                if (err) {
+                    throw ApiError.BadRequest('Файл не найден')
+                }
+        })};
+        const status = ask.Status
+        if(Array.isArray(status[nameArray])){
+            let newStatus = status[nameArray].filter(item=>item.filename!==file.filename)
+            status[nameArray]=newStatus
+        }
+        const updateStatus = await AskModel.updateOne({_id:askId},{
+            Status:status
+        })
+        return updateStatus
     }
 }
 

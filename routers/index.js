@@ -79,6 +79,8 @@ router.post('/fillask', askController.fillAsk);
 router.post('/modifyask', authMiddleware,upload.array("file"),askController.modifyAsk);
 router.post('/setstatusask',uploadStatusAsk.array("file"), askController.setStatusAsk);
 router.post('/getstatusask',askController.getStatusAsk);
+router.post('/deletestatusaskfile',askController.deleteStatusAskFile);
+
 
 router.post('/getoffers', offerController.getOffers);
 router.post('/deleteoffer', offerController.deleteOffer);

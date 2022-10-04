@@ -191,20 +191,8 @@ class PriceService {
             Shipmentfiles,
             Receivedfiles,
             PriceAskId,
-            DeletedFiles,
             Status
         } = req.body
-        JSON.parse(DeletedFiles).map((item)=>{
-            if(fs.existsSync(__dirname+'\\..\\'+item.path)){
-            fs.unlink(__dirname+'\\..\\'+item.path, function(err){
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Файл удалён");
-                }
-            })};
-        })
-        console.log(Status)
         const status = await PriceAskModel.updateOne({_id:PriceAskId},{
             Status:{
                 Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
@@ -221,6 +209,29 @@ class PriceService {
         const {id} = req.body
         const status = await PriceAskModel.findOne({_id:id})
         return status
+    }
+    async deleteStatusPriceAskFile(req) {
+        const 
+            {priceAskId,
+            nameArray,
+            file
+            } = req.body
+        const priceAsk = await PriceAskModel.findOne({_id:priceAskId})
+        if(fs.existsSync(__dirname+'\\..\\'+file.path)){
+            fs.unlink(__dirname+'\\..\\'+file.path, function(err){
+                if (err) {
+                    throw ApiError.BadRequest('Файл не найден')
+                }
+        })};
+        const status = priceAsk.Status
+        if(Array.isArray(status[nameArray])){
+            let newStatus = status[nameArray].filter(item=>item.filename!==file.filename)
+            status[nameArray]=newStatus
+        }
+        const updateStatus = await PriceAskModel.updateOne({_id:priceAskId},{
+            Status:status
+        })
+        return updateStatus
     }
 }
 module.exports = new PriceService()

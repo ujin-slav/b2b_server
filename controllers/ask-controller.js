@@ -109,6 +109,14 @@ class AskController {
             next(e);
         }
     }
+    async deleteStatusAskFile(req, res, next) {
+        try {
+            const result = await askService.deleteStatusAskFile(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 
