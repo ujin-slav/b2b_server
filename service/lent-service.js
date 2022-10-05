@@ -8,7 +8,7 @@ class LentService {
             userId,
             limit,
             page
-        } = req.body.formData  
+        } = req.body
         var abc = ([{ path: 'Ask', select: '_id Status Date' },
         {path: 'PriceAsk', select: '_id Status Date'},
         { path: 'Author', select: 'name nameOrg' }]);

@@ -90,6 +90,7 @@ router.post('/addoffer', upload.array("file"), offerController.addOffer);
 router.post('/getorg', orgController.getOrg);
 router.post('/getorgcat', orgController.getOrgCat);
 router.post('/getcontr', contrController.getContr);
+router.post('/getcontrparty', contrController.getContrParty);
 router.post('/addcontr', contrController.addContr);
 router.post('/delcontr', contrController.delContr);
 

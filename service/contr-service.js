@@ -25,7 +25,6 @@ class ContrService {
 
     async getContr(req) {
         const {page,limit,user,search} = req.body
-        console.log(req.body)
         const regex = search.replace(/\s{20000,}/g, '*.*')
         const options = {
             page,
@@ -47,6 +46,50 @@ class ContrService {
                  nameOrg: '$out.nameOrg',
                  inn: '$out.inn',
                  logo: '$out.logo',
+                 user: {$toString: "$User"} 
+                }
+            },
+            {$match:{
+                $and:[
+                    {$or: [
+                        {nameOrg: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}, {inn: {
+                        $regex: regex,
+                        $options: 'i'
+                    }},
+                ]},
+                    {user}
+                ]
+            }}
+        ])
+        const contr = await ContrModel.aggregatePaginate(aggregate, options)
+        return contr
+    }
+
+    async getContrParty(req) {
+        const {page,limit,user,search} = req.body
+        const regex = search.replace(/\s{20000,}/g, '*.*')
+        const options = {
+            page,
+            limit,
+        }        
+        const aggregate = ContrModel.aggregate([
+            { $lookup:
+                {
+                   from: "users",
+                   localField: "Contragent",
+                   foreignField: "_id",
+                   as: "out"
+                }
+            },
+            {$unwind:'$out'},
+            {$project:
+                {
+                 name:'$out.name',
+                 nameOrg: '$out.nameOrg',
+                 idContr: '$out._id',
                  user: {$toString: "$User"} 
                 }
             },

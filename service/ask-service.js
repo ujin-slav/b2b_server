@@ -47,7 +47,7 @@ class AskService {
             Inn: user.inn
         })
         await Promise.all(Party.map(async (item)=>{
-            const userParty = await UserModel.findOne({email:item.Email})
+            const userParty = await UserModel.findOne({email:item.idContr})
             if(userParty){
                await UnreadInvitedModel.create({
                 Ask: ask,
@@ -173,7 +173,7 @@ class AskService {
             limit,
             page};
         var searchParam = {
-            Party: {$elemMatch: {Email:email}}
+            Party: {$elemMatch: {idContr:userId}}
         }    
         await UnreadInvitedModel.deleteMany({
             To: userId,

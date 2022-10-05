@@ -19,6 +19,14 @@ class ContrController {
             next(e);
         }
     }
+    async getContrParty(req, res, next) {
+        try {
+            const result = await contrService.getContrParty(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 
     async delContr(req, res, next) {
         try {
