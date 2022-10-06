@@ -91,6 +91,14 @@ class PriceController {
             next(e);
         }
     }
+    async deleteStatusPriceAskFile(req, res, next) {
+        try {
+            const result = await priceService.deleteStatusPriceAskFile(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 

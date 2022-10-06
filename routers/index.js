@@ -66,6 +66,7 @@ router.post('/deletepriceask', priceController.deletePriceAsk);
 router.post('/updatepriceask', priceController.updatePriceAsk);
 router.post('/setstatuspriceask',uploadStatus.array("file"), priceController.setStatusPriceAsk);
 router.post('/getstatuspriceask',priceController.getStatusPriceAsk);
+router.post('/deletestatuspriceaskfile',priceController.deleteStatusPriceAskFile);
 
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/setwinner', askController.setWinner);

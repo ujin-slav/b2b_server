@@ -170,35 +170,40 @@ class PriceService {
         }})
         return result
     }
-    fileNameToObject(files,reqFiles){
+    fileNameToObject(files,reqFiles,author){
         let filesTemp = []  
         if(Array.isArray(files)){
             files.map((item)=>{
                 const el = reqFiles.find(file => file.originalname === item)
                 if(el){
-                    filesTemp.push(el)
+                    filesTemp.push({...el,author})
                 }
             })
         }else if(files){
-            filesTemp.push(reqFiles[0])
+            filesTemp.push({...reqFiles[0],author})
         }
         return filesTemp
     }
     async setStatusPriceAsk(req) {
         const {
+            CrContractfiles,
+            SiContractfiles,
             Bilsfiles,
             Paidfiles,
             Shipmentfiles,
             Receivedfiles,
             PriceAskId,
+            Author,
             Status
         } = req.body
         const status = await PriceAskModel.updateOne({_id:PriceAskId},{
             Status:{
-                Bilsfiles:this.fileNameToObject(Bilsfiles,req.files),
-                Paidfiles:this.fileNameToObject(Paidfiles,req.files),
-                Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files),
-                Receivedfiles:this.fileNameToObject(Receivedfiles,req.files),
+                CrContractfiles:this.fileNameToObject(CrContractfiles,req.files,Author),
+                SiContractfiles:this.fileNameToObject(SiContractfiles,req.files,Author),
+                Bilsfiles:this.fileNameToObject(Bilsfiles,req.files,Author),
+                Paidfiles:this.fileNameToObject(Paidfiles,req.files,Author),
+                Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files,Author),
+                Receivedfiles:this.fileNameToObject(Receivedfiles,req.files,Author),
                 Status:JSON.parse(Status)
             }
         })
