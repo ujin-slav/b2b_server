@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     resetLink: {type: String},
     name:{type: String},
     nameOrg: {type: String},
+    description:{type: String},
     telefon:{type: String},
     inn: {type: String},
     adressOrg: {type: String},

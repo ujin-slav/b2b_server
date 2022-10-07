@@ -25,6 +25,7 @@ class LentService {
         const result = await LentStatusModel.paginate(
             searchParam, 
             options)
+        console.log(result)
         return result
     }
 }

@@ -316,6 +316,7 @@ class AskService {
             AskId,
             Status,
             PrevStatus,
+            Otherfiles,
             Author,
             Winner
         } = req.body
@@ -324,6 +325,7 @@ class AskService {
                 CrContractfiles:this.fileNameToObject(CrContractfiles,req.files,Author),
                 SiContractfiles:this.fileNameToObject(SiContractfiles,req.files,Author),
                 Paidfiles:this.fileNameToObject(Paidfiles,req.files,Author),
+                Otherfiles:this.fileNameToObject(Otherfiles,req.files,Author),
                 Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files,Author),
                 Receivedfiles:this.fileNameToObject(Receivedfiles,req.files,Author),
                 Status:JSON.parse(Status)

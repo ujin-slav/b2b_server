@@ -193,6 +193,8 @@ class PriceService {
             Shipmentfiles,
             Receivedfiles,
             PriceAskId,
+            Otherfiles,
+            PrevStatus,
             Author,
             Status
         } = req.body
@@ -202,12 +204,20 @@ class PriceService {
                 SiContractfiles:this.fileNameToObject(SiContractfiles,req.files,Author),
                 Bilsfiles:this.fileNameToObject(Bilsfiles,req.files,Author),
                 Paidfiles:this.fileNameToObject(Paidfiles,req.files,Author),
+                Otherfiles:this.fileNameToObject(Otherfiles,req.files,Author),
                 Shipmentfiles:this.fileNameToObject(Shipmentfiles,req.files,Author),
                 Receivedfiles:this.fileNameToObject(Receivedfiles,req.files,Author),
                 Status:JSON.parse(Status)
             }
         })
-        await LentStatusModel.create({PriceAsk:PriceAskId,Date:Date.now()})
+        const priceAsk = await PriceAskModel.findOne({_id:PriceAskId})
+        await LentStatusModel.create({
+            PriceAsk:PriceAskId,
+            PrevStatus:JSON.parse(PrevStatus),
+            Date:Date.now(),
+            Author,
+            Winner:priceAsk.To
+        })
         return status
     }
     async getStatusPriceAsk(req) {

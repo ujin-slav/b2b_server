@@ -232,11 +232,11 @@ class UserService {
             name,
             nameOrg,
             adressOrg,
-            file,
             telefon,
             inn,
             fiz,
             region,
+            description,
             category,
             notiInvited,
             notiMessage,
@@ -252,13 +252,14 @@ class UserService {
                     console.log("Файл удалён");
                 }
         })};
-        await UserModel.updateOne({_id:id},{$set: 
+        const upadateUser = await UserModel.updateOne({_id:id},{$set: 
                 {name,
                 nameOrg,
                 adressOrg,
                 telefon,
                 inn,
                 fiz,  
+                description,
                 logo:req.file,
                 region:JSON.parse(region),
                 category:JSON.parse(category),
@@ -267,6 +268,9 @@ class UserService {
                 notiAsk
         }});
         const user = await UserModel.findOne({_id:id})
+        console.log(notiInvited,
+            notiMessage,
+            notiAsk)
         const userDto = new UserDto(user);
         return {user: userDto}
     }
