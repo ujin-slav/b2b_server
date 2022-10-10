@@ -81,6 +81,15 @@ class UploadController {
             next(e);
         }
     }
+    
+    async upLoadChatFile(req, res, next) {
+        try {
+            const result = await loadService.upLoadChatFile(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 
     // async parsing(req, res, next) {
     //     try {

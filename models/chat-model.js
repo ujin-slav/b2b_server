@@ -6,7 +6,7 @@ const Chat = new Schema({
     To: {type: Schema.Types.ObjectId, ref: 'User'},
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
     Date: {type: Date},
-    File: {type: String},
+    File: {},
 })
 
 Chat.plugin(mongoosePaginate);

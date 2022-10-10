@@ -44,22 +44,24 @@ const IOconnect = async (socket,io) =>{
   })
 
   var uploader = new SocketIOFile(socket, {
-        // uploadDir: {			// multiple directories
-        // 	music: 'data/music',
-        // 	document: 'data/document'
-        // },
-        uploadDir: './uploads',							// simple directory
-        maxFileSize: 4194304, 						// 4 MB. default is undefined(no limit)
+        uploadDir: './uploads',					
+        maxFileSize: 6214400, 	
+        accepts: ['image/jpeg'],					
         chunkSize: 10240,	
         transmissionDelay: 0,	
-        overwrite: false,					// delay of each transmission, higher value saves more cpu resources, lower upload speed. default is 0(no delay)
+        overwrite: false,					
         rename: function(filename, fileInfo) {
+          console.log(fileInfo)
           var file = path.parse(filename);
           var fname = Date.now();
           var ext = file.ext;
         return `${fname}${ext}`;
      } 							
     });
+  
+  uploader.on('error', function(err) {
+      console.log('Error!', err);
+  });
 
   const getUnread = async(id)=>{
     try {
@@ -80,15 +82,15 @@ const IOconnect = async (socket,io) =>{
     }
   }
 
-  uploader.on('complete', async (fileInfo) => {
+  socket.on('uploadcomplete', async (data) => {
     try {
-    console.log('Upload Complete.');
-    const data = fileInfo.data
+      console.log(data)
     const message = await ChatModel.create({
       To: await UserModel.findOne({_id:data.Recevier}),
       Author: await  UserModel.findOne({_id:data.Author}),
       Date: data.Date,
-      File: fileInfo.name
+      Text:"",
+      File: data.File
       }) 
       const unread = await UnreadModel.create({
         Message: message,  
@@ -210,8 +212,8 @@ const IOconnect = async (socket,io) =>{
   });
 
   socket.on("get_message", async (data)=>{
-      const {SearchText} = data
-      const regex = SearchText.replace(/\s{20000,}/g, '*.*')
+      const searchText = data.SearchText || ""
+      const regex = searchText.replace(/\s{20000,}/g, '*.*')
       try {
           const messages = await ChatModel.paginate({
           "$or": [{

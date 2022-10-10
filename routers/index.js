@@ -15,6 +15,7 @@ const carouselController = require('../controllers/carousel-controller')
 const lentController = require('../controllers/lent-controller')
 const upload = require('../config/load-config');
 const uploadPic = require('../config/load-config-pic');
+const uploadChat = require('../config/load-config-chat');
 const uploadPrice = require('../config/load-config-price');
 const uploadLogo = require('../config/load-config-logo');
 const uploadStatus = require('../config/load-config-status');
@@ -82,7 +83,6 @@ router.post('/setstatusask',uploadStatusAsk.array("file"), askController.setStat
 router.post('/getstatusask',askController.getStatusAsk);
 router.post('/deletestatusaskfile',askController.deleteStatusAskFile);
 
-
 router.post('/getoffers', offerController.getOffers);
 router.post('/deleteoffer', offerController.deleteOffer);
 router.post('/getuseroffers', offerController.getUserOffers);
@@ -112,6 +112,7 @@ router.get('/download/:file', loadController.download);
 router.get('/getstatusfile/:file', loadController.getStatusFile);
 router.get('/getstatusaskfile/:file', loadController.getStatusAskFile);
 router.get('/static/:path/:file', loadController.getStatic);
+router.post('/uploadchatfile',uploadChat.single("file"), loadController.upLoadChatFile);
 
 router.get('/parsing', loadController.parsing);
 

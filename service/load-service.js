@@ -13,6 +13,10 @@ class LoadService {
                 }
         })};
     }
+
+    async upLoadChatFile(req) {
+        return req.file
+    }
     
 }
 
