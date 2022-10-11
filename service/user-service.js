@@ -160,6 +160,7 @@ class UserService {
             nameOrg:user.nameOrg,
             telefon:user.telefon,
             adressOrg: user.adressOrg,
+            description: user.description,
             inn: user.inn,
             logo:user?.logo
         }

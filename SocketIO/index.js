@@ -153,8 +153,8 @@ const IOconnect = async (socket,io) =>{
   })
   socket.on("delete_message", async (data) => { 
     if("File" in data){
-      if (fs.existsSync(__dirname+'\\..\\' + '\\uploads\\'+data.File)) {
-        fs.unlink(__dirname+'\\..\\' + '\\uploads\\'+data.File, function(err){
+      if (fs.existsSync(__dirname+'\\..\\' + '\\uploads\\'+data.File.filename)) {
+        fs.unlink(__dirname+'\\..\\' + '\\uploads\\'+data.File.filename, function(err){
           if (err) {
               console.log(err);
           } else {
