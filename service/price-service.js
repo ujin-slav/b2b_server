@@ -3,6 +3,8 @@ const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
 const LentStatusModel =require('../models/lentStatus-model')
 const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
+const builder = require('xmlbuilder')
+const ApiError = require('../exceptions/api-error');
 
 String.prototype.replaceAll = function(search, replace){
     return this.split(search).join(replace);
@@ -10,6 +12,26 @@ String.prototype.replaceAll = function(search, replace){
 
 class PriceService {
 
+    async createPriceXML(userID) {
+        const price = await PriceModel.find({User:userID})
+        var xml = builder.create('urlset')
+        xml.att('xmlns',"http://www.sitemaps.org/schemas/sitemap/0.9")
+        await Promise.all(price.map(async (item)=>{
+            xml.ele("url",).ele("loc", String(item._id));
+        }))
+        const result = xml.end({ pretty: true});
+        if(fs.existsSync(__dirname+'//../sitemapPrice/' + userID + 'Price')){
+            fs.unlink(__dirname+'//../sitemapPrice/' + userID + 'Price', function(err){
+                if (err) {
+                    throw ApiError.BadRequest('Файл не найден')
+                }else{
+                    console.log("файл удален")
+                }
+        })};
+        fs.writeFileSync(__dirname + '//../sitemapPrice/' + userID + 'Price', result, function (err) {
+            if (err) throw ApiError.BadRequest('Файл не записан');
+        });
+    }
 
     async addPrice(req) {
         const {userID} = req.body
@@ -24,15 +46,16 @@ class PriceService {
             const balance = Number(item[3])
             if(nameItem!==null&&balance!==NaN){
                 await PriceModel.create({
-                    Code:code,
+                    Code:code || "",
                     Name: nameItem,
                     Price: item[2],
-                    Balance: balance,
+                    Balance: balance || 0,
                     User:userID,
                     Date: Date.now()
                 })
             }
         }))
+        this.createPriceXML(userID)
         return {result:true}
     }
 
@@ -55,7 +78,6 @@ class PriceService {
         if(spec && org){
             searchParam = Object.assign(searchParam,{User:org,SpecOffer : {$ne : null}})
         }
-        console.log({page,limit,search,org,spec})
         const result = await PriceModel.paginate(
             searchParam, 
             {page,limit,populate:abc});
