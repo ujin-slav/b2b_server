@@ -3,10 +3,32 @@ const SpecAskModel = require("../models/specAsk-model")
 const PriceModel = require('../models/price-model')
 const UnreadSpecAskModel = require("../models/unreadSpecAsk-model")
 const UserModel =require('../models/user-model')
+const builder = require('xmlbuilder')
 const fs = require("fs");
 const { ifError } = require("assert");
 
 class specOfferService {
+
+    async createSpecOfferXML(userID) {
+        const specOffer = await SpecOfferModel.find({Author:userID})
+        var xml = builder.create('urlset')
+        xml.att('xmlns',"http://www.sitemaps.org/schemas/sitemap/0.9")
+        await Promise.all(specOffer.map(async (item)=>{
+            xml.ele("url",).ele("loc", `${process.env.CLIENT_URL}/cardspecoffer/${String(item._id)}`);
+        }))
+        const result = xml.end({ pretty: true});
+        if(fs.existsSync(__dirname+'//../sitemapSpecOffer/' + userID + 'SpecOffer.xml')){
+            fs.unlink(__dirname+'//../sitemapSpecOffer/' + userID + 'SpecOffer.xml', function(err){
+                if (err) {
+                    throw ApiError.BadRequest('Файл не найден')
+                }else{
+                    console.log("файл удален")
+                }
+        })};
+        fs.writeFileSync(__dirname + '//../sitemapSpecOffer/' + userID + 'SpecOffer.xml', result, function (err) {
+            if (err) throw ApiError.BadRequest('Файл не записан');
+        });
+    }
 
     async addSpecOffer(req) {
         const {
@@ -48,6 +70,7 @@ class specOfferService {
             Date: Date.now(),
             SpecOffer:result
         })
+        this.createSpecOfferXML(Author)
         return result 
     }
     async modifySpecOffer(req) {
@@ -192,6 +215,7 @@ class specOfferService {
         }
         const result = await SpecOfferModel.deleteOne({_id:id}); 
         await PriceModel.deleteOne({SpecOffer:id}); 
+        this.createSpecOfferXML(specOffer.Author)
         return result
     }
     async specAskFiz(req) {

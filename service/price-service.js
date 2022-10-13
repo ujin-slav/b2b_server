@@ -17,18 +17,18 @@ class PriceService {
         var xml = builder.create('urlset')
         xml.att('xmlns',"http://www.sitemaps.org/schemas/sitemap/0.9")
         await Promise.all(price.map(async (item)=>{
-            xml.ele("url",).ele("loc", String(item._id));
+            xml.ele("url",).ele("loc", `${process.env.CLIENT_URL}/orginfo/${userID}/${String(item._id)}`);
         }))
         const result = xml.end({ pretty: true});
-        if(fs.existsSync(__dirname+'//../sitemapPrice/' + userID + 'Price')){
-            fs.unlink(__dirname+'//../sitemapPrice/' + userID + 'Price', function(err){
+        if(fs.existsSync(__dirname+'//../sitemapPrice/' + userID + 'Price.xml')){
+            fs.unlink(__dirname+'//../sitemapPrice/' + userID + 'Price.xml', function(err){
                 if (err) {
                     throw ApiError.BadRequest('Файл не найден')
                 }else{
                     console.log("файл удален")
                 }
         })};
-        fs.writeFileSync(__dirname + '//../sitemapPrice/' + userID + 'Price', result, function (err) {
+        fs.writeFileSync(__dirname + '//../sitemapPrice/' + userID + 'Price.xml', result, function (err) {
             if (err) throw ApiError.BadRequest('Файл не записан');
         });
     }
@@ -85,8 +85,12 @@ class PriceService {
     }
     async getPriceUnit(req) {
         const {id} = req.body
-        const result = PriceModel.findOne({_id:id})
-        return result
+        try {
+            const result = PriceModel.findOne({_id:id})
+            return result
+        } catch (error) {
+            return {docs:[]}
+        }
     }
 
     async clearPrice(req) {
