@@ -1,11 +1,18 @@
 const multer  = require("multer");
+const SharpMulter  =  require('./sharp-multer')
 
-const fileStorageEngine = multer.diskStorage({
+const fileStorageEngine = SharpMulter({
     destination: (req, file, cb) => {
       cb(null, "./uploadsPic");
     },
-    filename: (req, file, cb) => {
-      cb(null, Date.now() + "--" + file.originalname);
+    imageOptions:{
+      fileFormat: "jpeg",
+      quality: 80,
+    },
+    imageOptionsMini:{
+      fileFormat: "jpeg",
+      quality: 80,
+      resize:{width:100}
     },
   });
 
