@@ -12,7 +12,7 @@ const getFilename = (name, input) =>
   input.fileFormat;
 
 const getFilenameMini = (name, input) =>
-  Date.now() + "--" + "mini" + "--" + name.split(".").slice(0, -1).join(".") +
+"mini" + Date.now() + "--" + name.split(".").slice(0, -1).join(".") +
 `${input.useTimestamp ? "-" + Date.now() : ""}` +
 "." +
 input.fileFormat;
@@ -140,6 +140,18 @@ const handleSaveMini = async (
         if (err) console.log(err);
       })
       .on("finish", function () {
+        if(!Array.isArray(req.filesmini)){
+          req.filesmini = []
+          req.filesmini.push({
+            filename,
+            path:path + "/" + filename
+          })
+        }else{
+          req.filesmini.push({
+            filename,
+            path:path + "/" + filename
+          })
+        }
       });
     // finally
     file.stream.pipe(stream);

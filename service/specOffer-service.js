@@ -43,8 +43,9 @@ class specOfferService {
             Price,
             Code,
             Balance,
-            FileArray,
+            FilesMini,
         } = req.body
+        console.log(req.filesmini)
         const user = await UserModel.findOne({_id:Author});
         const result = await SpecOfferModel.create({
             Author,
@@ -58,6 +59,7 @@ class specOfferService {
             Region:JSON.parse(Region),
             Date: Date.now(),
             Files:req.files,
+            FilesMini:req.filesmini,
             NameOrg: user.nameOrg,
             Inn: user.inn
         })
@@ -96,7 +98,7 @@ class specOfferService {
                     } else {
                         console.log("Файл удалён");
                     }
-                })};
+            })};
         })
         const result = await SpecOfferModel.updateOne({_id:ID},{$set:{
             Author,
@@ -204,13 +206,24 @@ class specOfferService {
         const specOffer = await SpecOfferModel.findOne({_id:id});      
         if(specOffer){
             specOffer.Files.map((item)=>{
-                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        console.log("Файл удалён");
-                    }
-                });
+                if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+                    fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("Файл удалён");
+                        }
+                })};
+            })
+            specOffer.FilesMini.map((item)=>{
+                if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+                    fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("Файл удалён");
+                        }
+                })};
             })
         }
         const result = await SpecOfferModel.deleteOne({_id:id}); 
