@@ -17,6 +17,7 @@ const SpecOffer = new Schema({
     Region: [],
     Files: [],
     FilesMini: [],
+    FilesPreview: [],
     Date: {type: Date},
 })
 

@@ -45,7 +45,6 @@ class specOfferService {
             Balance,
             FilesMini,
         } = req.body
-        console.log(req.filesmini)
         const user = await UserModel.findOne({_id:Author});
         const result = await SpecOfferModel.create({
             Author,
@@ -60,6 +59,7 @@ class specOfferService {
             Date: Date.now(),
             Files:req.files,
             FilesMini:req.filesmini,
+            FilesPreview:req.filespreview,
             NameOrg: user.nameOrg,
             Inn: user.inn
         })
@@ -90,7 +90,7 @@ class specOfferService {
         } = req.body
         const user = await UserModel.findOne({_id:Author});
         const existOffer = await SpecOfferModel.findOne({_id:ID})
-        existOffer.Files.map((item)=>{
+        existOffer.Files?.map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
                 fs.unlink(__dirname+'\\..\\'+item.path, function(err){
                     if (err) {
@@ -99,6 +99,26 @@ class specOfferService {
                         console.log("Файл удалён");
                     }
             })};
+        existOffer.FilesMini?.map((item)=>{
+                if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+                    fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("Файл удалён");
+                        }
+                })};
+            })
+        existOffer.FilesPreview?.map((item)=>{
+                if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+                    fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("Файл удалён");
+                        }
+                })};
+            })
         })
         const result = await SpecOfferModel.updateOne({_id:ID},{$set:{
             Author,
@@ -112,6 +132,8 @@ class specOfferService {
             Region:JSON.parse(Region),
             Date: Date.now(),
             Files:req.files,
+            FilesMini:req.filesmini,
+            FilesReview:req.filesreview,
             NameOrg: user.nameOrg,
             Inn: user.inn
         }})
@@ -205,7 +227,7 @@ class specOfferService {
         const {id} = req.body        
         const specOffer = await SpecOfferModel.findOne({_id:id});      
         if(specOffer){
-            specOffer.Files.map((item)=>{
+            specOffer.Files?.map((item)=>{
                 if(fs.existsSync(__dirname+'\\..\\'+item.path)){
                     fs.unlink(__dirname+'\\..\\'+item.path, function(err){
                         if (err) {
@@ -215,7 +237,17 @@ class specOfferService {
                         }
                 })};
             })
-            specOffer.FilesMini.map((item)=>{
+            specOffer.FilesMini?.map((item)=>{
+                if(fs.existsSync(__dirname+'\\..\\'+item.path)){
+                    fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log("Файл удалён");
+                        }
+                })};
+            })
+            specOffer.FilesPreview?.map((item)=>{
                 if(fs.existsSync(__dirname+'\\..\\'+item.path)){
                     fs.unlink(__dirname+'\\..\\'+item.path, function(err){
                         if (err) {

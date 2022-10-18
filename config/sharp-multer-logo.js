@@ -11,18 +11,6 @@ const getFilename = (name, input) =>
   "." +
   input.fileFormat;
 
-const getFilenameMini = (name, input) =>
-"mini" + Date.now() + "--" + name.split(".").slice(0, -1).join(".") +
-`${input.useTimestamp ? "-" + Date.now() : ""}` +
-"." +
-input.fileFormat;
-
-const getFilenamePreview = (name, input) =>
-"preview" + Date.now() + "--" + name.split(".").slice(0, -1).join(".") +
-`${input.useTimestamp ? "-" + Date.now() : ""}` +
-"." +
-input.fileFormat;
-
 const prepareSharpStream = (SharpStram, input) => {
   if (input.resize) {
     const { width, height, resizeMode } = input.resize;
@@ -120,113 +108,20 @@ const handleSave = async (
   file.stream.pipe(stream);
 };
 
-const handleSaveMini = async (
-    req,
-    file,
-    cb,
-    imageOptions,
-    path,
-    watermarkOptions
-  ) => {
-    let stream = sharp();
   
-  
-    // preparing harp functions based on inputs
-  
-    // checking if watermark is provided or not
-    if (watermarkOptions)
-      stream = await handleWatermark(stream, watermarkOptions);
-  
-    let filename = getFilenameMini(file.originalname, imageOptions);
-    //handling image Options
-    stream = prepareSharpStream(stream, imageOptions);
-  
-    stream
-      .toFile(path + "/" + filename, function (err) {
-        if (err) console.log(err);
-      })
-      .on("finish", function () {
-        if(!Array.isArray(req.filesmini)){
-          req.filesmini = []
-          req.filesmini.push({
-            filename,
-            path:path + "/" + filename
-          })
-        }else{
-          req.filesmini.push({
-            filename,
-            path:path + "/" + filename
-          })
-        }
-      });
-    // finally
-    file.stream.pipe(stream);
-  };
-
-  const handleSavePreview = async (
-    req,
-    file,
-    cb,
-    imageOptions,
-    path,
-    watermarkOptions
-  ) => {
-    let stream = sharp();
-  
-  
-    // preparing harp functions based on inputs
-  
-    // checking if watermark is provided or not
-    if (watermarkOptions)
-      stream = await handleWatermark(stream, watermarkOptions);
-  
-    let filename = getFilenamePreview(file.originalname, imageOptions);
-    //handling image Options
-    stream = prepareSharpStream(stream, imageOptions);
-  
-    stream
-      .toFile(path + "/" + filename, function (err) {
-        if (err) console.log(err);
-      })
-      .on("finish", function () {
-        if(!Array.isArray(req.filespreview)){
-          req.filespreview = []
-          req.filespreview.push({
-            filename,
-            path:path + "/" + filename
-          })
-        }else{
-          req.filespreview.push({
-            filename,
-            path:path + "/" + filename
-          })
-        }
-      });
-    // finally
-    file.stream.pipe(stream);
-  };
-
 function MyCustomStorage(options) {
   this.getDestination = options.destination || getDestination;
   this.imageOptions = options.imageOptions ||
-    options.sharpOptions || { fileFormat: "jpg", quality: 80 };
-  this.imageOptionsMini = options.imageOptionsMini ||
-    options.sharpOptions || { fileFormat: "jpg", quality: 80 };
-  this.imageOptionsPreview = options.imageOptionsPreview ||
     options.sharpOptions || { fileFormat: "jpg", quality: 80 };
   this.watermarkOptions = options.watermarkOptions;
 }
 
 MyCustomStorage.prototype._handleFile = function _handleFile(req, file, cb) {
   const imageOptions = this.imageOptions;
-  const imageOptionsMini = this.imageOptionsMini;
-  const imageOptionsPreview = this.imageOptionsPreview;
   const watermarkOptions = this.watermarkOptions;
   this.getDestination(req, file, function (err, path) {
     if (err) return cb(err);
     handleSave(req, file, cb, imageOptions, path, watermarkOptions);
-    handleSaveMini(req, file, cb, imageOptionsMini, path, watermarkOptions);
-    handleSavePreview(req, file, cb, imageOptionsPreview, path, watermarkOptions);
   });
 };
 

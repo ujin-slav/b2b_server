@@ -14,6 +14,11 @@ const fileStorageEngine = SharpMulter({
       quality: 80,
       resize:{width:100}
     },
+    imageOptionsPreview:{
+      fileFormat: "jpeg",
+      quality: 80,
+      resize:{width:174}
+    },
   });
 
 module.exports = multer({ storage: fileStorageEngine,limits: { fileSize: 6214400 }});
