@@ -5,6 +5,7 @@ const UnreadQuestModel = require('../models/unreadQuest-model')
 const UnreadInvitedModel = require('../models/unreadInvited-model')
 const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
 const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
+const UnreadStatusAskModel = require('../models/unreadStatusAsk-model')
 const UserModel =require('../models/user-model')
 const ContactsModel =require('../models/contacts-model')
 const LastVisitModel =require('../models/lastVisit-model')
@@ -150,6 +151,8 @@ const IOconnect = async (socket,io) =>{
     io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invitedPrice",unreadInvitedPrice);
     const UnreadSpecAsk = await UnreadSpecAskModel.find({To:userId}).countDocuments()
     io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_specOfferAsk",UnreadSpecAsk);
+    const UnreadStatusAsk = await UnreadStatusAskModel.find({To:userId}).countDocuments()
+    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_statusAsk",10);
   })
   socket.on("delete_message", async (data) => { 
     if("File" in data){

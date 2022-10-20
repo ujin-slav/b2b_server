@@ -2,6 +2,7 @@ const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
 const LentStatusModel =require('../models/lentStatus-model')
 const UnreadInvitedModel = require("../models/unreadInvited-model")
+const UnreadStatusAskModel = require("../models/unreadStatusAsk-model")
 const roleService = require('./role-service')
 const ApiError = require('../exceptions/api-error');
 const mailService =require('./mail-service')
@@ -337,6 +338,10 @@ class AskService {
             Author,
             Winner,
             Date:Date.now()
+        })
+        await UnreadStatusAskModel.create({
+            AskId,
+            To: Winner,
         })
         return status
     }
