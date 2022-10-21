@@ -12,6 +12,15 @@ class ChatController {
         }
     }
 
+    async checkConnect(req, res, next) {
+        try {
+            const result = await chatService.checkConnect(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+
 
 }
 

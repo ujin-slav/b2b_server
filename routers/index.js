@@ -117,6 +117,7 @@ router.post('/uploadchatfile',uploadChat.single("file"), loadController.upLoadCh
 router.get('/parsing', loadController.parsing);
 
 router.post('/getconnectedfriend', chatController.getStatus);
+router.post('/getconnectedfriend', chatController.checkConnect);
 
 router.post('/getcarousel', carouselController.getCarousel);
 

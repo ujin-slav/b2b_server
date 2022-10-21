@@ -10,6 +10,11 @@ class ChatService {
         return SocketIO.userSocketIdMap.has(iD)
     }
 
+    
+    async checkConnect(req) {
+        console.log("check")
+    }
+
 }
 
 module.exports = new ChatService()
