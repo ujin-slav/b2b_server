@@ -44,26 +44,6 @@ const IOconnect = async (socket,io) =>{
     }
   })
 
-  var uploader = new SocketIOFile(socket, {
-        uploadDir: './uploads',					
-        maxFileSize: 6214400, 	
-        accepts: ['image/jpeg'],					
-        chunkSize: 10240,	
-        transmissionDelay: 0,	
-        overwrite: false,					
-        rename: function(filename, fileInfo) {
-          console.log(fileInfo)
-          var file = path.parse(filename);
-          var fname = Date.now();
-          var ext = file.ext;
-        return `${fname}${ext}`;
-     } 							
-    });
-  
-  uploader.on('error', function(err) {
-      console.log('Error!', err);
-  });
-
   const getUnread = async(id)=>{
     try {
       var unreadMessage = [];
@@ -82,31 +62,6 @@ const IOconnect = async (socket,io) =>{
       console.log(error) 
     }
   }
-
-  socket.on('uploadcomplete', async (data) => {
-    try {
-      console.log(data)
-    const message = await ChatModel.create({
-      To: await UserModel.findOne({_id:data.Recevier}),
-      Author: await  UserModel.findOne({_id:data.Author}),
-      Date: data.Date,
-      Text:"",
-      File: data.File
-      }) 
-      const unread = await UnreadModel.create({
-        Message: message,  
-        To: await UserModel.findOne({_id:data.Recevier}),
-        From: await UserModel.findOne({_id:data.Author})
-      })
-      if(userSocketIdMap.has(data.Recevier)) {
-        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
-        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread(data.Recevier));
-      }
-      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("new_message", data);
-    }catch (error) {
-     console.log(error) 
-    }
-  });
 
   socket.on("unread_quest", async (data) => {
     const unreadQuest = await UnreadQuestModel.find({To:data.id}).countDocuments()
@@ -180,14 +135,14 @@ const IOconnect = async (socket,io) =>{
       const userRecevier = await UserModel.findOne({_id:data.Recevier})
       const message = await ChatModel.create({
       Text: data.Text,  
-      To: await UserModel.findOne({_id:data.Recevier}),
-      Author: await  UserModel.findOne({_id:data.Author}),
+      To: data.Recevier,
+      Author: data.Author,
       Date: data.Date
       }) 
       const unread = await UnreadModel.create({
         Message: message,  
-        To: await UserModel.findOne({_id:data.Recevier}),
-        From: await UserModel.findOne({_id:data.Author})
+        To: data.Recevier,
+        From: data.Author
       }) 
       if(userSocketIdMap.has(data.Recevier)) {
         io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
