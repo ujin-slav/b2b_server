@@ -168,43 +168,60 @@ class UserService {
     }
 
     async getUsers(req) {
-        const {page,limit,user,searchUser} = req.body
-        const regex = searchUser.replace(/\s{20000,}/g, '*.*')
-        var abc = ({ path: 'contact', select: 'id name nameOrg email logo',
-        match:{
-            $or: [
-                {nameOrg: {
-                $regex: regex,
-                $options: 'i'
-            }}, {name: {
-                $regex: regex,
-                $options: 'i'
-            }}] 
-        }});
-        const option = {
-            id:true,
-            name:true,
-            nameOrg:true,
-            sort:{"_id":-1},
-            email:true,
-            populate: abc,
+        const {page,limit,user,search} = req.body
+        const regex = search.replace(/\s{20000,}/g, '*.*')
+        const options = {
+            page,
             limit,
-            page}
-        const search = await ContactsModel.paginate(
-            {owner:user},
-            option);
-        const contacts = search.docs
+        }        
+        const aggregate = ContactsModel.aggregate([
+            { $lookup:
+                {
+                   from: "users",
+                   localField: "contact",
+                   foreignField: "_id",
+                   as: "out"
+                }
+            },
+            {$unwind:'$out'},
+            {$project:
+                {
+                 name:'$out.name',
+                 nameOrg: '$out.nameOrg',
+                 email: '$out.email',
+                 logo: '$out.logo',
+                 id: {$toString: "$out._id"},
+                 owner: {$toString: "$owner"} 
+                }
+            },
+            {$match:{
+                $and:[
+                    {$or: [
+                        {nameOrg: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}, {name: {
+                        $regex: regex,
+                        $options: 'i'
+                    }},
+                ]},
+                    {owner:user}
+                ]
+            }},
+            { $sort : { _id : -1 } }
+        ])
+        const aggregateContacts = await ContactsModel.aggregatePaginate(aggregate, options)
+        const contacts = aggregateContacts.docs
         let result = []
         await Promise.all(contacts.map(async (item)=>{
-            if(item.contact!==null){
-                const contact = item.contact
-                const status = {statusLine:SocketIO.userSocketIdMap.has(item?.contact?.id)}
-                const lastVisit = await LastVisitModel.findOne({User:item?.contact?.id})
-                result.push({...status,lastVisit,contact})
-            }
+            const contact = item
+            console.log(item)
+            const status = {statusLine:SocketIO.userSocketIdMap.has(item?.id)}
+            const lastVisit = await LastVisitModel.findOne({User:item?.id})
+            result.push({...status,lastVisit,contact})
         })) 
-        search.docs = result
-        return search
+        aggregateContacts.docs = result
+        return aggregateContacts
     }
 
     async getUserList(req) {
