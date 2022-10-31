@@ -1,5 +1,5 @@
 const ApiError = require('../exceptions/api-error');
-const messageService = require('../service/message-service');
+const messageService = require('../service/message-service')
 
 class MessageController {
     async getMessage(req, res, next) {

@@ -215,7 +215,6 @@ class UserService {
         let result = []
         await Promise.all(contacts.map(async (item)=>{
             const contact = item
-            console.log(item)
             const status = {statusLine:SocketIO.userSocketIdMap.has(item?.id)}
             const lastVisit = await LastVisitModel.findOne({User:item?.id})
             result.push({...status,lastVisit,contact})
