@@ -169,6 +169,31 @@ const IOconnect = async (socket,io) =>{
     }
   });
 
+  socket.on('uploadcomplete', async (data) => {
+    try {
+      console.log(data)
+    const message = await ChatModel.create({
+      To: await UserModel.findOne({_id:data.Recevier}),
+      Author: await  UserModel.findOne({_id:data.Author}),
+      Date: data.Date,
+      Text:"",
+      File: data.File
+      }) 
+      const unread = await UnreadModel.create({
+        Message: message,  
+        To: await UserModel.findOne({_id:data.Recevier}),
+        From: await UserModel.findOne({_id:data.Author})
+      })
+      if(userSocketIdMap.has(data.Recevier)) {
+        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("new_message", data);
+        io.sockets.sockets.get(userSocketIdMap.get(data.Recevier)).emit("unread_message",await getUnread(data.Recevier));
+      }
+      io.sockets.sockets.get(userSocketIdMap.get(data.Author)).emit("new_message", data);
+    }catch (error) {
+     console.log(error) 
+    }
+  });
+
   socket.on("get_message", async (data)=>{
       const searchText = data.SearchText || ""
       const regex = searchText.replace(/\s{20000,}/g, '*.*')

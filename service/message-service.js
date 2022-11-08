@@ -14,6 +14,13 @@ class MessageService {
             limit,
             page
         } = req.body
+        console.log({
+            UserId,
+            RecevierId,
+            SearchText,
+            limit,
+            page
+        })
         const searchText = SearchText || ""
         const regex = searchText.replace(/\s{20000,}/g, '*.*')
         const messages = await ChatModel.paginate({
