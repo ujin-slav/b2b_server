@@ -3,6 +3,7 @@ const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
 const LentStatusModel =require('../models/lentStatus-model')
 const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
+const UnreadStatusAskModel = require("../models/unreadStatusAsk-model")
 const builder = require('xmlbuilder')
 const ApiError = require('../exceptions/api-error');
 
@@ -221,6 +222,8 @@ class PriceService {
             PriceAskId,
             Otherfiles,
             PrevStatus,
+            AuthorAsk,
+            AskTo,
             Author,
             Status
         } = req.body
@@ -243,6 +246,10 @@ class PriceService {
             Date:Date.now(),
             Author,
             Winner:priceAsk.To
+        })
+        await UnreadStatusAskModel.create({
+            PriceAskId,
+            To: Author===AuthorAsk? AskTo : AuthorAsk
         })
         return status
     }

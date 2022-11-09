@@ -96,18 +96,38 @@ const IOconnect = async (socket,io) =>{
       io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invitedPrice",unreadInvitedPrice);
     }
   })
-  socket.on("get_unread", async () => {
+  socket.on("unread_changeStatus", async (data) => {
+    const UnreadStatusAsk = await UnreadStatusAskModel.find({To:data.To}).countDocuments()
+    if(userSocketIdMap.has(data.To)) {
+      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_statusAsk",UnreadStatusAsk);
+    }
+  })
+  socket.on("get_unread_message", async () => {
     io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread(userId));
+  })
+  const getRestUnread = async () => {
+    io.sockets.sockets.get(socket.id).emit("unread_message",await getUnread(userId));
+    
     const unreadQuest = await UnreadQuestModel.find({To:userId}).countDocuments()
-    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_quest",unreadQuest);
     const unreadInvited = await UnreadInvitedModel.find({To:userId}).countDocuments()
-    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invited",unreadInvited);
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:userId}).countDocuments()
-    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_invitedPrice",unreadInvitedPrice);
     const UnreadSpecAsk = await UnreadSpecAskModel.find({To:userId}).countDocuments()
-    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_specOfferAsk",UnreadSpecAsk);
     const UnreadStatusAsk = await UnreadStatusAskModel.find({To:userId}).countDocuments()
-    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("get_unread_statusAsk",10);
+
+    const result = {
+      unreadQuest,
+      unreadInvited,
+      unreadInvitedPrice,
+      UnreadSpecAsk,
+      UnreadStatusAsk,
+    }
+
+    io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("unread_rest",result);
+  }
+  getRestUnread()
+  socket.on("get_unread", async () => {
+    console.log("unread")
+    getRestUnread()
   })
   socket.on("delete_message", async (data) => { 
     if("File" in data){

@@ -1,4 +1,5 @@
 const LentStatusModel =require('../models/lentStatus-model')
+const UnreadStatusAskModel = require("../models/unreadStatusAsk-model")
 const ApiError = require('../exceptions/api-error');
 
 class LentService {
@@ -25,7 +26,9 @@ class LentService {
         const result = await LentStatusModel.paginate(
             searchParam, 
             options)
-        console.log(result)
+        await UnreadStatusAskModel.deleteMany({
+            To: userId,
+        })
         return result
     }
 }

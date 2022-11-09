@@ -319,6 +319,7 @@ class AskService {
             PrevStatus,
             Otherfiles,
             Author,
+            AuthorAsk,
             Winner
         } = req.body
         const status = await AskModel.updateOne({_id:AskId},{
@@ -341,7 +342,7 @@ class AskService {
         })
         await UnreadStatusAskModel.create({
             AskId,
-            To: Winner,
+            To: Author===Winner? AuthorAsk : Winner
         })
         return status
     }
