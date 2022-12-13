@@ -26,11 +26,15 @@ class ReviewOrgService {
     }
 
     async getReviewOrg(req) {
-        const {id,skip,limit} = req.body
-        
-        let query = {Org:id,Host:null}
-        let reviewOrg = await ReviewOrgModel.find({Org:id,Host:null}).skip(skip).limit(limit).sort({"_id":-1});
-        let count = await ReviewOrgModel.find({Org:id,Host:null}).countDocuments(); 
+        const {id,author,skip,limit} = req.body
+        let query
+        if(author){
+            query = {Author:author,Host:null}
+        }else{
+            query = {Org:id,Host:null}
+        }
+        let reviewOrg = await ReviewOrgModel.find(query).skip(skip).limit(limit).sort({"_id":-1});
+        let count = await ReviewOrgModel.find(query).countDocuments(); 
         const docs = await Promise.all(reviewOrg.map(async (item)=>{   
             const author = await UserModel.findOne({ _id: item.Author },{id:true,name:true,nameOrg:true,email:true});
             const answer =  await ReviewOrgModel.find({Host:item._id});
