@@ -101,6 +101,7 @@ class PriceService {
     }
 
     async saveAsk(req) {
+        let result
         const {Author,
             To,
             Table,
@@ -111,7 +112,7 @@ class PriceService {
             EmailFiz,
             TelefonFiz} = req.body
         if(!FIZ){
-            const result = await PriceAskModel.create({
+            result = await PriceAskModel.create({
                 Author,
                 To,
                 Table,
@@ -119,9 +120,8 @@ class PriceService {
                 Sum,
                 Date: new Date()
             })
-            return result
         }else{
-            const result = await PriceAskModel.create({
+            result = await PriceAskModel.create({
                 To,
                 Table,
                 Comment,
@@ -132,12 +132,12 @@ class PriceService {
                 TelefonFiz,
                 Date: new Date()
         })
+        }
         UnreadInvitedPriceModel.create({
             PriceAsk:result,
             To
         })
-            return result
-        }
+        return result
      }
 
      async getAskPrice(req) {

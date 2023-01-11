@@ -16,6 +16,7 @@ const fs = require("fs");
 
 const IOconnectNotAuth = (socket,io)=>{
   socket.on("unread_invitedPrice", async (data) => {
+    console.log("NotAuth invitedPrice" + data)
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
     if(userSocketIdMap.has(data.To)) {
       io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_invitedPrice",unreadInvitedPrice);
@@ -91,14 +92,17 @@ const IOconnect = async (socket,io) =>{
     }))
   })
   socket.on("unread_invitedPrice", async (data) => {
+    console.log("unread_invitedPrice")
+    console.log(data)
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
     if(userSocketIdMap.has(data.To)) {
-      io.sockets.sockets.get(userSocketIdMap.get(data.id)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_invitedPrice",unreadInvitedPrice);
     }
   })
   socket.on("unread_changeStatus", async (data) => {
     const UnreadStatusAsk = await UnreadStatusAskModel.find({To:data.To}).countDocuments()
     if(userSocketIdMap.has(data.To)) {
+      console.log(UnreadStatusAsk)
       io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_statusAsk",UnreadStatusAsk);
     }
   })
