@@ -107,6 +107,7 @@ class PriceService {
             Table,
             Comment,
             Sum,
+            Sent,
             FIZ,
             NameFiz,
             EmailFiz,
@@ -116,6 +117,7 @@ class PriceService {
                 Author,
                 To,
                 Table,
+                Sent,
                 Comment,
                 Sum,
                 Date: new Date()

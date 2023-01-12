@@ -81,8 +81,8 @@ const IOconnect = async (socket,io) =>{
     }
   })
   socket.on("unread_invited", async (data) => {
-    await Promise.all(data.checkedEmail.map(async (item)=>{
-        const user = await UserModel.findOne({email:item.Email})
+    await Promise.all(data.map(async (item)=>{
+        const user = await UserModel.findOne({_id:item.idContr})
         if(user){
           if(userSocketIdMap.has(user.id)) {
             const unreadInvited = await UnreadInvitedModel.find({To:user.id}).countDocuments()

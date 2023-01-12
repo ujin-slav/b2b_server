@@ -48,17 +48,13 @@ class AskService {
             Inn: user.inn
         })
         await Promise.all(Party.map(async (item)=>{
-            const userParty = await UserModel.findOne({email:item.idContr})
-            if(userParty){
+            const userParty = await UserModel.findOne({_id:item.idContr})
+            if(userParty.notiInvited){
                await UnreadInvitedModel.create({
                 Ask: ask,
                 To: userParty,
                })
-               if(userParty.notiInvited!==false){
-                mailService.sendInvited(item.Email,ask,user)           
-               }
-            }else if(Send){
-                mailService.sendInvited(item.Email,ask,user)        
+                mailService.sendInvited(userParty.email,ask,user)           
             }
         }))
         return {ask} 
@@ -77,22 +73,36 @@ class AskService {
         const {
             limit,
             page,
-            authorId
-        } = req.body.formData
-        if(authorId){
-            const user = await UserModel.findOne({_id:authorId});
-            const result = await AskModel.paginate({Author:user}, {page,limit,sort:{"_id":-1}});
-            return result;
-        } else {
-            var abc = ({ path: 'Author', select: 'name nameOrg inn' });
-            var options = {
-                sort:{"_id":-1},
-                populate: abc, 
-                limit,
-                page};
-            const result = await AskModel.paginate({}, options);
-            return result;
-        }    
+            authorId,
+            search,
+            startDate,
+            endDate
+        } = req.body
+        console.log(startDate)
+        console.log(endDate)
+        const regex = search.replace(/\s{20000,}/g, '*.*')
+        const result = await AskModel.paginate(
+            {
+                Author:authorId,
+                $and:[
+                    {$or: [
+                        {Name: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}, {Text: {
+                        $regex: regex,
+                        $options: 'i'
+                    }},
+                        {Comment: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}
+                ]}
+                ]
+            }, 
+            {page,limit,sort:{"_id":-1}}
+        );
+        return result;
     }
 
     async getFilterAsk(req) {
@@ -157,6 +167,7 @@ class AskService {
         const result = await AskModel.paginate(
             searchParam, 
             options);
+        console.log(searchParam)
         return result;  
     }
 
