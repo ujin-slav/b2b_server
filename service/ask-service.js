@@ -78,12 +78,11 @@ class AskService {
             startDate,
             endDate
         } = req.body
-        console.log(startDate)
-        console.log(endDate)
         const regex = search.replace(/\s{20000,}/g, '*.*')
         const result = await AskModel.paginate(
             {
                 Author:authorId,
+                Date: { $gte: startDate, $lt: endDate },
                 $and:[
                     {$or: [
                         {Name: {
