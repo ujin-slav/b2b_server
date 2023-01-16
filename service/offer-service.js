@@ -58,13 +58,22 @@ class OfferService {
     }
 
     async getUserOffers(req) {
-        const {authorId,page,limit} = req.body;
-            var options = {
-                sort:{"_id":-1},
-                limit,
-                page};     
-        const offer = await OfferModel.paginate({Author:authorId},options);
-        return offer
+        const {
+            limit,
+            page,
+            authorId,
+            search='',
+            startDate,
+            endDate
+        } = req.body
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
+        const regex = search.replace(/\s{20000,}/g, '*.*')     
+        const offers = await OfferModel.paginate(
+            {Author:authorId},
+            {sort:{"_id":-1},limit,page}
+        );
+        return offers
     }
     async deleteOffer(req) {
         const {id} = req.body        
