@@ -199,7 +199,7 @@ class AskService {
 
 
     async getOneAsk(id) {
-        const ask = await AskModel.findOne({_id:id}).populate({path:'Author', select:'name nameOrg inn telefon'});
+        const ask = await AskModel.findOne({_id:id}).populate({path:'Author', select:'_id name nameOrg inn telefon'});
         return ask;
     }
 
