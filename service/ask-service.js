@@ -174,11 +174,18 @@ class AskService {
 
     async getInvitedAsk(req) {
         const {
+            userId,
             limit,
+            search,
+            searchInn,
             page,
-            email,
-            userId
-        } = req.body.formData
+            startDate,
+            endDate
+        } = req.body
+        const regex = search.replace(/\s{20000,}/g, '*.*')
+        const regexInn = searchInn.replace(/\s{20000,}/g, '*.*')
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
@@ -186,7 +193,26 @@ class AskService {
             limit,
             page};
         var searchParam = {
-            Party: {$elemMatch: {idContr:userId}}
+            Party: {$elemMatch: {idContr:userId}},
+            Date: { $gte: sd, $lt: ed },
+            $and:[
+                {$or: [
+                    {Name: {
+                    $regex: regex,
+                    $options: 'i'
+                }}, {Text: {
+                    $regex: regex,
+                    $options: 'i'
+                }}]},
+                {$or: [
+                    {NameOrg: {
+                    $regex: regexInn,
+                    $options: 'i'
+                }}, {Inn: {
+                    $regex: regexInn,
+                    $options: 'i'
+                }}]}
+            ]
         }    
         await UnreadInvitedModel.deleteMany({
             To: userId,

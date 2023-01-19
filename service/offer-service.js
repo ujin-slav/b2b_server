@@ -74,11 +74,13 @@ class OfferService {
             limit,
             page,
             authorId,
-            search='',
+            search,
+            searchInn,
             startDate,
             endDate
         } = req.body
         const regex = search.replace(/\s{20000,}/g, '*.*') 
+        const regexInn = searchInn.replace(/\s{20000,}/g, '*.*') 
         const options = {
             page,
             limit,
@@ -109,13 +111,17 @@ class OfferService {
                 $and:[
                     {$or: [
                         {nameOrg: {
-                        $regex: regex,
+                        $regex: regexInn,
                         $options: 'i'
                     }}, {inn: {
+                        $regex: regexInn,
+                        $options: 'i'
+                    }}
+                    ]},
+                    {Text: {
                         $regex: regex,
                         $options: 'i'
                     }},
-                    ]},
                     {Author:authorId},
                 ],
                 Date: {
