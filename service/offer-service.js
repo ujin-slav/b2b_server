@@ -131,7 +131,6 @@ class OfferService {
             }},
             { $sort : { _id : -1 } }
         ])
-        console.log(authorId)
         const offers = await OfferModel.aggregatePaginate(aggregate, options)
         console.log(offers)
         return offers

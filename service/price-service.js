@@ -147,9 +147,15 @@ class PriceService {
         const {
             limit,
             page,
+            searchInn="",
+            searchComment="",
             to,
-            authorId
+            authorId,
+            startDate,
+            endDate
         } = req.body
+        const regexInn = searchInn.replace(/\s{20000,}/g, '*.*')
+        const regexComment = searchComment.replace(/\s{20000,}/g, '*.*')
         var abc = ([{ path: 'To', select: 'name nameOrg inn' },
         {path: 'Author', select: 'name nameOrg inn'}]);
         var options = {
@@ -158,12 +164,112 @@ class PriceService {
             limit,
             page};
         if(to){
-            result = await PriceAskModel.paginate({To:to}, options);
+            const aggregate = PriceAskModel.aggregate([
+                { $lookup:
+                    {
+                       from: "users",
+                       localField: "Author",
+                       foreignField: "_id",
+                       as: "out"
+                    }
+                },
+                {$unwind:'$out'},
+                {$project:
+                    {
+                     nameOrg:'$out.nameOrg',
+                     inn: '$out.inn',
+                     Text: '$Text',
+                     Author:'$out',
+                     Comment:'$Comment',
+                     Sum:'$Sum',
+                     Date: '$Date',
+                     Sent: '$Sent',
+                     Status: '$Status',
+                     Fiz: '$Fiz',
+                     To: {$toString: "$To"} 
+                    }
+                },
+                {$match:{
+                    $and:[
+                        {$or: [
+                            {nameOrg: {
+                            $regex: regexInn,
+                            $options: 'i'
+                        }}, {inn: {
+                            $regex: regexInn,
+                            $options: 'i'
+                        }}
+                        ]},
+                        {To:to},
+                    ],
+                    Date: {
+                        $gte: new Date(startDate),
+                        $lt: new Date(endDate)
+                    }
+                }}
+            ])
+            result = await PriceAskModel.aggregatePaginate(aggregate, options);
             await UnreadInvitedPriceModel.deleteMany({
                 To: to,
             })
         }else if(authorId){
-            result = await PriceAskModel.paginate({Author:authorId}, options);
+            const aggregate = PriceAskModel.aggregate([
+                { $lookup:
+                    {
+                       from: "users",
+                       localField: "Author",
+                       foreignField: "_id",
+                       as: "out"
+                    }
+                },
+                { $lookup:
+                    {
+                       from: "users",
+                       localField: "To",
+                       foreignField: "_id",
+                       as: "outTo"
+                    }
+                },
+                {$unwind:'$out'},
+                {$unwind:'$outTo'},
+                {$project:
+                    {
+                     nameOrg:'$out.nameOrg',
+                     inn: '$out.inn',
+                     Text: '$Text',
+                     To: '$outTo',
+                     Comment:'$Comment',
+                     Sum:'$Sum',
+                     Date: '$Date',
+                     Sent: '$Sent',
+                     Status: '$Status',
+                     Author: {$toString: "$Author"} 
+                    }
+                },
+                {$match:{
+                    $and:[
+                        {$or: [
+                            {nameOrg: {
+                            $regex: regexInn,
+                            $options: 'i'
+                        }}, {inn: {
+                            $regex: regexInn,
+                            $options: 'i'
+                        }}
+                        ]},
+                        {Comment: {
+                            $regex: regexComment,
+                            $options: 'i'
+                        }},
+                        {Author:authorId},
+                    ],
+                    Date: {
+                        $gte: new Date(startDate),
+                        $lt: new Date(endDate)
+                    }
+                }}
+            ])
+            result = await PriceAskModel.aggregatePaginate(aggregate, options);
         }      
          return result; 
     }

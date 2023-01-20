@@ -1,6 +1,7 @@
 const { Double } = require('mongodb');
 const {Schema, model} = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 
 const PriceAsk = new Schema({
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -18,5 +19,5 @@ const PriceAsk = new Schema({
 })
 
 PriceAsk.plugin(mongoosePaginate);
-
+PriceAsk.plugin(aggregatePaginate);
 module.exports = model('PriceAsk', PriceAsk);
