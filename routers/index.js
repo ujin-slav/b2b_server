@@ -62,6 +62,7 @@ router.post('/specaskorg', specOfferController.specAskOrg);
 
 router.post('/saveask', priceController.saveAsk);
 router.post('/getaskprice', priceController.getAskPrice);
+router.post('/getaskpricefiz', priceController.getAskPriceFiz);
 router.post('/getaskpriceid', priceController.getAskPriceId);
 router.post('/deletepriceask', priceController.deletePriceAsk);
 router.post('/updatepriceask', priceController.updatePriceAsk);

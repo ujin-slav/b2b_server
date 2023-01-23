@@ -4,6 +4,7 @@ const UnreadModel = require('../models/unread-model')
 const UnreadQuestModel = require('../models/unreadQuest-model')
 const UnreadInvitedModel = require('../models/unreadInvited-model')
 const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
+const UnreadInvitedPriceFizModel = require('../models/unreadInvitedPriceFiz-model')
 const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
 const UnreadStatusAskModel = require('../models/unreadStatusAsk-model')
 const UserModel =require('../models/user-model')
@@ -15,11 +16,10 @@ const path = require('path');
 const fs = require("fs");
 
 const IOconnectNotAuth = (socket,io)=>{
-  socket.on("unread_invitedPrice", async (data) => {
-    console.log("NotAuth invitedPrice" + data)
+  socket.on("unread_invitedPriceFiz", async (data) => {
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
     if(userSocketIdMap.has(data.To)) {
-      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_invitedPrice",unreadInvitedPrice);
+      io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_invitedPriceFiz",unreadInvitedPrice);
     }
   })
   socket.on("unread_specOfferAsk", async (data) => {
@@ -115,6 +115,7 @@ const IOconnect = async (socket,io) =>{
     const unreadQuest = await UnreadQuestModel.find({To:userId}).countDocuments()
     const unreadInvited = await UnreadInvitedModel.find({To:userId}).countDocuments()
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:userId}).countDocuments()
+    const unreadInvitedPriceFiz = await UnreadInvitedPriceFizModel.find({To:userId}).countDocuments()
     const UnreadSpecAsk = await UnreadSpecAskModel.find({To:userId}).countDocuments()
     const UnreadStatusAsk = await UnreadStatusAskModel.find({To:userId}).countDocuments()
 
@@ -122,6 +123,7 @@ const IOconnect = async (socket,io) =>{
       unreadQuest,
       unreadInvited,
       unreadInvitedPrice,
+      unreadInvitedPriceFiz,
       UnreadSpecAsk,
       UnreadStatusAsk,
     }

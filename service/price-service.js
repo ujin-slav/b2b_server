@@ -3,6 +3,7 @@ const PriceModel = require('../models/price-model')
 const PriceAskModel = require('../models/priceAsk-model')
 const LentStatusModel =require('../models/lentStatus-model')
 const UnreadInvitedPriceModel = require("../models/unreadInvitedPrice-model")
+const UnreadInvitedPriceFizModel = require("../models/unreadInvitedPriceFiz-model")
 const UnreadStatusAskModel = require("../models/unreadStatusAsk-model")
 const builder = require('xmlbuilder')
 const ApiError = require('../exceptions/api-error');
@@ -113,7 +114,11 @@ class PriceService {
             EmailFiz,
             TelefonFiz} = req.body
         if(!FIZ){
-            result = await PriceAskModel.create({
+            await UnreadInvitedPriceModel.create({
+                PriceAsk:result,
+                To
+            })
+            return result = await PriceAskModel.create({
                 Author,
                 To,
                 Table,
@@ -123,7 +128,11 @@ class PriceService {
                 Date: new Date()
             })
         }else{
-            result = await PriceAskModel.create({
+            await UnreadInvitedPriceFizModel.create({
+                PriceAsk:result,
+                To
+            })
+            return result = await PriceAskModel.create({
                 To,
                 Table,
                 Comment,
@@ -133,13 +142,7 @@ class PriceService {
                 EmailFiz,
                 TelefonFiz,
                 Date: new Date()
-        })
-        }
-        UnreadInvitedPriceModel.create({
-            PriceAsk:result,
-            To
-        })
-        return result
+        })}
      }
 
      async getAskPrice(req) {
@@ -272,6 +275,45 @@ class PriceService {
             result = await PriceAskModel.aggregatePaginate(aggregate, options);
         }      
          return result; 
+    }
+    async getAskPriceFiz(req) {
+        const {
+            limit,
+            page,
+            search='',
+            to,
+            startDate,
+            endDate
+        } = req.body
+        const regex = search.replace(/\s{20000,}/g, '*.*')
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
+		const result = PriceAskModel.paginate(
+            {
+                To:to,
+                Date: { $gte: sd, $lt: ed },
+                $and:[
+                    {$or: [
+                        {NameFiz: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}, {EmailFiz: {
+                        $regex: regex,
+                        $options: 'i'
+                    }},
+                        {TelefonFiz: {
+                        $regex: regex,
+                        $options: 'i'
+                    }}
+                ]}
+                ]
+            }, 
+            {page,limit,sort:{"_id":-1}}
+        );
+        await UnreadInvitedPriceFizModel.deleteMany({
+            To: to,
+        })
+        return result;
     }
     async getAskPriceId(req) {
         const {id} = req.body
