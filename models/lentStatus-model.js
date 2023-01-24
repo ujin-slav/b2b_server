@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 
 const LentStatus = new Schema({
     PriceAsk: {type: Schema.Types.ObjectId, ref: 'PriceAsk'},
@@ -11,5 +12,5 @@ const LentStatus = new Schema({
 })
 
 LentStatus.plugin(mongoosePaginate);
-
+LentStatus.plugin(aggregatePaginate);
 module.exports = model('LentStatus', LentStatus);
