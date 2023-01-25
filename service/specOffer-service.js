@@ -213,13 +213,32 @@ class specOfferService {
         const {
             id,
             limit,
+            search,
             page,
+            startDate,
+            endDate
         } = req.body
+        const regex = search.replace(/\s{20000,}/g, '*.*')
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
         var options = {
             sort:{"_id":-1}, 
             limit,
             page};
-        const result = await SpecOfferModel.paginate({Author:id},options);
+        const result = await SpecOfferModel.paginate(
+            {
+                Author:id,
+                Date: { $gte: sd, $lt: ed }, 
+                $or: [
+                {Text: {
+                $regex: regex,
+                $options: 'i'
+            }}, {Name: {
+                $regex: regex,
+                $options: 'i'
+            }}
+            ]},
+            options);
         return result;   
     }
 
