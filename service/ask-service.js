@@ -1,6 +1,7 @@
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
 const LentStatusModel =require('../models/lentStatus-model')
+const UnreadIWinnerModel = require("../models/unreadIWinner-model")
 const UnreadInvitedModel = require("../models/unreadInvited-model")
 const UnreadStatusAskModel = require("../models/unreadStatusAsk-model")
 const roleService = require('./role-service')
@@ -66,6 +67,7 @@ class AskService {
           id
         } = req.body
         const ask =  await AskModel.updateOne({_id:id},{$set:{Winner:winnerDTO.AuthorID}})
+        await UnreadIWinnerModel.create({Ask:id,To:winnerDTO.AuthorID})
         return ask
     }
 
@@ -106,6 +108,58 @@ class AskService {
         return result;
     }
 
+    
+    async getIWinnerAsks(req) {
+        const {
+            limit,
+            page,
+            userId,
+            search='',
+            searchInn='',
+            startDate,
+            endDate
+        } = req.body
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
+        const regex = search.replace(/\s{20000,}/g, '*.*')
+        const regexInn = searchInn.replace(/\s{20000,}/g, '*.*')
+        var abc = ({ path: 'Author', select: 'name nameOrg inn' });
+        var options = {
+            sort:{"_id":-1}, 
+            populate: abc,
+            limit,
+            page};
+        var searchParam = {
+            Winner: userId,
+            Date: { $gte: sd, $lt: ed },
+            $and:[
+                {$or: [
+                    {Name: {
+                    $regex: regex,
+                    $options: 'i'
+                }}, {Text: {
+                    $regex: regex,
+                    $options: 'i'
+                }}]},
+                {$or: [
+                    {NameOrg: {
+                    $regex: regexInn,
+                    $options: 'i'
+                }}, {Inn: {
+                    $regex: regexInn,
+                    $options: 'i'
+                }}]}
+            ]
+        }    
+        await UnreadIWinnerModel.deleteMany({
+            To: userId,
+        })
+        const result = await AskModel.paginate(
+            searchParam, 
+            options);    
+        return result;  
+    }
+
     async getFilterAsk(req) {
         let searchParam = {}
         const {
@@ -119,7 +173,11 @@ class AskService {
             filterRegion,
             searchText,
             searchInn,
+            startDate,
+            endDate
         } = req.body.formData
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
@@ -127,6 +185,7 @@ class AskService {
             limit,
             page};
         var textInnParam = {
+            Date: { $gte: sd, $lt: ed },
             $and:[
                 {$or: [
                     {Name: {
@@ -168,7 +227,6 @@ class AskService {
         const result = await AskModel.paginate(
             searchParam, 
             options);
-        console.log(searchParam)
         return result;  
     }
 

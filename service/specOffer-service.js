@@ -149,7 +149,11 @@ class specOfferService {
             filterRegion,
             searchText,
             searchInn,
+            startDate,
+            endDate
         } = req.body
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
             sort:{"_id":-1}, 
@@ -157,6 +161,7 @@ class specOfferService {
             limit,
             page};
         var textInnParam = {
+            Date: { $gte: sd, $lt: ed },
             $and:[
                 {$or: [
                     {Name: {

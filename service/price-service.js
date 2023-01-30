@@ -62,7 +62,7 @@ class PriceService {
     }
 
     async getPrice(req) {
-        const {page,limit,search,org,spec} = req.body
+        const {page,limit,search='',org,spec} = req.body
         const regex = search.replace(/\s{20000,}/g, '*.*')
         var abc = ({ path: 'User', select: 'nameOrg id' });
         let searchParam = 

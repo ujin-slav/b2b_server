@@ -73,6 +73,7 @@ router.post('/deletestatuspriceaskfile',priceController.deleteStatusPriceAskFile
 router.post('/addask',  upload.array("file"), askController.addAsk);
 router.post('/setwinner', askController.setWinner);
 router.post('/getask', askController.getAsk);
+router.post('/getiwinnerasks',  askController.getIWinnerAsks);
 router.post('/getfilterask', askController.getFilterAsk);
 router.post('/getinvitedask', askController.getInvitedAsk);
 router.post('/getoneask', askController.getOneAsk);
