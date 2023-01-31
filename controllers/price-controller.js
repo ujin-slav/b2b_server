@@ -19,6 +19,14 @@ class PriceController {
             next(e);
         }
     }
+    async getFilterPrice(req, res, next) {
+        try {
+            const result = await priceService.getFilterPrice(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
     async getPriceUnit(req, res, next) {
         try {
             const result = await priceService.getPriceUnit(req);

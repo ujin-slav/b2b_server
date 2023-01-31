@@ -85,6 +85,75 @@ class PriceService {
             {page,limit,populate:abc});
         return result
     }
+    async getFilterPrice(req) {
+        const {
+            limit,
+            page,
+            searchInn,
+            searchText,
+            startDate,
+            filterCat,
+            filterRegion,
+            endDate
+        } = req.body
+        console.log(req.body)
+        const regex = searchText.replace(/\s{20000,}/g, '*.*')
+        const regexInn = searchInn.replace(/\s{20000,}/g, '*.*')
+        var options = {
+            sort:{"_id":-1},
+            limit,
+            page};
+        const search = PriceModel.aggregate([
+            { $lookup:
+                {
+                   from: "users",
+                   localField: "User",
+                   foreignField: "_id",
+                   as: "out"
+                }
+            },
+            {$unwind:'$out'},
+            {$project:
+                {
+                 nameOrg:'$out.nameOrg',
+                 inn: '$out.inn',
+                 category:"$out.category",
+                 region: "$out.region",
+                 Code:'$Code',
+                 Name:'$Name',
+                 Price:'$Price',
+                 Balance:'$Balance',
+                 Date:'$Date',
+                }
+            },
+            {$match:{
+                $and:[
+                    {$or: [
+                        {nameOrg: {
+                        $regex: regexInn,
+                        $options: 'i'
+                    }}, {inn: {
+                        $regex: regexInn,
+                        $options: 'i'
+                    }}
+                    ]},
+                        {Name: {
+                        $regex: regex,
+                        $options: 'i'
+                    }},
+                ],
+                Date: {
+                    $gte: new Date(startDate),
+                    $lt: new Date(endDate)
+                },
+                category: {$in : [filterCat]},
+                region: {$in : [filterRegion]},
+            }}
+        ])
+        const result = await PriceModel.aggregatePaginate(search, options);
+        console.log(result)
+        return result
+    }
     async getPriceUnit(req) {
         const {id} = req.body
         try {

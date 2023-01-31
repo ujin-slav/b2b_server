@@ -218,7 +218,7 @@ class specOfferService {
         const {
             id,
             limit,
-            search,
+            search="",
             page,
             startDate,
             endDate

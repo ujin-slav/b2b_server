@@ -47,6 +47,7 @@ router.post('/getlent', lentController.getLent);
 
 router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);
 router.post('/getprice', priceController.getPrice);
+router.post('/getfilterprice', priceController.getFilterPrice);
 router.post('/getpriceunit', priceController.getPriceUnit);
 router.post('/clearprice',authMiddleware, priceController.clearPrice);
 
