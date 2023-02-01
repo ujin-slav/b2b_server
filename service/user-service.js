@@ -152,6 +152,7 @@ class UserService {
 
     async getUser(req) {
         const {id} = req.body
+        console.log(req.body)
         const user = await UserModel.findOne({_id:id});
         const result = {
             _id:user._id,
@@ -269,7 +270,7 @@ class UserService {
                     console.log("Файл удалён");
                 }
         })};
-        const upadateUser = await UserModel.updateOne({_id:id},{$set: 
+        await UserModel.updateOne({_id:id},{$set: 
                 {name,
                 nameOrg,
                 adressOrg,
@@ -285,9 +286,6 @@ class UserService {
                 notiAsk
         }});
         const user = await UserModel.findOne({_id:id})
-        console.log(notiInvited,
-            notiMessage,
-            notiAsk)
         const userDto = new UserDto(user);
         return {user: userDto}
     }

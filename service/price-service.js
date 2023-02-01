@@ -85,6 +85,29 @@ class PriceService {
             {page,limit,populate:abc});
         return result
     }
+
+    getFilterObj(filterCat,filterRegion,match){
+        if(filterCat.length==0 && filterRegion.length==0){
+            return match
+        }
+        if(filterCat.length>0 && filterRegion.length==0){
+            return Object.assign({
+                category: {$in : [filterCat]}
+            },match)
+        }
+        if(filterCat.length==0 && filterRegion.length>0){
+            return Object.assign({
+                region: {$in : [filterRegion]}
+            },match)
+        }
+        if(filterCat.length>0 && filterRegion.length>0){
+            return Object.assign({
+                category: {$in : [filterCat]},
+                region: {$in : [filterRegion]}
+            },match)
+        }
+    }
+
     async getFilterPrice(req) {
         const {
             limit,
@@ -96,9 +119,30 @@ class PriceService {
             filterRegion,
             endDate
         } = req.body
-        console.log(req.body)
         const regex = searchText.replace(/\s{20000,}/g, '*.*')
         const regexInn = searchInn.replace(/\s{20000,}/g, '*.*')
+        const match = {
+            $and:[
+                {$or: [
+                    {nameOrg: {
+                    $regex: regexInn,
+                    $options: 'i'
+                }}, {inn: {
+                    $regex: regexInn,
+                    $options: 'i'
+                }}
+                ]},
+                    {Name: {
+                    $regex: regex,
+                    $options: 'i'
+                }},
+            ],
+            Date: {
+                $gte: new Date(startDate),
+                $lt: new Date(endDate)
+            }
+        }
+        const newMatch = this.getFilterObj(filterCat,filterRegion,match)
         var options = {
             sort:{"_id":-1},
             limit,
@@ -126,29 +170,7 @@ class PriceService {
                  Date:'$Date',
                 }
             },
-            {$match:{
-                $and:[
-                    {$or: [
-                        {nameOrg: {
-                        $regex: regexInn,
-                        $options: 'i'
-                    }}, {inn: {
-                        $regex: regexInn,
-                        $options: 'i'
-                    }}
-                    ]},
-                        {Name: {
-                        $regex: regex,
-                        $options: 'i'
-                    }},
-                ],
-                Date: {
-                    $gte: new Date(startDate),
-                    $lt: new Date(endDate)
-                },
-                category: {$in : [filterCat]},
-                region: {$in : [filterRegion]},
-            }}
+            {$match:newMatch}
         ])
         const result = await PriceModel.aggregatePaginate(search, options);
         console.log(result)

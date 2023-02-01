@@ -152,6 +152,7 @@ class specOfferService {
             startDate,
             endDate
         } = req.body
+        console.log(req.body)
         const sd = new Date(startDate).setHours(0,0,0,0)
         const ed = new Date(endDate).setHours(23,59,59,999)
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
@@ -223,6 +224,7 @@ class specOfferService {
             startDate,
             endDate
         } = req.body
+        console.log(req.body)
         const regex = search.replace(/\s{20000,}/g, '*.*')
         const sd = new Date(startDate).setHours(0,0,0,0)
         const ed = new Date(endDate).setHours(23,59,59,999)
