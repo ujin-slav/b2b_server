@@ -164,6 +164,7 @@ class PriceService {
                  category:"$out.category",
                  region: "$out.region",
                  Code:'$Code',
+                 User:'$out',
                  Name:'$Name',
                  Price:'$Price',
                  Balance:'$Balance',
