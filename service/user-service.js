@@ -251,6 +251,7 @@ class UserService {
             nameOrg,
             adressOrg,
             telefon,
+            site,
             inn,
             fiz,
             region,
@@ -258,8 +259,10 @@ class UserService {
             category,
             notiInvited,
             notiMessage,
-            notiAsk
+            notiAsk,
+            getAskFromFiz,
         } = req.body
+        console.log(req.body)
         let logo
         const existProfile = await UserModel.findOne({_id:id})
         if(fs.existsSync(__dirname+'\\..\\'+ existProfile.logo?.path)){
@@ -275,6 +278,7 @@ class UserService {
                 nameOrg,
                 adressOrg,
                 telefon,
+                site,
                 inn,
                 fiz,  
                 description,
@@ -283,7 +287,8 @@ class UserService {
                 category:JSON.parse(category),
                 notiInvited,
                 notiMessage,
-                notiAsk
+                notiAsk,
+                getAskFromFiz
         }});
         const user = await UserModel.findOne({_id:id})
         const userDto = new UserDto(user);

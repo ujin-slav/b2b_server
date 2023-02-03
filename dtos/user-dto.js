@@ -12,6 +12,7 @@ module.exports = class UserDto {
         this.adressOrg = model.adressOrg;
         this.fiz = model.fiz;
         this.telefon = model.telefon;
+        this.site = model.site;
         this.inn = model.inn;
         this.logo = model.logo;
         this.region = model.region;
@@ -20,5 +21,6 @@ module.exports = class UserDto {
         this.notiInvited = model.notiInvited;
         this.notiMessage = model.notiMessage;
         this.notiAsk = model.notiAsk;
+        this.getAskFromFiz = model.getAskFromFiz;
     }
 }

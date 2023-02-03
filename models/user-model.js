@@ -11,6 +11,7 @@ const UserSchema = new Schema({
     nameOrg: {type: String},
     description:{type: String},
     telefon:{type: String},
+    site:{type: String},
     inn: {type: String},
     adressOrg: {type: String},
     category: [],
@@ -20,6 +21,7 @@ const UserSchema = new Schema({
     notiInvited:{type:Boolean},
     notiMessage:{type:Boolean},
     notiAsk:{type:Boolean},
+    getAskFromFiz:{type:Boolean},
 })
 
 UserSchema.plugin(mongoosePaginate);
