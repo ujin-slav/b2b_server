@@ -1,6 +1,7 @@
 const Router = require('express').Router;
 const userController = require('../controllers/user-controller');
 const askController = require('../controllers/ask-controller');
+const adminController = require('../controllers/admin-controller');
 const loadController = require('../controllers/load-controller');
 const offerController = require('../controllers/offer-controller');
 const specOfferController = require('../controllers/specOffer-controller');
@@ -116,6 +117,10 @@ router.get('/getstatusfile/:file', loadController.getStatusFile);
 router.get('/getstatusaskfile/:file', loadController.getStatusAskFile);
 router.get('/static/:path/:file', loadController.getStatic);
 router.post('/uploadchatfile',uploadChat.single("file"), loadController.upLoadChatFile);
+
+router.post('/admin/getusers', adminController.getUsers);
+router.post('/admin/getasks', adminController.getAsks);
+router.post('/admin/price', adminController.getPrice);
 
 router.get('/parsing', loadController.parsing);
 
