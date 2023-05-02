@@ -1,5 +1,6 @@
 const ApiError = require('../exceptions/api-error');
 const UserModel =require('../models/user-model')
+const PriceModel = require('../models/price-model')
 const AskModel = require("../models/Ask-model")
 
 class AdminService {
@@ -38,7 +39,6 @@ class AdminService {
             startDate,
             endDate
         } = req.body
-        console.log(req.body)
         const sd = new Date(startDate).setHours(0,0,0,0)
         const ed = new Date(endDate).setHours(23,59,59,999)
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
@@ -75,7 +75,8 @@ class AdminService {
     }
 
     async getPrice(req) {
-        const {page,limit,search='',org,spec} = req.body
+        const {page,limit,search='',searchInn} = req.body
+        console.log( req.body)
         const regex = search.replace(/\s{20000,}/g, '*.*')
         var abc = ({ path: 'User', select: 'nameOrg id' });
         let searchParam = 
@@ -87,8 +88,8 @@ class AdminService {
                         $regex: regex,
                         $options: 'i'
                     }}]}
-        if(org){
-            searchParam = Object.assign(searchParam,{User:org})
+        if(searchInn){
+            searchParam = Object.assign(searchParam,{User:searchInn})
         }
         const result = await PriceModel.paginate(
             searchParam, 
