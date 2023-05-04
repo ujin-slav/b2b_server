@@ -102,6 +102,7 @@ class OfferService {
                  id: {$toString: "$out._id"},
                  Text: '$Text',
                  Price:'$Price',
+                 Ask:'$Ask',
                  Date: '$Date',
                  Files:'$Files',
                  Author: {$toString: "$Author"} 
@@ -132,7 +133,6 @@ class OfferService {
             { $sort : { _id : -1 } }
         ])
         const offers = await OfferModel.aggregatePaginate(aggregate, options)
-        console.log(offers)
         return offers
     }
     async deleteOffer(req) {
