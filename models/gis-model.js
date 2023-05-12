@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 
 const GisSchema = new Schema({
     Name: {type: String},
@@ -14,4 +15,5 @@ const GisSchema = new Schema({
     Site: {type: String},
 })
 GisSchema.plugin(mongoosePaginate);
+GisSchema.plugin(aggregatePaginate);
 module.exports = model('Gis', GisSchema);

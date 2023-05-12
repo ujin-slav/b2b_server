@@ -121,6 +121,7 @@ router.post('/uploadchatfile',uploadChat.single("file"), loadController.upLoadCh
 router.post('/admin/getusers', adminController.getUsers);
 router.post('/admin/getasks', adminController.getAsks);
 router.post('/admin/getprice', adminController.getPrice);
+router.post('/admin/getspamlist', adminController.getSpamList);
 
 router.get('/parsing', loadController.parsing);
 

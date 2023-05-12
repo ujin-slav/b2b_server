@@ -26,6 +26,14 @@ class AdminController {
             next(e);
         }
     }
+    async getSpamList(req, res, next) {
+        try {
+            const result = await AdminService.getSpamList(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 

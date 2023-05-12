@@ -2,6 +2,11 @@ const ApiError = require('../exceptions/api-error');
 const UserModel =require('../models/user-model')
 const PriceModel = require('../models/price-model')
 const AskModel = require("../models/Ask-model")
+const GisModel = require('../models/gis-model')
+const getCategoryName = require('../utils/ConvertCategory')
+const getRegionCode = require('../utils/ConvertRegion')
+const nodesCategory = require('../utils/Category')
+const nodesRegion = require('../utils/Region')
 
 class AdminService {
 
@@ -94,6 +99,21 @@ class AdminService {
         const result = await PriceModel.paginate(
             searchParam, 
             {page,limit,populate:abc});
+        return result
+    }
+    async getSpamList(req) {
+        const {page,limit,search,searchInn,id} = req.body
+        let reg = "" + search + "";
+        const ask = await AskModel.findOne({_id:id})
+        const searchCat = getCategoryName(ask.Category,nodesCategory).join().split(",")
+        const searchRegion = getRegionCode(ask.Region,nodesRegion).join().split(",")
+        const result = await GisModel.paginate(
+            {
+                Category: {$in : searchCat},
+                City: {$in : searchRegion}
+            },
+               {page,limit}
+        );
         return result
     }
 }
