@@ -3,6 +3,7 @@ const UserModel =require('../models/user-model')
 const PriceModel = require('../models/price-model')
 const AskModel = require("../models/Ask-model")
 const GisModel = require('../models/gis-model')
+const SentMailModel = require('../models/sentMail-model')
 const getCategoryName = require('../utils/ConvertCategory')
 const getRegionCode = require('../utils/ConvertRegion')
 const nodesCategory = require('../utils/Category')
@@ -107,13 +108,54 @@ class AdminService {
         const ask = await AskModel.findOne({_id:id})
         const searchCat = getCategoryName(ask.Category,nodesCategory).join().split(",")
         const searchRegion = getRegionCode(ask.Region,nodesRegion).join().split(",")
-        const result = await GisModel.paginate(
-            {
+        // const result = await GisModel.paginate(
+        //     {
+        //         Category: {$in : searchCat},
+        //         City: {$in : searchRegion}
+        //     },
+        //        {page,limit}
+        // );
+        // return result
+        var options = {
+            sort:{"_id":-1},
+            limit,
+            page};
+        const query = GisModel.aggregate([
+            {$match:{
                 Category: {$in : searchCat},
                 City: {$in : searchRegion}
-            },
-               {page,limit}
-        );
+            }},
+            { $group : { _id : "$Email"}}
+        ])
+        const result = await GisModel.aggregatePaginate(query, options);
+        return result
+    }
+    async sendSpamByAsk(req) {
+        const {
+            id,
+            listOrg,
+            limit,
+            currentPage
+        } = req.body
+        const result = await SentMailModel.create({
+            To:listOrg,
+            Limit: limit,
+            CurrentPage:currentPage,
+            Ask:id  
+        })
+        return result
+    }
+    async getSentSpamByAsk(req) {
+        const {
+            Ask,
+            page,
+            limit,
+        } = req.body
+        var options = {
+            sort:{"_id":-1},
+            limit,
+            page};
+        const result = await SentMailModel.paginate({Ask},options)
         return result
     }
 }

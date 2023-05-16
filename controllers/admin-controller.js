@@ -34,6 +34,22 @@ class AdminController {
             next(e);
         }
     }
+    async sendSpamByAsk(req, res, next) {
+        try {
+            const result = await AdminService.sendSpamByAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getSentSpamByAsk(req, res, next) {
+        try {
+            const result = await AdminService.getSentSpamByAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 
