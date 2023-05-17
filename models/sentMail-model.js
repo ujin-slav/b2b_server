@@ -3,7 +3,7 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 
 const SentMail = new Schema({
     To: [],
-    PriceAsk: {type: Schema.Types.ObjectId, ref: 'PriceAsk'},
+    SpecOffer: {type: Schema.Types.ObjectId, ref: 'SpecOffer'},
     Ask: {type: Schema.Types.ObjectId, ref: 'Ask'},
     Limit: {type: Number},
     CurrentPage: {type: Number},

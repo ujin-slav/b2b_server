@@ -1,5 +1,6 @@
 const ApiError = require('../exceptions/api-error');
 const UserModel =require('../models/user-model')
+const SpecOfferModel = require("../models/specOffer-model")
 const PriceModel = require('../models/price-model')
 const AskModel = require("../models/Ask-model")
 const GisModel = require('../models/gis-model')
@@ -74,10 +75,86 @@ class AdminService {
                 }}]}
             ]
         }    
-        const result = await AskModel.paginate(
+        const query = await AskModel.paginate(
             searchParam, 
             options);
+        const endResult = await Promise.all(query.docs.map(async (item)=>{
+            const countSentMailPack = await SentMailModel.find({Ask:item._id}).countDocuments()
+            const newItem = {
+                Category:item.Category,
+                Region:item.Region,
+                Name:item.Name,
+                Author:item.Author,
+                EndDateOffers:item.EndDateOffers,
+                Text:item.Text,
+                Date:item.Date,
+                NameOrg:item.NameOrg,
+                CountSentMailPack:countSentMailPack
+            }
+            return newItem
+        }))
+        const result = {docs:endResult,totalPages:query.totalPages};
         return result;  
+    }
+    async getSpecOffers(req) {
+        const {
+            limit,
+            page,
+            searchText,
+            searchInn,
+            startDate,
+            endDate
+        } = req.body
+        const sd = new Date(startDate).setHours(0,0,0,0)
+        const ed = new Date(endDate).setHours(23,59,59,999)
+        var abc = ({ path: 'Author', select: 'name nameOrg inn' });
+        var options = {
+            sort:{"_id":-1}, 
+            populate: abc,
+            limit,
+            page};
+        var searchParam = {
+            Date: { $gte: sd, $lt: ed },
+            $and:[
+                {$or: [
+                    {Name: {
+                    $regex: searchText,
+                    $options: 'i'
+                }}, {Text: {
+                    $regex: searchText,
+                    $options: 'i'
+                }}]},
+                {$or: [
+                    {NameOrg: {
+                    $regex: searchInn,
+                    $options: 'i'
+                }}, {Inn: {
+                    $regex: searchInn,
+                    $options: 'i'
+                }}]}
+            ]
+        }    
+        const query = await SpecOfferModel.paginate(
+            searchParam, 
+            options);
+        const endResult = await Promise.all(query.docs.map(async (item)=>{
+            const countSentMailPack = await SentMailModel.find({SpecOffer:item._id}).countDocuments()
+            const newItem = {
+                Category:item.Category,
+                Region:item.Region,
+                Name:item.Name,
+                Author:item.Author,
+                Files: item.Files,
+                EndDateOffers:item.EndDateOffers,
+                Text:item.Text,
+                Date:item.Date,
+                NameOrg:item.NameOrg,
+                CountSentMailPack:countSentMailPack
+            }
+            return newItem
+        }))
+        const result = {docs:endResult,totalPages:query.totalPages};
+        return result;   
     }
 
     async getPrice(req) {
@@ -133,12 +210,12 @@ class AdminService {
     async sendSpamByAsk(req) {
         const {
             id,
-            listOrg,
+            list,
             limit,
             currentPage
         } = req.body
         const result = await SentMailModel.create({
-            To:listOrg,
+            To:list,
             Limit: limit,
             CurrentPage:currentPage,
             Ask:id  

@@ -124,6 +124,7 @@ router.post('/admin/getprice', adminController.getPrice);
 router.post('/admin/getspamlist', adminController.getSpamList);
 router.post('/admin/sendspambyask', adminController.sendSpamByAsk);
 router.post('/admin/getsentspambyask', adminController.getSentSpamByAsk);
+router.post('/admin/getspecoffers', adminController.getSpecOffers);
 
 router.get('/parsing', loadController.parsing);
 
