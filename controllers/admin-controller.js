@@ -34,9 +34,17 @@ class AdminController {
             next(e);
         }
     }
-    async getSpamList(req, res, next) {
+    async getSpamListAsk(req, res, next) {
         try {
-            const result = await AdminService.getSpamList(req);
+            const result = await AdminService.getSpamListAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getSpamListSpecOffer(req, res, next) {
+        try {
+            const result = await AdminService.getSpamListSpecOffer(req);
             return res.json(result)
         } catch (e) {
             next(e);
@@ -50,9 +58,25 @@ class AdminController {
             next(e);
         }
     }
+    async sendSpamBySpecOffer(req, res, next) {
+        try {
+            const result = await AdminService.sendSpamBySpecOffer(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
     async getSentSpamByAsk(req, res, next) {
         try {
             const result = await AdminService.getSentSpamByAsk(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
+    async getSentSpamBySpecOffer(req, res, next) {
+        try {
+            const result = await AdminService.getSentSpamBySpecOffer(req);
             return res.json(result)
         } catch (e) {
             next(e);

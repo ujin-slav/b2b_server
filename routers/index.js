@@ -121,9 +121,12 @@ router.post('/uploadchatfile',uploadChat.single("file"), loadController.upLoadCh
 router.post('/admin/getusers', adminController.getUsers);
 router.post('/admin/getasks', adminController.getAsks);
 router.post('/admin/getprice', adminController.getPrice);
-router.post('/admin/getspamlist', adminController.getSpamList);
+router.post('/admin/getspamlistask', adminController.getSpamListAsk);
+router.post('/admin/getspamlistspecoffer', adminController.getSpamListSpecOffer);
 router.post('/admin/sendspambyask', adminController.sendSpamByAsk);
+router.post('/admin/sendspambyspecoffer', adminController.sendSpamBySpecOffer);
 router.post('/admin/getsentspambyask', adminController.getSentSpamByAsk);
+router.post('/admin/getsentspambyspecoffer', adminController.getSentSpamBySpecOffer);
 router.post('/admin/getspecoffers', adminController.getSpecOffers);
 
 router.get('/parsing', loadController.parsing);

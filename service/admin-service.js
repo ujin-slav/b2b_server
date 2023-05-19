@@ -9,6 +9,8 @@ const getCategoryName = require('../utils/ConvertCategory')
 const getRegionCode = require('../utils/ConvertRegion')
 const nodesCategory = require('../utils/Category')
 const nodesRegion = require('../utils/Region')
+const SocketIO =  require('../SocketIO/index');
+const LastVisitModel = require('../models/lastVisit-model') 
 
 class AdminService {
 
@@ -33,7 +35,26 @@ class AdminService {
         const option = {
             limit,
             page}
-        const result = await UserModel.paginate(searchParam,option)
+        const userQuery = await UserModel.paginate(searchParam,option)
+        const endResult = await Promise.all(userQuery.docs.map(async (item)=>{
+            const onLine = SocketIO.userSocketIdMap.has(item?.id)
+            const lv = await LastVisitModel.findOne({User:item?._id})
+            const newItem = {
+                _id:item._id,
+                email:item.email,
+                name:item.name,
+                nameOrg:item.nameOrg,
+                inn:item.inn,
+                onLine,
+                LastVisit:lv?.Date
+            }
+            return newItem
+        })) 
+        const result = {
+            docs:endResult,
+            page:userQuery.page,
+            totalPages:userQuery.totalPages
+        }
         return result;
     }
 
@@ -81,6 +102,7 @@ class AdminService {
         const endResult = await Promise.all(query.docs.map(async (item)=>{
             const countSentMailPack = await SentMailModel.find({Ask:item._id}).countDocuments()
             const newItem = {
+                _id:item._id,
                 Category:item.Category,
                 Region:item.Region,
                 Name:item.Name,
@@ -93,7 +115,11 @@ class AdminService {
             }
             return newItem
         }))
-        const result = {docs:endResult,totalPages:query.totalPages};
+        const result = {
+            docs:endResult,
+            page:query.page,
+            totalPages:query.totalPages
+        };
         return result;  
     }
     async getSpecOffers(req) {
@@ -140,6 +166,7 @@ class AdminService {
         const endResult = await Promise.all(query.docs.map(async (item)=>{
             const countSentMailPack = await SentMailModel.find({SpecOffer:item._id}).countDocuments()
             const newItem = {
+                _id:item._id,
                 Category:item.Category,
                 Region:item.Region,
                 Name:item.Name,
@@ -179,12 +206,40 @@ class AdminService {
             {page,limit,populate:abc});
         return result
     }
-    async getSpamList(req) {
+    async getSpamListAsk(req) {
         const {page,limit,search,searchInn,id} = req.body
         let reg = "" + search + "";
         const ask = await AskModel.findOne({_id:id})
         const searchCat = getCategoryName(ask.Category,nodesCategory).join().split(",")
         const searchRegion = getRegionCode(ask.Region,nodesRegion).join().split(",")
+        // const result = await GisModel.paginate(
+        //     {
+        //         Category: {$in : searchCat},
+        //         City: {$in : searchRegion}
+        //     },
+        //        {page,limit}
+        // );
+        // return result
+        var options = {
+            sort:{"_id":-1},
+            limit,
+            page};
+        const query = GisModel.aggregate([
+            {$match:{
+                Category: {$in : searchCat},
+                City: {$in : searchRegion}
+            }},
+            { $group : { _id : "$Email"}}
+        ])
+        const result = await GisModel.aggregatePaginate(query, options);
+        return result
+    }
+    async getSpamListSpecOffer(req) {
+        const {page,limit,search,searchInn,id} = req.body
+        let reg = "" + search + "";
+        const specOffer = await SpecOfferModel.findOne({_id:id})
+        const searchCat = getCategoryName(specOffer.Category,nodesCategory).join().split(",")
+        const searchRegion = getRegionCode(specOffer.Region,nodesRegion).join().split(",")
         // const result = await GisModel.paginate(
         //     {
         //         Category: {$in : searchCat},
@@ -222,6 +277,21 @@ class AdminService {
         })
         return result
     }
+    async sendSpamBySpecOffer(req) {
+        const {
+            id,
+            list,
+            limit,
+            currentPage
+        } = req.body
+        const result = await SentMailModel.create({
+            To:list,
+            Limit: limit,
+            CurrentPage:currentPage,
+            SpecOffer:id  
+        })
+        return result
+    }
     async getSentSpamByAsk(req) {
         const {
             Ask,
@@ -233,6 +303,20 @@ class AdminService {
             limit,
             page};
         const result = await SentMailModel.paginate({Ask},options)
+        return result
+    }
+    async getSentSpamBySpecOffer(req) {
+        const {
+            SpecOffer,
+            page,
+            limit,
+        } = req.body
+        var options = {
+            sort:{"_id":-1},
+            limit,
+            page};
+        const result = await SentMailModel.paginate({SpecOffer},options)
+        console.log(SpecOffer)
         return result
     }
 }
