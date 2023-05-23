@@ -101,33 +101,36 @@ class MailService {
     }
     async sendMessage(user,data) {
         const to = user.email
-        await this.transporter.sendMail({
-            from: process.env.SMTP_USER,
-            to,
-            subject: 'Новое сообщение.',
-            html:
-                `
-                <div style="display: flex;">
-                <div>
-                ${logo.logo}
-                </div>
-
-                <div style="width:100%;">
-                <span style="text-align: center;">
-                    <h3>Новое непрочитанное сообщение.</h3>
-                </span>    
-                <hr style=" border: none; background-color: #a2ebfd; height: 10px">
-                <div style="line-height: 2;">
-                    <div><span style="font-weight: bold;">Автор: </span>${user.name}</div>
-                    <div><span style="font-weight: bold;">Организация: </span>${user.nameOrg}</div>
-                    <div><span style="font-weight: bold;">Текст: </span>${data.Text}</div>
-                    <a href="${process.env.CLIENT_URL}/chat">${process.env.CLIENT_URL}/chat</a>
-                </div>
-                </div>
-                </div>
-                
-                `
-        })
+        try{
+            await this.transporter.sendMail({
+                from: process.env.SMTP_USER,
+                to,
+                subject: 'Новое сообщение',
+                html:
+                    `
+                    <div style="display: flex; justify-content: center;height: 100%;">
+                        <div style="width:600px;">
+                            <div style="height:100px;">${logo.logo}</div>
+                            <div style="background-color:#FAFAFA;height: 100%;">
+                                <div style="padding: 30px 0px 0px 50px;font-size: 160%;font-family: American Retro;">
+                                    Новое непрочитанное сообщение.
+                                </div>
+                                <div style="padding: 20px 0px 0px 70px;">
+                                     <div style="line-height: 2;">
+                                        <div><span style="font-weight: bold;">Автор: </span>${user.name}</div>
+                                        <div><span style="font-weight: bold;">Организация: </span>${user.nameOrg}</div>
+                                        <div><span style="font-weight: bold;">Текст: </span>${data.Text}</div>
+                                        <a href="${process.env.CLIENT_URL}/chat">${process.env.CLIENT_URL}/chat</a>
+                                    </div>
+                                </div>
+                            <div>
+                        </div>
+                    </div>
+                    `
+            })
+        }catch(e){
+            console.log(e)
+        }
     }
     async sendQuest(to,author,text,path) {
         console.log(to)
