@@ -3,6 +3,7 @@ const ChatModel = require('../models/chat-model')
 const UnreadModel = require('../models/unread-model')
 const UnreadQuestModel = require('../models/unreadQuest-model')
 const UnreadInvitedModel = require('../models/unreadInvited-model')
+const UnreadIWinnerModel = require('../models/unreadIWinner-model')
 const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
 const UnreadInvitedPriceFizModel = require('../models/unreadInvitedPriceFiz-model')
 const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
@@ -81,7 +82,8 @@ const IOconnect = async (socket,io) =>{
     }
   })
   socket.on("unread_invited", async (data) => {
-    await Promise.all(data.map(async (item)=>{
+    try{
+      await Promise.all(data.map(async (item)=>{
         const user = await UserModel.findOne({_id:item.idContr})
         if(user){
           if(userSocketIdMap.has(user.id)) {
@@ -90,6 +92,22 @@ const IOconnect = async (socket,io) =>{
           }
         }
     }))
+    }
+    catch(e){
+      console.log(e)
+    }
+  })
+  socket.on("unread_iwinner", async (data) => {
+    try{
+      const unreadIWinner = await UnreadIWinnerModel.find({To:data.AuthorID}).countDocuments()
+      if(userSocketIdMap.has(data.AuthorID)) {
+        console.log(data)
+        io.sockets.sockets.get(userSocketIdMap.get(data.AuthorID)).emit("get_unread_iwinner",unreadIWinner);
+      }
+    }
+    catch(e){
+      console.log(e)
+    }
   })
   socket.on("unread_invitedPrice", async (data) => {
     console.log("unread_invitedPrice")
@@ -114,6 +132,7 @@ const IOconnect = async (socket,io) =>{
     
     const unreadQuest = await UnreadQuestModel.find({To:userId}).countDocuments()
     const unreadInvited = await UnreadInvitedModel.find({To:userId}).countDocuments()
+    const unreadIWinner = await UnreadIWinnerModel.find({To:userId}).countDocuments()
     const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:userId}).countDocuments()
     const unreadInvitedPriceFiz = await UnreadInvitedPriceFizModel.find({To:userId}).countDocuments()
     const UnreadSpecAsk = await UnreadSpecAskModel.find({To:userId}).countDocuments()
@@ -122,6 +141,7 @@ const IOconnect = async (socket,io) =>{
     const result = {
       unreadQuest,
       unreadInvited,
+      unreadIWinner,
       unreadInvitedPrice,
       unreadInvitedPriceFiz,
       UnreadSpecAsk,
