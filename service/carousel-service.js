@@ -1,9 +1,10 @@
-const UserModel =require('../models/user-model')
+const UserModel = require('../models/user-model')
+const ContrModel = require('../models/contr-model')
 
 class CarouselService {
 
     async getCarousel(req) {
-        const {page,limit,search} = req.body
+        const {page,limit,search,user} = req.body
         const regex = search.replace(/ /g, '*.*')
         let searchParam = 
         { $or: [
@@ -19,7 +20,28 @@ class CarouselService {
             limit,
             page}
         const result = await UserModel.paginate(searchParam,option)
-        return result
+        if(user){
+            const resultAuth = await Promise.all(result.docs.map(async (item)=>{
+                const showPlus = await ContrModel.findOne({User:user,Contragent:item._id})
+                const newItem = {
+                    _id: item._id,
+                    email: item.email,
+                    name: item.name,
+                    nameOrg: item.nameOrg,
+                    inn: item.inn,
+                    logo: item.logo,
+                    contrIs: Boolean(showPlus)
+                }
+                return newItem
+            }))
+            return {
+                docs:resultAuth,
+                page: result.totalPages,
+                totalPages:result.totalPages
+            }
+        }else{
+            return result
+        }
     }
 }
 
