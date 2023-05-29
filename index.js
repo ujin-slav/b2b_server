@@ -4,6 +4,7 @@ const express = require("express");
 const IOconnect = require('./SocketIO/index');
 const cors = require("cors");
 const http = require("http");
+const logger = require("./utils/Logger")
 const { Server } = require("socket.io");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -66,9 +67,10 @@ const start = async () => {
         })
         server.listen(PORT,()=>{
             console.log("Server run in port 5000")
+            logger.info("Server run in port 5000");
         })    
     } catch (error) {
-        console.log(error)
+        logger.error(error);
     }
 }
 
