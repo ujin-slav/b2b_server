@@ -9,24 +9,23 @@ class ReviewOrgService {
         Author,
         Text,
         Org} = req.body
-
-        const reviewOrg = await ReviewOrgModel.create
-                ({Host,
-                Author,
-                Text,
-                Org,
-                Date: new Date()});
-        
-        await UnreadReviewOrgModel.create
-        ({
-        Message:reviewOrg,
-        From:Author});
-                
+        console.log(req.body)
+        const reviewOrg = await ReviewOrgModel.create({
+            Host,
+            Author,
+            Text,
+            Org,
+            Date: new Date()
+        });
+        await UnreadReviewOrgModel.create({
+            Message:reviewOrg._id,
+            To:Org
+        });        
         return reviewOrg; 
     }
 
     async getReviewOrg(req) {
-        const {id,author,skip,limit} = req.body
+        const {id,author,skip,limit,user} = req.body
         let query
         if(author){
             query = {Author:author,Host:null}
@@ -52,9 +51,10 @@ class ReviewOrgService {
             docs,
             totalPages:Math.ceil(count/limit)
         }
-
-        const unread = await UnreadReviewOrgModel.deleteMany({To:id})
-
+        console.log({user,id})
+        if(user===id){
+            const unread = await UnreadReviewOrgModel.deleteMany({To:id})
+        }
         return result; 
     }
 

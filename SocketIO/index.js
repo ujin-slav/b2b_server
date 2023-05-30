@@ -4,6 +4,7 @@ const UnreadModel = require('../models/unread-model')
 const UnreadQuestModel = require('../models/unreadQuest-model')
 const UnreadInvitedModel = require('../models/unreadInvited-model')
 const UnreadIWinnerModel = require('../models/unreadIWinner-model')
+const UnreadReviewOrgModel = require('../models/unreadReviewOrg-model')
 const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
 const UnreadInvitedPriceFizModel = require('../models/unreadInvitedPriceFiz-model')
 const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
@@ -104,8 +105,18 @@ const IOconnectNotAuth = (socket,io)=>{
         try{
           const unreadIWinner = await UnreadIWinnerModel.find({To:data.AuthorID}).countDocuments()
           if(userSocketIdMap.has(data.AuthorID)) {
-            console.log(data)
             io.sockets.sockets.get(userSocketIdMap.get(data.AuthorID)).emit("get_unread_iwinner",unreadIWinner);
+          }
+        }
+        catch(e){
+          console.log(e)
+        }
+      })
+      socket.on("unread_review_org", async (data) => {
+        try{
+          const unreadReviewOrg = await UnreadReviewOrgModel.find({To:data.Org}).countDocuments()
+          if(userSocketIdMap.has(data.Org)) {
+            io.sockets.sockets.get(userSocketIdMap.get(data.Org)).emit("get_unread_review_org",unreadReviewOrg);
           }
         }
         catch(e){
@@ -136,6 +147,7 @@ const IOconnectNotAuth = (socket,io)=>{
         const unreadQuest = await UnreadQuestModel.find({To:userId}).countDocuments()
         const unreadInvited = await UnreadInvitedModel.find({To:userId}).countDocuments()
         const unreadIWinner = await UnreadIWinnerModel.find({To:userId}).countDocuments()
+        const unreadReviewOrg = await UnreadReviewOrgModel.find({To:userId}).countDocuments()
         const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:userId}).countDocuments()
         const unreadInvitedPriceFiz = await UnreadInvitedPriceFizModel.find({To:userId}).countDocuments()
         const UnreadSpecAsk = await UnreadSpecAskModel.find({To:userId}).countDocuments()
@@ -145,6 +157,7 @@ const IOconnectNotAuth = (socket,io)=>{
           unreadQuest,
           unreadInvited,
           unreadIWinner,
+          unreadReviewOrg,
           unreadInvitedPrice,
           unreadInvitedPriceFiz,
           UnreadSpecAsk,
