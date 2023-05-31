@@ -50,3 +50,77 @@
 {"level":"info","message":"User Connected: xDSGjTlfMJKbXnfoAAAD id 619e4028315b602a6439ff05","timestamp":"2023-05-30T13:16:42.534Z"}
 {"level":"info","message":"User Connected: 4HpMIPh5QNSKnT4IAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-05-30T13:16:44.305Z"}
 {"level":"info","message":"User Connected: lQ0JtCUVeTdOsmuFAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-05-30T13:35:03.620Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T09:07:12.253Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T09:08:26.873Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T09:10:40.964Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T09:11:12.648Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T09:16:01.624Z"}
+{"level":"info","message":"User Connected: ETX4O9Zt-n1kwrepAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T09:16:26.651Z"}
+{"level":"info","message":"User Connected: pTYAsn_d0298AHweAAAF id 619e4028315b602a6439ff05","timestamp":"2023-05-31T09:17:30.772Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T09:19:07.853Z"}
+{"level":"info","message":"User Connected: Ym5l65X718GAvVYKAAAB id 619e4028315b602a6439ff05","timestamp":"2023-05-31T09:19:09.196Z"}
+{"level":"info","message":"User Connected: 2rlH-xe5NDVLn7StAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T09:19:10.173Z"}
+{"level":"info","message":"User Connected: odwaaBufi_3w-tqgAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T09:34:53.022Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T09:54:00.127Z"}
+{"level":"info","message":"User Connected: ysfHeY4oo-8RYS43AAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T09:54:01.193Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T09:54:48.480Z"}
+{"level":"info","message":"User Connected: H927rtcvVLTUPYchAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T09:54:48.512Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T09:57:21.726Z"}
+{"level":"error","timestamp":"2023-05-31T09:57:21.834Z"}
+{"level":"info","message":"User Connected: PLL3QLs6UrBObi7kAAAJ id 619e4028315b602a6439ff05","timestamp":"2023-05-31T09:57:23.964Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T09:58:28.813Z"}
+{"level":"error","timestamp":"2023-05-31T09:58:28.917Z"}
+{"level":"info","message":"User Connected: oRI1LN1tMdh07hMSAAAN id 619e4028315b602a6439ff05","timestamp":"2023-05-31T09:58:30.940Z"}
+{"level":"info","message":"User Connected: jFamyLgg7r888SQ5AAAP id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T09:58:51.884Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T10:10:20.962Z"}
+{"level":"error","timestamp":"2023-05-31T10:10:21.057Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T10:10:25.245Z"}
+{"level":"error","timestamp":"2023-05-31T10:10:25.357Z"}
+{"level":"info","message":"User Connected: q8wtAKlyzVcseLh2AAAV id 619e4028315b602a6439ff05","timestamp":"2023-05-31T10:10:28.126Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T10:12:42.140Z"}
+{"level":"info","message":"User Connected: NWV-Z4uT0Ipr41wrAAAD id 619e4028315b602a6439ff05","timestamp":"2023-05-31T10:12:42.236Z"}
+{"level":"info","message":"User Connected: fGIRuXzFGNwYoicuAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T10:12:43.205Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T10:13:45.017Z"}
+{"level":"info","message":"User Connected: 8An8SBhHb6HqWlLCAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T10:13:46.217Z"}
+{"level":"info","message":"User Connected: 1EGrcbwft2jGhx2TAAAE id 619e4028315b602a6439ff05","timestamp":"2023-05-31T10:13:47.212Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T10:15:57.025Z"}
+{"level":"info","message":"User Connected: haT6WvWZy_qgGiETAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T10:15:57.220Z"}
+{"level":"info","message":"User Connected: KZ6H9sNeGSdk9h2XAAAD id 619e4028315b602a6439ff05","timestamp":"2023-05-31T10:15:58.209Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T10:32:15.533Z"}
+{"level":"info","message":"User Connected: plPktv3U7c6bH01YAAAD id 619e4028315b602a6439ff05","timestamp":"2023-05-31T10:32:15.661Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T10:35:03.867Z"}
+{"level":"info","message":"User Connected: oyU8cgD1Rf3TEMcHAAAC id 619e4028315b602a6439ff05","timestamp":"2023-05-31T10:35:03.920Z"}
+{"level":"error","timestamp":"2023-05-31T11:02:03.393Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T11:02:10.272Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T11:07:51.263Z"}
+{"level":"info","message":"User Connected: Z8eNaQYAe3sAoFrWAAAJ id 619e4028315b602a6439ff05","timestamp":"2023-05-31T11:07:54.781Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T11:09:34.139Z"}
+{"level":"error","timestamp":"2023-05-31T11:09:38.232Z"}
+{"level":"info","message":"User Connected: l8gpFpkbeinG25gNAAAN id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:09:38.463Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T11:10:52.389Z"}
+{"level":"info","message":"User Connected: z0vnhVtdLa250eWwAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:10:52.518Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T11:11:44.517Z"}
+{"level":"info","message":"User Connected: zBcPQR8k9PvwyuV3AAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:11:45.508Z"}
+{"level":"info","message":"User Connected: MMh_Eh45Ta_2Vi5JAAAF id 619e4028315b602a6439ff05","timestamp":"2023-05-31T11:11:57.158Z"}
+{"level":"info","message":"User Connected: VQfFFfFHR-cmLKHdAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:12:38.185Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T11:13:35.861Z"}
+{"level":"info","message":"User Connected: CHCh1myjAPP8RD8lAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:13:35.926Z"}
+{"level":"info","message":"User Connected: JFC5LlImOgNqjNVFAAAF id 619e4028315b602a6439ff05","timestamp":"2023-05-31T11:13:36.256Z"}
+{"level":"info","message":"User Connected: 859Xdo10a9U6lP1UAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:13:59.475Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T11:37:27.607Z"}
+{"level":"info","message":"User Connected: T9RFwurqPHlZpNEvAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:37:28.104Z"}
+{"level":"info","message":"User Connected: 1efn20kTvFpi4w-EAAAD id 619e4028315b602a6439ff05","timestamp":"2023-05-31T11:37:28.278Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T11:41:54.278Z"}
+{"level":"info","message":"User Connected: QrIg3nNbmcD9Bc1WAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-05-31T11:41:55.531Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T11:45:49.377Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T11:46:37.514Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T11:46:43.414Z"}
+{"level":"info","message":"User Connected: k5oeY-M9sbYkwTC6AAAJ id 619e4028315b602a6439ff05","timestamp":"2023-05-31T11:46:46.036Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-05-31T12:44:49.305Z"}
+{"level":"info","message":"User Connected: VG60DsSTk-dEZI3EAAAN id 619e4028315b602a6439ff05","timestamp":"2023-05-31T12:44:55.869Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T12:55:27.464Z"}
+{"level":"info","message":"User Connected: qwL9edVkLjMMRtKnAAAF id 619e4028315b602a6439ff05","timestamp":"2023-05-31T12:55:29.299Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T12:56:52.324Z"}
+{"level":"info","message":"User Connected: 0SmYVztuynb1zdiOAAAF id 619e4028315b602a6439ff05","timestamp":"2023-05-31T12:56:53.637Z"}
+{"level":"info","message":"Server run in port 5000","timestamp":"2023-05-31T13:10:39.563Z"}
+{"level":"info","message":"User Connected: sp84KA3q405Z66cgAAAF id 619e4028315b602a6439ff05","timestamp":"2023-05-31T13:10:42.644Z"}

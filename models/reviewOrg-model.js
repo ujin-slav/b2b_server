@@ -6,7 +6,8 @@ const ReviewOrg = new Schema({
     Author: {type: Schema.Types.ObjectId, ref: 'User'},
     Text: {type: String},
     Org: {type: Schema.Types.ObjectId, ref: 'User'},
-    Date: {type: Date}
+    Date: {type: Date},
+    Update:{type: Date}
 })
 
 ReviewOrg.plugin(mongoosePaginate);

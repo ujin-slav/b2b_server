@@ -5,6 +5,7 @@ const UnreadQuestModel = require('../models/unreadQuest-model')
 const UnreadInvitedModel = require('../models/unreadInvited-model')
 const UnreadIWinnerModel = require('../models/unreadIWinner-model')
 const UnreadReviewOrgModel = require('../models/unreadReviewOrg-model')
+const UnreadAnswerOrgModel = require('../models/unreadAnswerOrg-model')
 const UnreadInvitedPriceModel = require('../models/unreadInvitedPrice-model')
 const UnreadInvitedPriceFizModel = require('../models/unreadInvitedPriceFiz-model')
 const UnreadSpecAskModel = require('../models/unreadSpecAsk-model')
@@ -117,6 +118,18 @@ const IOconnectNotAuth = (socket,io)=>{
           const unreadReviewOrg = await UnreadReviewOrgModel.find({To:data.Org}).countDocuments()
           if(userSocketIdMap.has(data.Org)) {
             io.sockets.sockets.get(userSocketIdMap.get(data.Org)).emit("get_unread_review_org",unreadReviewOrg);
+          }
+        }
+        catch(e){
+          console.log(e)
+        }
+      })
+      socket.on("unread_answer_org", async (data) => {
+        console.log(data)
+        try{
+          const unreadAnswerOrg = await UnreadAnswerOrgModel.find({To:data.Author._id}).countDocuments()
+          if(userSocketIdMap.has(data.Author._id)) {
+            io.sockets.sockets.get(userSocketIdMap.get(data.Author._id)).emit("get_unread_answer_org",unreadAnswerOrg);
           }
         }
         catch(e){

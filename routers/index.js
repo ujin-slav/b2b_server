@@ -109,6 +109,7 @@ router.post('/delanswer', questionController.delAnswer);
 router.post('/addrevieworg', reviewOrgController.addQuest);
 router.post('/getrevieworg', reviewOrgController.getQuest);
 router.post('/delrevieworg', reviewOrgController.delReviewOrg);
+router.post('/delanswerorg', reviewOrgController.delAnswerOrg);
 
 router.get('/getpic/:file', loadController.getPic);
 router.get('/getlogo/:file', loadController.getLogo);

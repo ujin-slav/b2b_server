@@ -28,6 +28,14 @@ class ReviewOrgController {
             next(e);
         }
     }
+    async delAnswerOrg(req, res, next) {
+        try {
+            const result = await reviewOrgService.delAnswerOrg(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 module.exports = new ReviewOrgController();

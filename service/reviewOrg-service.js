@@ -1,5 +1,6 @@
 const ReviewOrgModel = require("../models/reviewOrg-model")
 const UnreadReviewOrgModel = require("../models/unreadReviewOrg-model")
+const UnreadAnswerOrgModel = require("../models/unreadAnswerOrg-model")
 const UserModel =require('../models/user-model');
 
 class ReviewOrgService {
@@ -9,18 +10,26 @@ class ReviewOrgService {
         Author,
         Text,
         Org} = req.body
-        console.log(req.body)
         const reviewOrg = await ReviewOrgModel.create({
             Host,
             Author,
             Text,
             Org,
-            Date: new Date()
+            Date: new Date(),
+            Update: new Date()
         });
-        await UnreadReviewOrgModel.create({
-            Message:reviewOrg._id,
-            To:Org
-        });        
+        if(Host){
+            await ReviewOrgModel.updateOne({_id:Host},{$set:{Update: new Date()}})
+            await UnreadAnswerOrgModel.create({
+                Message:reviewOrg._id,
+                To:Author
+            });  
+        }else{
+            await UnreadReviewOrgModel.create({
+                Message:reviewOrg._id,
+                To:Org
+            });  
+        }      
         return reviewOrg; 
     }
 
@@ -32,7 +41,7 @@ class ReviewOrgService {
         }else{
             query = {Org:id,Host:null}
         }
-        let reviewOrg = await ReviewOrgModel.find(query).skip(skip).limit(limit).sort({"_id":-1});
+        let reviewOrg = await ReviewOrgModel.find(query).skip(skip).limit(limit).sort({"Update":-1});
         let count = await ReviewOrgModel.find(query).countDocuments(); 
         const docs = await Promise.all(reviewOrg.map(async (item)=>{   
             const author = await UserModel.findOne({ _id: item.Author },{id:true,name:true,nameOrg:true,email:true});
@@ -51,9 +60,10 @@ class ReviewOrgService {
             docs,
             totalPages:Math.ceil(count/limit)
         }
-        console.log({user,id})
         if(user===id){
-            const unread = await UnreadReviewOrgModel.deleteMany({To:id})
+            await UnreadReviewOrgModel.deleteMany({To:id})
+        }else if(author===user){
+            await UnreadAnswerOrgModel.deleteMany({To:author})
         }
         return result; 
     }
@@ -61,7 +71,15 @@ class ReviewOrgService {
     async delReviewOrg(req) {
         const {id} = req.body
         const result = await ReviewOrgModel.deleteOne({_id:id});
+        await ReviewOrgModel.deleteMany({Host:id});
         await UnreadReviewOrgModel.deleteOne({Message:id});
+        return result;
+    }
+
+    async delAnswerOrg(req) {
+        const {id} = req.body
+        const result = await ReviewOrgModel.deleteOne({_id:id});
+        await UnreadAnswerOrgModel.deleteOne({Message:id});
         return result;
     }
 
