@@ -11,6 +11,7 @@ const SpecAsk = new Schema({
     FIZ:{type:Boolean},
     Comment:{type:String},
     Amount:{type:String},
+    Date:{type: Date},
     Receiver:{type: Schema.Types.ObjectId, ref: 'User'},
     SpecOffer: {type: Schema.Types.ObjectId, ref: 'SpecOffer'}
 })

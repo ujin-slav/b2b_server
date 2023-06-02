@@ -22,6 +22,9 @@ const UserSchema = new Schema({
     notiInvited:{type:Boolean},
     notiMessage:{type:Boolean},
     notiAsk:{type:Boolean},
+    banned:{type:Boolean},
+    bannedTo:{type: Date},
+    bannedReason:{type: String},
     getAskFromFiz:{type:Boolean},
 })
 

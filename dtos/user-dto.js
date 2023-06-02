@@ -22,6 +22,9 @@ module.exports = class UserDto {
         this.notiInvited = model.notiInvited;
         this.notiMessage = model.notiMessage;
         this.notiAsk = model.notiAsk;
+        this.banned = model.banned;
+        this.bannedTo = model.bannedTo;
+        this.bannedReason = model.bannedReason;
         this.getAskFromFiz = model.getAskFromFiz;
     }
 }
