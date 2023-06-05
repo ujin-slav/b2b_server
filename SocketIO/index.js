@@ -18,6 +18,7 @@ const mailService = require('../service/mail-service')
 const path = require('path');
 const fs = require("fs");
 const logger = require('../utils/Logger')
+const UserDto = require('../dtos/user-dto')
 
 const IOconnectNotAuth = (socket,io)=>{
     socket.on("unread_invitedPriceFiz", async (data) => {
@@ -69,7 +70,13 @@ const IOconnectNotAuth = (socket,io)=>{
           console.log(error) 
         }
       }
-
+      socket.on("refreshUser", async (id) => {
+        if(userSocketIdMap.has(id)) {
+          const user = await UserModel.findOne({_id:id})
+          const userDto = new UserDto(user);
+          io.sockets.sockets.get(userSocketIdMap.get(id)).emit("get_refreshUser",userDto);
+        }
+      })
       socket.on("unread_quest", async (data) => {
         const unreadQuest = await UnreadQuestModel.find({To:data.id}).countDocuments()
         if(userSocketIdMap.has(data.id)) {

@@ -26,3 +26,17 @@
 {"errors":[],"level":"error","status":401,"timestamp":"2023-06-02T11:25:19.930Z"}
 {"errors":[],"level":"error","status":401,"timestamp":"2023-06-02T12:00:41.135Z"}
 {"errors":[],"level":"error","status":401,"timestamp":"2023-06-02T12:03:48.030Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T09:52:34.172Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:01:29.936Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:12:57.423Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:26:01.908Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:26:11.649Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:28:22.699Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:28:29.522Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:30:02.903Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:30:09.940Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:31:18.254Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:31:21.838Z"}
+{"kind":"Boolean","message":"Cast to Boolean failed for value \"undefined\" (type string) at path \"getAskFromFiz\"","name":"CastError","path":"getAskFromFiz","reason":{"kind":"boolean","message":"Cast to boolean failed for value \"undefined\" (type string) at path \"undefined\"","name":"CastError","stringValue":"\"undefined\"","value":"undefined","valueType":"string"},"stringValue":"\"undefined\"","value":"undefined","valueType":"string"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T11:55:48.498Z"}
+{"errors":[],"level":"error","status":401,"timestamp":"2023-06-05T12:20:53.125Z"}

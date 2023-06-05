@@ -262,7 +262,6 @@ class UserService {
             notiAsk,
             getAskFromFiz,
         } = req.body
-        console.log(req.body)
         let logo
         const existProfile = await UserModel.findOne({_id:id})
         if(fs.existsSync(__dirname+'\\..\\'+ existProfile.logo?.path)){

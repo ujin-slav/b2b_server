@@ -46,7 +46,8 @@ class AdminService {
                 nameOrg:item.nameOrg,
                 inn:item.inn,
                 onLine,
-                LastVisit:lv?.Date
+                LastVisit:lv?.Date,
+                banned: item.banned
             }
             return newItem
         })) 
@@ -316,7 +317,15 @@ class AdminService {
             limit,
             page};
         const result = await SentMailModel.paginate({SpecOffer},options)
-        console.log(SpecOffer)
+        return result
+    }
+    async userBan(req) {
+        const {
+            id,
+            ban
+        } = req.body
+        const result = await UserModel.updateOne({_id:id},{$set:{banned:ban}})
+        const onLine = SocketIO.userSocketIdMap.has(id)
         return result
     }
 }

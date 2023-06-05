@@ -41,6 +41,7 @@ router.post('/getuserbyid',userController.getUserById);
 router.post('/getusers',userController.getUsers);
 router.post('/getuserlist',userController.getUserList);
 router.post('/changeuser', uploadLogo.single("file"),userController.changeuser);
+router.post('/changeuser', uploadLogo.single("file"),userController.changeuser);
 
 router.post('/getmessage', messageController.getMessage);
 
@@ -129,6 +130,7 @@ router.post('/admin/sendspambyspecoffer', adminController.sendSpamBySpecOffer);
 router.post('/admin/getsentspambyask', adminController.getSentSpamByAsk);
 router.post('/admin/getsentspambyspecoffer', adminController.getSentSpamBySpecOffer);
 router.post('/admin/getspecoffers', adminController.getSpecOffers);
+router.post('/admin/userban', adminController.userBan);
 
 router.get('/parsing', loadController.parsing);
 

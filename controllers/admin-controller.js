@@ -82,6 +82,14 @@ class AdminController {
             next(e);
         }
     }
+    async userBan(req, res, next) {
+        try {
+            const result = await AdminService.userBan(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
 }
 
 
