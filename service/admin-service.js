@@ -47,7 +47,8 @@ class AdminService {
                 inn:item.inn,
                 onLine,
                 LastVisit:lv?.Date,
-                banned: item.banned
+                banned: item.banned,
+                bannedReason:item.bannedReason
             }
             return newItem
         })) 
@@ -322,9 +323,15 @@ class AdminService {
     async userBan(req) {
         const {
             id,
-            ban
+            ban,
+            bannedReason
         } = req.body
-        const result = await UserModel.updateOne({_id:id},{$set:{banned:ban}})
+        const result = await UserModel.updateOne(
+            {_id:id},
+            {$set:{
+                banned:ban,
+                bannedReason
+            }})
         const onLine = SocketIO.userSocketIdMap.has(id)
         return result
     }

@@ -41,7 +41,7 @@ router.post('/getuserbyid',userController.getUserById);
 router.post('/getusers',userController.getUsers);
 router.post('/getuserlist',userController.getUserList);
 router.post('/changeuser', uploadLogo.single("file"),userController.changeuser);
-router.post('/changeuser', uploadLogo.single("file"),userController.changeuser);
+router.post('/refreshuser', userController.refreshUser);
 
 router.post('/getmessage', messageController.getMessage);
 

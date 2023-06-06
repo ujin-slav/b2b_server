@@ -74,7 +74,14 @@ class UserController {
             next(e);
         }
     }
-
+    async refreshUser(req, res, next) {
+        try {
+            const result = await userService.refreshUser(req);
+            return res.json(result)
+        } catch (e) {
+            next(e);
+        }
+    }
     async reset(req, res, next) {
         try {
             const {token, password} = req.body;

@@ -73,8 +73,7 @@ const IOconnectNotAuth = (socket,io)=>{
       socket.on("refreshUser", async (id) => {
         if(userSocketIdMap.has(id)) {
           const user = await UserModel.findOne({_id:id})
-          const userDto = new UserDto(user);
-          io.sockets.sockets.get(userSocketIdMap.get(id)).emit("get_refreshUser",userDto);
+          io.sockets.sockets.get(userSocketIdMap.get(id)).emit("get_refreshUser",true);
         }
       })
       socket.on("unread_quest", async (data) => {

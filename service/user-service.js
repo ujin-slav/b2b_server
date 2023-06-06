@@ -1,4 +1,5 @@
 const UserModel =require('../models/user-model')
+const tokenModel = require('../models/token-model')
 const ChatModel = require('../models/chat-model')
 const ContactsModel = require('../models/contacts-model')
 const LastVisitModel = require('../models/lastVisit-model') 
@@ -292,6 +293,17 @@ class UserService {
         const user = await UserModel.findOne({_id:id})
         const userDto = new UserDto(user);
         return {user: userDto}
+    }
+
+    async refreshUser(req){
+        const {id} = req.body
+        const {refreshToken} = req.cookies
+        const user = await tokenModel.findOne({user:id})
+        if(user.refreshToken===refreshToken){
+            return true
+        }else{
+            throw ApiError.BadRequest('Токены не совпадают');
+        }
     }
 
 }
