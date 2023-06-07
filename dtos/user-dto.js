@@ -25,6 +25,7 @@ module.exports = class UserDto {
         this.banned = model.banned;
         this.bannedTo = model.bannedTo;
         this.bannedReason = model.bannedReason;
+        this.registrationDate = model.registrationDate;
         this.getAskFromFiz = model.getAskFromFiz;
     }
 }

@@ -25,6 +25,7 @@ const UserSchema = new Schema({
     banned:{type:Boolean},
     bannedTo:{type: Date},
     bannedReason:{type: String},
+    registrationDate:{type: Date},
     getAskFromFiz:{type:Boolean},
 })
 

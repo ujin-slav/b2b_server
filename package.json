@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js --max-old-space-size=4096"
+    "dev": "nodemon index.js --max-old-space-size=4096",
+    "prod": "node index.js"
   },
   "keywords": [],
   "author": "",

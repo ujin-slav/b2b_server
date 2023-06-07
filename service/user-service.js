@@ -47,7 +47,11 @@ class UserService {
                 category:JSON.parse(category),
                 notiInvited:true,
                 notiMessage:true,
-                notiQuest:true}) 
+                notiQuest:true,
+                getAskFromFiz:true,
+                notiAsk:true,
+                banned:false,
+                registrationDate:new Date()}) 
         await mailService.sendActivationMail(email, `${process.env.CLIENT_URL}/activate/${activationLink}`);
         const userDto = new UserDto(user)
 
@@ -99,6 +103,14 @@ class UserService {
         const user = await UserModel.findById(userData.id);
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
+
+        if(user.banned){
+            const nowDate = new Date()
+            if(nowDate>user.bannedTo){
+                await UserModel.updateOne({_id:user._id},{$set:{banned:false}})
+                userDto.banned = false
+            }
+        }
 
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
         return {...tokens, user: userDto}

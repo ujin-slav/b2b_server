@@ -324,13 +324,15 @@ class AdminService {
         const {
             id,
             ban,
-            bannedReason
+            bannedReason,
+            bannedTo
         } = req.body
         const result = await UserModel.updateOne(
             {_id:id},
             {$set:{
                 banned:ban,
-                bannedReason
+                bannedReason,
+                bannedTo
             }})
         const onLine = SocketIO.userSocketIdMap.has(id)
         return result
