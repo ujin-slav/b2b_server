@@ -1,101 +1,49 @@
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:00:49.613Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T10:02:56.380Z"}
-{"level":"info","message":"User Connected: -fRHrYsjh-8g-WlJAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:02:56.963Z"}
-{"level":"info","message":"User Connected: uIJEM8Sj6bbkOAsuAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:03:01.140Z"}
-{"level":"info","message":"User Connected: 9Wr-ScHhWP0WZSLLAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:03:28.724Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:13:29.703Z"}
-{"level":"info","message":"User Connected: KvyPww2r9mIy3wAuAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:13:29.919Z"}
-{"level":"info","message":"User Connected: ExgSq8nyORWPIF9iAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:16:41.436Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:19:02.970Z"}
-{"level":"info","message":"User Connected: MTz82gtkKszhE3DxAAAC id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:19:03.180Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:19:14.427Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:19:42.670Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:21:10.100Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:21:32.732Z"}
-{"level":"info","message":"User Connected: 5lJEKhck8O5KE9W1AAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:21:34.298Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:21:43.900Z"}
-{"level":"info","message":"User Connected: NRHbBlfNL9dVPXZ-AAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:21:44.932Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:21:47.756Z"}
-{"level":"info","message":"User Connected: ZiMsvsVQEkIeSq_XAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:22:01.590Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:22:05.070Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:22:33.118Z"}
-{"level":"info","message":"User Connected: UFCSCxtJZWNx_GPdAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:22:42.271Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:22:44.424Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:28:59.752Z"}
-{"level":"info","message":"User Connected: e8sPgU-L8ScHHi9aAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:29:00.942Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:29:05.480Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:30:40.335Z"}
-{"level":"info","message":"User Connected: j_y-SmnUx3mNuwM8AAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:30:42.051Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:30:43.332Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:31:02.448Z"}
-{"level":"info","message":"User Connected: QdA9TzaJFE5bC78dAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:31:02.939Z"}
-{"level":"error","timestamp":"2023-06-06T10:31:05.708Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:31:26.803Z"}
-{"level":"info","message":"User Connected: Bch8Uh6Ve_DNryOPAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:31:28.188Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:31:30.278Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:32:48.270Z"}
-{"level":"info","message":"User Connected: Fv5S7S-7NZ5cZvcJAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:32:49.975Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T10:36:13.108Z"}
-{"level":"info","message":"User Connected: DAktxn2AwYiCLL9UAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T10:36:14.940Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T10:48:05.737Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T11:06:48.059Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T12:11:40.983Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T12:12:12.914Z"}
-{"level":"info","message":"User Connected: xT6LDIpBuf6yMmzPAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T12:13:53.754Z"}
-{"level":"info","message":"User Connected: mTKxJ-jhMIXnr4t5AAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T12:14:13.232Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-06T12:14:51.384Z"}
-{"level":"info","message":"User Connected: nWflkQoI5H_hpOM0AAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T12:14:51.530Z"}
-{"level":"info","message":"User Connected: KcKIj9NOHBcOVSoiAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T12:16:59.793Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T12:17:35.090Z"}
-{"level":"info","message":"User Connected: x01d9QRHBh22pJHoAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T12:54:31.523Z"}
-{"level":"info","message":"User Connected: o2Exy3Oqc7vH4UnzAAAJ id 619e412feb0ad829d8e301b8","timestamp":"2023-06-06T12:55:12.432Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T09:05:48.854Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-07T09:07:24.350Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T09:31:45.269Z"}
-{"level":"info","message":"User Connected: 4bvLzwOohKz1mM0mAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T09:32:13.043Z"}
-{"level":"info","message":"User Connected: 2KQL--JUYsNhOjbCAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T09:32:29.223Z"}
-{"level":"info","message":"User Connected: MsRr7w0XysZLVyAoAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T09:32:44.910Z"}
-{"level":"info","message":"User Connected: kLHPAc7RrtA_HR2gAAAJ id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T09:39:18.926Z"}
-{"level":"info","message":"User Connected: 3xrJ4zS1yg5jUhyyAAAL id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T09:47:11.314Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-07T10:26:18.030Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-07T10:26:20.965Z"}
-{"level":"info","message":"User Connected: rdbT8GTr_04SlVqQAAAR id 619e4028315b602a6439ff05","timestamp":"2023-06-07T10:34:36.401Z"}
-{"level":"info","message":"User Connected: d7R3lrL2Bd4hfGeQAAAT id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:07:23.580Z"}
-{"level":"info","message":"User Connected: RiwetVh4nejXY5psAAAV id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:07:44.738Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T11:09:43.193Z"}
-{"level":"info","message":"User Connected: laUBvN-anPp3-5JyAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:09:49.688Z"}
-{"level":"info","message":"User Connected: PqqOrmNYsKin4XtMAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:09:53.065Z"}
-{"level":"info","message":"User Connected: UKewRDghH9QO21tGAAAH id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:10:41.909Z"}
-{"level":"info","message":"User Connected: 9em6wordPbncnENGAAAJ id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:10:46.854Z"}
-{"level":"info","message":"User Connected: g83OhNHKter69SqjAAAL id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:11:21.461Z"}
-{"level":"info","message":"User Connected: S8HKipqM7PFSGRkCAAAN id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:11:25.810Z"}
-{"level":"info","message":"User Connected: 2jndjm1l5Nl9cYZ_AAAP id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:11:46.498Z"}
-{"level":"info","message":"User Connected: w1byJgRGYj_j0JGoAAAR id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:11:48.647Z"}
-{"level":"info","message":"User Connected: Txw3vUNDe2pEg5SDAAAT id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:11:55.187Z"}
-{"level":"info","message":"User Connected: djTOFPEe4WSwyWa7AAAV id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:13:26.024Z"}
-{"level":"info","message":"User Connected: lCOb5_0eE9gnhdgVAAAX id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:13:44.106Z"}
-{"level":"info","message":"User Connected: fRPOEEGDMpK75x5uAAAZ id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:13:49.539Z"}
-{"level":"info","message":"User Connected: aQkCjlmoyHka-4FpAAAb id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:13:53.604Z"}
-{"level":"info","message":"User Connected: yDJiJ156RvU62gN0AAAd id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:14:31.596Z"}
-{"level":"info","message":"User Connected: qZqGM9qJ7n3XGILbAAAf id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:14:37.349Z"}
-{"level":"info","message":"User Connected: zV1iD8ByC1AZ59mpAAAh id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:15:01.746Z"}
-{"level":"info","message":"User Connected: 6mLzA3d6JzCfo5MWAAAj id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:17:14.974Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T11:35:31.756Z"}
-{"level":"info","message":"User Connected: 5sX0r9vjXWSyghLnAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:35:32.714Z"}
-{"level":"error","timestamp":"2023-06-07T11:36:04.448Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T11:37:25.720Z"}
-{"level":"info","message":"User Connected: MLe2ZPwNI17qxbvJAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:37:29.752Z"}
-{"level":"info","message":"User Connected: 3vI-9fjIN8-X8GFBAAAF id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T11:37:54.001Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T12:26:08.892Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T12:26:51.144Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T12:30:33.208Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T12:57:31.794Z"}
-{"level":"info","message":"User Connected: ClcYLkDxt8hGXw-vAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T12:57:35.245Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T13:21:52.083Z"}
-{"level":"info","message":"User Connected: Gns4pfel0MPtGAcCAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T13:21:53.432Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T13:30:39.994Z"}
-{"level":"info","message":"User Connected: hPFf1IGX7VnINO2FAAAD id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T13:30:53.810Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T13:32:16.987Z"}
-{"level":"info","message":"User Connected: ntWSnJuPGG4wxlgkAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T13:32:17.053Z"}
-{"level":"info","message":"Server run in port 5000","timestamp":"2023-06-07T13:33:06.208Z"}
-{"level":"info","message":"User Connected: PHAVCtTk_D3iHbFdAAAB id 619e412feb0ad829d8e301b8","timestamp":"2023-06-07T13:33:06.338Z"}
+[info] [2023-06-08T11:06:28.467Z] Server run in port 5000 121
+[info] [2023-06-08T11:06:29.857Z] User Connected: kkntfC_bfdTaJpAyAAAD id 619e412feb0ad829d8e301b8 121
+[error] [2023-06-08T11:06:30.602Z] Cannot read properties of undefined (reading 'emit') 121
+[info] [2023-06-08T11:30:24.476Z] Server run in port 5000
+[info] [2023-06-08T11:30:55.465Z] Server run in port 5000
+[error] [2023-06-08T11:31:10.472Z] Пользователь не авторизован
+[info] [2023-06-08T11:31:29.282Z] User Connected: Wkrf1-K74cfVvyGjAAAF id 619e412feb0ad829d8e301b8
+[error] [2023-06-08T11:31:30.076Z] Cannot read properties of undefined (reading 'emit')
+[error] [2023-06-08T11:31:30.076Z] [object Promise]
+[info] [2023-06-08T11:32:52.679Z] Server run in port 5000
+[info] [2023-06-08T11:32:56.876Z] User Connected: gHl0l1ovvFoH2CnDAAAD id 619e412feb0ad829d8e301b8
+[error] [2023-06-08T11:32:57.703Z] Cannot read properties of undefined (reading 'emit')
+[error] [2023-06-08T11:32:58.110Z] listen EADDRINUSE: address already in use :::5000
+[info] [2023-06-08T11:35:18.801Z] Server run in port 5000 undefined
+[info] [2023-06-08T11:35:18.888Z] User Connected: Yl2ysid5Kbiyk6PqAAAB id 619e412feb0ad829d8e301b8 undefined
+[error] [2023-06-08T11:35:19.645Z] Cannot read properties of undefined (reading 'emit') TypeError: Cannot read properties of undefined (reading 'emit')
+    at getRestUnread (C:\Users\John\Desktop\aut\server\SocketIO\index.js:186:62)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-08T11:36:07.299Z] Server run in port 5000 undefined
+[info] [2023-06-08T11:36:08.871Z] User Connected: 26WOrakcWvZgyRIUAAAD id 619e412feb0ad829d8e301b8 undefined
+[error] [2023-06-08T11:36:09.950Z] Cannot read properties of undefined (reading 'emit') TypeError: Cannot read properties of undefined (reading 'emit')
+    at getRestUnread (C:\Users\John\Desktop\aut\server\SocketIO\index.js:186:62)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-08T11:36:34.436Z] Server run in port 5000 undefined
+[info] [2023-06-08T11:36:34.884Z] User Connected: J23ZmfmCVKRfeWcqAAAB id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-08T11:37:06.656Z] User Connected: KH2EOK8QyzDTslRgAAAF id 619e4028315b602a6439ff05 undefined
+[info] [2023-06-08T12:11:01.136Z] Пользователь не авторизован Error: Пользователь не авторизован
+    at ApiError.UnauthorizedError (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:12:16)
+    at UserService.refresh (C:\Users\John\Desktop\aut\server\service\user-service.js:96:28)
+    at refresh (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:51:48)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:317:13)
+    at C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:275:10)
+    at cors (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:188:7)
+    at C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:224:17
+    at originCallback (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:214:15)
+    at C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:199:9)

@@ -1,19 +1,12 @@
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T10:02:56.380Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:19:14.427Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:19:42.670Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:21:10.100Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:21:47.756Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:22:05.070Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:22:33.118Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:22:44.424Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:29:05.480Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:30:43.332Z"}
-{"level":"error","timestamp":"2023-06-06T10:31:05.708Z"}
-{"errors":[],"level":"error","status":400,"timestamp":"2023-06-06T10:31:30.278Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T10:48:05.737Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T11:06:48.059Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-06T12:17:35.090Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-07T09:07:24.350Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-07T10:26:18.030Z"}
-{"errors":[],"level":"error","status":401,"timestamp":"2023-06-07T10:26:20.965Z"}
-{"level":"error","timestamp":"2023-06-07T11:36:04.448Z"}
+[error] [2023-06-08T11:06:30.602Z] Cannot read properties of undefined (reading 'emit') 121
+[error] [2023-06-08T11:31:10.472Z] Пользователь не авторизован
+[error] [2023-06-08T11:31:30.076Z] Cannot read properties of undefined (reading 'emit')
+[error] [2023-06-08T11:31:30.076Z] [object Promise]
+[error] [2023-06-08T11:32:57.703Z] Cannot read properties of undefined (reading 'emit')
+[error] [2023-06-08T11:32:58.110Z] listen EADDRINUSE: address already in use :::5000
+[error] [2023-06-08T11:35:19.645Z] Cannot read properties of undefined (reading 'emit') TypeError: Cannot read properties of undefined (reading 'emit')
+    at getRestUnread (C:\Users\John\Desktop\aut\server\SocketIO\index.js:186:62)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-08T11:36:09.950Z] Cannot read properties of undefined (reading 'emit') TypeError: Cannot read properties of undefined (reading 'emit')
+    at getRestUnread (C:\Users\John\Desktop\aut\server\SocketIO\index.js:186:62)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

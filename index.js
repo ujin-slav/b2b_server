@@ -56,6 +56,22 @@ app.use(cors({
 app.use('/api',router)
 app.use(errorMiddleware)
 
+process.on('uncaughtException', (error, origin) => {
+    console.log('----- Uncaught exception -----')
+    console.log(error)
+    console.log('----- Exception origin -----')
+    console.log(origin)
+    logger.error(error)
+})
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.log('----- Unhandled Rejection at -----')
+    console.log(promise)
+    console.log('----- Reason -----')
+    console.log(reason)
+    logger.error(reason)
+})
+
 const start = async () => {
     try {
         mongoose.Promise = global.Promise;

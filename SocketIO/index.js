@@ -183,7 +183,7 @@ const IOconnectNotAuth = (socket,io)=>{
           UnreadStatusAsk,
         }
 
-        io.sockets.sockets.get(userSocketIdMap.get("userId")).emit("unread_rest",result);
+        io.sockets.sockets.get(userSocketIdMap.get(userId)).emit("unread_rest",result);
       }
       getRestUnread()
       socket.on("get_unread", async () => {
