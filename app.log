@@ -1,49 +1,7 @@
-[info] [2023-06-08T11:06:28.467Z] Server run in port 5000 121
-[info] [2023-06-08T11:06:29.857Z] User Connected: kkntfC_bfdTaJpAyAAAD id 619e412feb0ad829d8e301b8 121
-[error] [2023-06-08T11:06:30.602Z] Cannot read properties of undefined (reading 'emit') 121
-[info] [2023-06-08T11:30:24.476Z] Server run in port 5000
-[info] [2023-06-08T11:30:55.465Z] Server run in port 5000
-[error] [2023-06-08T11:31:10.472Z] Пользователь не авторизован
-[info] [2023-06-08T11:31:29.282Z] User Connected: Wkrf1-K74cfVvyGjAAAF id 619e412feb0ad829d8e301b8
-[error] [2023-06-08T11:31:30.076Z] Cannot read properties of undefined (reading 'emit')
-[error] [2023-06-08T11:31:30.076Z] [object Promise]
-[info] [2023-06-08T11:32:52.679Z] Server run in port 5000
-[info] [2023-06-08T11:32:56.876Z] User Connected: gHl0l1ovvFoH2CnDAAAD id 619e412feb0ad829d8e301b8
-[error] [2023-06-08T11:32:57.703Z] Cannot read properties of undefined (reading 'emit')
-[error] [2023-06-08T11:32:58.110Z] listen EADDRINUSE: address already in use :::5000
-[info] [2023-06-08T11:35:18.801Z] Server run in port 5000 undefined
-[info] [2023-06-08T11:35:18.888Z] User Connected: Yl2ysid5Kbiyk6PqAAAB id 619e412feb0ad829d8e301b8 undefined
-[error] [2023-06-08T11:35:19.645Z] Cannot read properties of undefined (reading 'emit') TypeError: Cannot read properties of undefined (reading 'emit')
-    at getRestUnread (C:\Users\John\Desktop\aut\server\SocketIO\index.js:186:62)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-[info] [2023-06-08T11:36:07.299Z] Server run in port 5000 undefined
-[info] [2023-06-08T11:36:08.871Z] User Connected: 26WOrakcWvZgyRIUAAAD id 619e412feb0ad829d8e301b8 undefined
-[error] [2023-06-08T11:36:09.950Z] Cannot read properties of undefined (reading 'emit') TypeError: Cannot read properties of undefined (reading 'emit')
-    at getRestUnread (C:\Users\John\Desktop\aut\server\SocketIO\index.js:186:62)
-    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-[info] [2023-06-08T11:36:34.436Z] Server run in port 5000 undefined
-[info] [2023-06-08T11:36:34.884Z] User Connected: J23ZmfmCVKRfeWcqAAAB id 619e412feb0ad829d8e301b8 undefined
-[info] [2023-06-08T11:37:06.656Z] User Connected: KH2EOK8QyzDTslRgAAAF id 619e4028315b602a6439ff05 undefined
-[info] [2023-06-08T12:11:01.136Z] Пользователь не авторизован Error: Пользователь не авторизован
-    at ApiError.UnauthorizedError (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:12:16)
-    at UserService.refresh (C:\Users\John\Desktop\aut\server\service\user-service.js:96:28)
-    at refresh (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:51:48)
-    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
-    at Route.dispatch (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:112:3)
-    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:281:22
-    at Function.process_params (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:335:12)
-    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:275:10)
-    at Function.handle (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:174:3)
-    at router (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:317:13)
-    at C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:284:7
-    at Function.process_params (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:335:12)
-    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:275:10)
-    at cors (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:188:7)
-    at C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:224:17
-    at originCallback (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:214:15)
-    at C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:219:13
-    at optionsCallback (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:199:9)
+[info] [2023-06-16T08:51:52.493Z] Server run in port 5000 undefined
+[info] [2023-06-16T08:52:51.654Z] Server run in port 5000 undefined
+[info] [2023-06-16T08:53:30.001Z] Server run in port 5000 undefined
+[info] [2023-06-16T08:54:44.454Z] Server run in port 5000 undefined
+[info] [2023-06-16T09:02:57.841Z] Server run in port 5000 undefined
+[info] [2023-06-16T09:06:03.712Z] Server run in port 5000 undefined
+[info] [2023-06-16T09:13:39.843Z] Server run in port 5000 undefined
