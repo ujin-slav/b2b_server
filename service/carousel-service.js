@@ -37,7 +37,7 @@ class CarouselService {
             return {
                 docs:resultAuth,
                 page: result.totalPages,
-                totalPages:result.totalPages
+                totalDocs:result.totalDocs
             }
         }else{
             return result

@@ -6,4 +6,5 @@
 *uploadsChat/*
 *sitemapPrice/*
 *sitemapSpecOffer/*
-*.log
+app.log
+error.log

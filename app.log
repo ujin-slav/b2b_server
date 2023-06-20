@@ -7,3 +7,33 @@
 [info] [2023-06-16T09:13:39.843Z] Server run in port 5000 undefined
 [info] [2023-06-16T09:16:15.257Z] Server run in port 5000 undefined
 [info] [2023-06-16T09:16:45.736Z] User Connected: 2DRpuMxAtEspzUO1AAAD id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-19T08:44:20.094Z] Server run in port 5000 undefined
+[info] [2023-06-19T12:02:15.834Z] Пользователь с таким email ujin_slav@mail.ru уже существует Error: Пользователь с таким email ujin_slav@mail.ru уже существует
+    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at UserService.registration (C:\Users\John\Desktop\aut\server\service\user-service.js:31:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async registration (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:8:30)
+[info] [2023-06-19T12:09:41.619Z] Server run in port 5000 undefined
+[info] [2023-06-19T12:51:41.562Z] Server run in port 5000 undefined
+[info] [2023-06-19T12:58:58.652Z] User Connected: 9pZFllZttJMTPIUgAAAF id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-19T13:22:54.025Z] Акккаунт не активирован Error: Акккаунт не активирован
+    at ApiError.BadRequest (c:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at UserService.login (c:\Users\John\Desktop\aut\server\service\user-service.js:84:28)
+    at async login (c:\Users\John\Desktop\aut\server\controllers\user-controller.js:19:30)
+[info] [2023-06-20T09:18:02.214Z] Server run in port 5000 undefined
+[info] [2023-06-20T09:18:58.498Z] Акккаунт не активирован Error: Акккаунт не активирован
+    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at UserService.login (C:\Users\John\Desktop\aut\server\service\user-service.js:85:28)
+    at async login (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:19:30)
+[info] [2023-06-20T09:21:05.302Z] User Connected: CuEmxGFTWynhKcxxAAAF id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-20T09:26:37.239Z] Server run in port 5000 undefined
+[info] [2023-06-20T09:26:41.114Z] User Connected: 1y9ncEYBlCwdtpc5AAAD id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-20T09:27:32.025Z] Server run in port 5000 undefined
+[info] [2023-06-20T09:27:32.079Z] User Connected: OPCSrGG8HvjL5pyaAAAC id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-20T09:28:19.185Z] User Connected: vzrrSCA1xARRqK1xAAAL id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-20T09:33:06.470Z] User Connected: jjnlzRY0fWPJWJlEAAAR id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-20T09:36:20.292Z] Server run in port 5000 undefined
+[info] [2023-06-20T09:37:03.694Z] User Connected: qp-skVMu_dIYd4pSAAAF id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-20T12:00:25.361Z] User Connected: PPbUH80nUYN-BJEyAAAP id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-20T12:00:52.795Z] User Connected: PPYO4cRgreWHv-6TAAAR id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-20T12:23:32.009Z] User Connected: TluFDVXdzVkahfmzAAAT id 64904fcd9684322e94cf7243 undefined
