@@ -37,3 +37,13 @@
 [info] [2023-06-20T12:00:25.361Z] User Connected: PPbUH80nUYN-BJEyAAAP id 619e412feb0ad829d8e301b8 undefined
 [info] [2023-06-20T12:00:52.795Z] User Connected: PPYO4cRgreWHv-6TAAAR id 619e412feb0ad829d8e301b8 undefined
 [info] [2023-06-20T12:23:32.009Z] User Connected: TluFDVXdzVkahfmzAAAT id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-21T10:08:13.654Z] Server run in port 5000 undefined
+[info] [2023-06-21T10:10:09.438Z] User Connected: xd6N9accuPWpuoJkAAAD id 64904fcd9684322e94cf7243 undefined
+[info] [2023-06-21T10:22:46.984Z] Пользователь с таким email ujin-slav@ya.ru уже существует Error: Пользователь с таким email ujin-slav@ya.ru уже существует
+    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at UserService.registration (C:\Users\John\Desktop\aut\server\service\user-service.js:31:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async registration (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:8:30)
+[info] [2023-06-21T10:25:14.930Z] User Connected: Ox7ZnMTMak3TkWxuAAAH id 6492cfaaa91b9d1b50fa1093 undefined
+[info] [2023-06-21T10:26:47.346Z] Server run in port 5000 undefined
+[info] [2023-06-21T10:26:51.587Z] User Connected: tu_Y-KKXAgebJO60AAAD id 6492cfaaa91b9d1b50fa1093 undefined
