@@ -1,5 +1,6 @@
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
+const tokenModel = require('../models/token-model')
 const LentStatusModel =require('../models/lentStatus-model')
 const UnreadIWinnerModel = require("../models/unreadIWinner-model")
 const UnreadInvitedModel = require("../models/unreadInvited-model")
@@ -339,20 +340,26 @@ class AskService {
     async modifyAsk(req) {
         const {
             Id,
-            Author,
             Name,
             Telefon,
             EndDateOffers,
             Text,
             Category,
             Region,
-            Date,
             DeletedFiles,
             Private,
             Hiden,
             Comment,
             Party,
         } = req.body
+        //
+        const authorAsk =  await AskModel.findOne({_id:Id}).populate({path:'Author', select:'id'})
+        const {refreshToken} = req.cookies
+        const user = await tokenModel.findOne({user:authorAsk})
+        if(user?.refreshToken!==refreshToken){
+            throw ApiError.BadRequest('Токены не совпадают');
+        }
+        //
         JSON.parse(DeletedFiles).map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
             fs.unlink(__dirname+'\\..\\'+item.path, function(err){
@@ -363,30 +370,19 @@ class AskService {
                 }
             })};
         })
-        const user = await UserModel.findOne({_id:Author})
-        const authorAsk =  await AskModel.findOne({_id:Id}).populate({path:'Author', select:'id'})
-        if(req.user.id===authorAsk.Author.id){
-            const ask = await AskModel.updateOne({_id:Id},{$set:{
-                Author,
-                Name,
-                Telefon,
-                EndDateOffers,
-                Text,
-                Category:JSON.parse(Category),
-                Region:JSON.parse(Region),
-                Date,
-                Files:req.files,
-                Private,
-                Hiden,
-                Party:JSON.parse(Party),
-                Comment,
-                NameOrg: user.nameOrg,
-                Inn: user.inn
-            }})
-            return ask
-        }else{
-            throw ApiError.BadRequest('Нет прав на изменение') 
-        }
+        const ask = await AskModel.updateOne({_id:Id},{$set:{
+            Name,
+            Telefon,
+            EndDateOffers,
+            Text,
+            Category:JSON.parse(Category),
+            Region:JSON.parse(Region),
+            Files:req.files,
+            Hiden,
+            Party:JSON.parse(Party),
+            Comment,
+        }})
+        return ask
     }
     fileNameToObject(files,reqFiles,author){
         let filesTemp = []  

@@ -10,3 +10,43 @@
 [error] [2023-06-08T11:36:09.950Z] Cannot read properties of undefined (reading 'emit') TypeError: Cannot read properties of undefined (reading 'emit')
     at getRestUnread (C:\Users\John\Desktop\aut\server\SocketIO\index.js:186:62)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:13:34.600Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:13:43.910Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:14:45.753Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:17:42.659Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:22:54.157Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:28:27.214Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:28:42.310Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] [2023-06-22T13:29:19.866Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)

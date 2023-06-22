@@ -1,49 +1,155 @@
-[info] [2023-06-16T08:51:52.493Z] Server run in port 5000 undefined
-[info] [2023-06-16T08:52:51.654Z] Server run in port 5000 undefined
-[info] [2023-06-16T08:53:30.001Z] Server run in port 5000 undefined
-[info] [2023-06-16T08:54:44.454Z] Server run in port 5000 undefined
-[info] [2023-06-16T09:02:57.841Z] Server run in port 5000 undefined
-[info] [2023-06-16T09:06:03.712Z] Server run in port 5000 undefined
-[info] [2023-06-16T09:13:39.843Z] Server run in port 5000 undefined
-[info] [2023-06-16T09:16:15.257Z] Server run in port 5000 undefined
-[info] [2023-06-16T09:16:45.736Z] User Connected: 2DRpuMxAtEspzUO1AAAD id 619e412feb0ad829d8e301b8 undefined
-[info] [2023-06-19T08:44:20.094Z] Server run in port 5000 undefined
-[info] [2023-06-19T12:02:15.834Z] Пользователь с таким email ujin_slav@mail.ru уже существует Error: Пользователь с таким email ujin_slav@mail.ru уже существует
-    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
-    at UserService.registration (C:\Users\John\Desktop\aut\server\service\user-service.js:31:28)
+[info] [2023-06-22T10:37:40.371Z] Server run in port 5000 undefined
+[info] [2023-06-22T10:46:00.868Z] User Connected: eGr9z60KNkkPVfArAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T11:51:13.974Z] User Connected: oqzThhPsksplGTvqAAAN id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T11:53:38.687Z] Server run in port 5000 undefined
+[info] [2023-06-22T11:53:39.067Z] User Connected: y4L0WgV1fevXYahbAAAF id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T11:56:51.391Z] Server run in port 5000 undefined
+[info] [2023-06-22T11:56:51.462Z] User Connected: Xdri8dhWPN6iixYvAAAB id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T12:00:05.749Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:00:05.927Z] User Connected: 8pMTlpm47fnhnktYAAAC id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T12:08:53.081Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:08:53.613Z] User Connected: ukpmbj_R8MgdLzaGAAAB id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T12:09:36.344Z] tokenModel is not defined ReferenceError: tokenModel is not defined
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:366:22)
+    at modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:45)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Immediate.<anonymous> (C:\Users\John\Desktop\aut\server\node_modules\multer\lib\make-middleware.js:53:37)
+    at process.processImmediate (node:internal/timers:473:21)
+[info] [2023-06-22T12:10:07.569Z] tokenModel is not defined ReferenceError: tokenModel is not defined
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:366:22)
+    at modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:45)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Immediate.<anonymous> (C:\Users\John\Desktop\aut\server\node_modules\multer\lib\make-middleware.js:53:37)
+    at process.processImmediate (node:internal/timers:473:21)
+[info] [2023-06-22T12:10:27.429Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:10:28.387Z] User Connected: lj5W83HtoXFw5HmtAAAF id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T12:11:20.273Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:11:20.378Z] User Connected: 1wQe8DBc_hgfakLZAAAB id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T12:34:39.924Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:35:47.941Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:39:42.215Z] User Connected: rcBLd9XVMtooYdXqAAAJ id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-22T12:44:46.877Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:44:47.367Z] User Connected: IYRFr7YTkMTJNQ8uAAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-22T12:44:55.256Z] tokenModel is not defined ReferenceError: tokenModel is not defined
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:366:22)
+    at modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:45)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Array.<anonymous> (C:\Users\John\Desktop\aut\server\node_modules\multer\lib\make-middleware.js:53:37)
+    at listener (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:169:15)
+    at onFinish (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:100:5)
+    at callback (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:55:10)
+    at IncomingMessage.onevent (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:93:5)
+    at IncomingMessage.emit (node:events:513:28)
+    at endReadableNT (node:internal/streams/readable:1359:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+[info] [2023-06-22T12:46:05.110Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:46:06.739Z] User Connected: dgmMsxEXnqFBm3SkAAAJ id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-22T12:46:09.245Z] tokenModel is not defined ReferenceError: tokenModel is not defined
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:366:22)
+    at modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:45)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Array.<anonymous> (C:\Users\John\Desktop\aut\server\node_modules\multer\lib\make-middleware.js:53:37)
+    at listener (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:169:15)
+    at onFinish (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:100:5)
+    at callback (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:55:10)
+    at IncomingMessage.onevent (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:93:5)
+    at IncomingMessage.emit (node:events:513:28)
+    at endReadableNT (node:internal/streams/readable:1359:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+[info] [2023-06-22T12:46:21.953Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:46:23.836Z] User Connected: Xh6ZLV3BtauGxNmvAAAH id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-22T12:46:26.127Z] tokenModel is not defined ReferenceError: tokenModel is not defined
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:366:22)
+    at modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:45)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Array.<anonymous> (C:\Users\John\Desktop\aut\server\node_modules\multer\lib\make-middleware.js:53:37)
+    at listener (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:169:15)
+    at onFinish (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:100:5)
+    at callback (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:55:10)
+    at IncomingMessage.onevent (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:93:5)
+    at IncomingMessage.emit (node:events:513:28)
+    at endReadableNT (node:internal/streams/readable:1359:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+[info] [2023-06-22T12:47:19.148Z] Server run in port 5000 undefined
+[info] [2023-06-22T12:47:21.365Z] User Connected: fmbNC7ZSMZEWPVKOAAAJ id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-22T12:47:23.811Z] tokenModel is not defined ReferenceError: tokenModel is not defined
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:367:22)
+    at modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:45)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Array.<anonymous> (C:\Users\John\Desktop\aut\server\node_modules\multer\lib\make-middleware.js:53:37)
+    at listener (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:169:15)
+    at onFinish (C:\Users\John\Desktop\aut\server\node_modules\on-finished\index.js:100:5)
+    at callback (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:55:10)
+    at IncomingMessage.onevent (C:\Users\John\Desktop\aut\server\node_modules\ee-first\index.js:93:5)
+    at IncomingMessage.emit (node:events:513:28)
+    at endReadableNT (node:internal/streams/readable:1359:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
+[info] [2023-06-22T13:12:42.961Z] Server run in port 5000 undefined
+[info] [2023-06-22T13:13:19.290Z] User Connected: LmdO889JIBLDpMaZAAAN id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-22T13:13:34.330Z] User Connected: vpg1NK5ZHTPv2QKlAAAT id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:13:34.600Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async registration (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:8:30)
-[info] [2023-06-19T12:09:41.619Z] Server run in port 5000 undefined
-[info] [2023-06-19T12:51:41.562Z] Server run in port 5000 undefined
-[info] [2023-06-19T12:58:58.652Z] User Connected: 9pZFllZttJMTPIUgAAAF id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-19T13:22:54.025Z] Акккаунт не активирован Error: Акккаунт не активирован
-    at ApiError.BadRequest (c:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
-    at UserService.login (c:\Users\John\Desktop\aut\server\service\user-service.js:84:28)
-    at async login (c:\Users\John\Desktop\aut\server\controllers\user-controller.js:19:30)
-[info] [2023-06-20T09:18:02.214Z] Server run in port 5000 undefined
-[info] [2023-06-20T09:18:58.498Z] Акккаунт не активирован Error: Акккаунт не активирован
-    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
-    at UserService.login (C:\Users\John\Desktop\aut\server\service\user-service.js:85:28)
-    at async login (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:19:30)
-[info] [2023-06-20T09:21:05.302Z] User Connected: CuEmxGFTWynhKcxxAAAF id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-20T09:26:37.239Z] Server run in port 5000 undefined
-[info] [2023-06-20T09:26:41.114Z] User Connected: 1y9ncEYBlCwdtpc5AAAD id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-20T09:27:32.025Z] Server run in port 5000 undefined
-[info] [2023-06-20T09:27:32.079Z] User Connected: OPCSrGG8HvjL5pyaAAAC id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-20T09:28:19.185Z] User Connected: vzrrSCA1xARRqK1xAAAL id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-20T09:33:06.470Z] User Connected: jjnlzRY0fWPJWJlEAAAR id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-20T09:36:20.292Z] Server run in port 5000 undefined
-[info] [2023-06-20T09:37:03.694Z] User Connected: qp-skVMu_dIYd4pSAAAF id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-20T12:00:25.361Z] User Connected: PPbUH80nUYN-BJEyAAAP id 619e412feb0ad829d8e301b8 undefined
-[info] [2023-06-20T12:00:52.795Z] User Connected: PPYO4cRgreWHv-6TAAAR id 619e412feb0ad829d8e301b8 undefined
-[info] [2023-06-20T12:23:32.009Z] User Connected: TluFDVXdzVkahfmzAAAT id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-21T10:08:13.654Z] Server run in port 5000 undefined
-[info] [2023-06-21T10:10:09.438Z] User Connected: xd6N9accuPWpuoJkAAAD id 64904fcd9684322e94cf7243 undefined
-[info] [2023-06-21T10:22:46.984Z] Пользователь с таким email ujin-slav@ya.ru уже существует Error: Пользователь с таким email ujin-slav@ya.ru уже существует
-    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
-    at UserService.registration (C:\Users\John\Desktop\aut\server\service\user-service.js:31:28)
+[info] [2023-06-22T13:13:43.765Z] User Connected: 9oXxE-Y8qCqulm4cAAAV id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:13:43.910Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async registration (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:8:30)
-[info] [2023-06-21T10:25:14.930Z] User Connected: Ox7ZnMTMak3TkWxuAAAH id 6492cfaaa91b9d1b50fa1093 undefined
-[info] [2023-06-21T10:26:47.346Z] Server run in port 5000 undefined
-[info] [2023-06-21T10:26:51.587Z] User Connected: tu_Y-KKXAgebJO60AAAD id 6492cfaaa91b9d1b50fa1093 undefined
+[info] [2023-06-22T13:14:45.614Z] User Connected: Hyo9qxA0ZZ8vTPm7AAAX id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:14:45.753Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-22T13:17:40.174Z] Server run in port 5000 undefined
+[info] [2023-06-22T13:17:42.491Z] User Connected: i7MGyXI4td4rSkJPAAAJ id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:17:42.659Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-22T13:22:53.812Z] Server run in port 5000 undefined
+[info] [2023-06-22T13:22:53.946Z] User Connected: I2W1v98nCKgSP4CRAAAD id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:22:54.157Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-22T13:28:26.294Z] Server run in port 5000 undefined
+[info] [2023-06-22T13:28:26.637Z] User Connected: 3Ta9mjkhuF7UpzLeAAAD id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:28:27.214Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-22T13:28:42.166Z] User Connected: M7lXlTKi1ENXnLMOAAAN id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:28:42.310Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-22T13:28:44.308Z] Cannot read properties of null (reading 'refreshToken') TypeError: Cannot read properties of null (reading 'refreshToken')
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:359:17)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:28)
+[info] [2023-06-22T13:29:17.646Z] Server run in port 5000 undefined
+[info] [2023-06-22T13:29:19.683Z] User Connected: T4RgNBq73LnOfohNAAAJ id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:29:19.866Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-22T13:29:27.853Z] Токены не совпадают Error: Токены не совпадают
+    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:360:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:28)

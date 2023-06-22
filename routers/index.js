@@ -83,7 +83,7 @@ router.post('/getoneask', askController.getOneAsk);
 router.post('/getuserasks', askController.getUserAsks);
 router.post('/deleteask', askController.deleteAsk);
 router.post('/fillask', askController.fillAsk);
-router.post('/modifyask', authMiddleware,upload.array("file"),askController.modifyAsk);
+router.post('/modifyask',upload.array("file"),askController.modifyAsk);
 router.post('/setstatusask',uploadStatusAsk.array("file"), askController.setStatusAsk);
 router.post('/getstatusask',askController.getStatusAsk);
 router.post('/deletestatusaskfile',askController.deleteStatusAskFile);
