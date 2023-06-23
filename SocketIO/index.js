@@ -98,6 +98,7 @@ const IOconnectNotAuth = (socket,io)=>{
             const user = await UserModel.findOne({_id:item.idContr})
             if(user){
               if(userSocketIdMap.has(user.id)) {
+                console.log(data)
                 const unreadInvited = await UnreadInvitedModel.find({To:user.id}).countDocuments()
                 io.sockets.sockets.get(userSocketIdMap.get(user.id)).emit("get_unread_invited",unreadInvited);
               }

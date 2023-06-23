@@ -181,7 +181,7 @@ class AskService {
         const ed = new Date(endDate).setHours(23,59,59,999)
         var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
-            sort:{"_id":-1}, 
+            sort:{"Date":-1}, 
             populate: abc,
             limit,
             page};
@@ -339,6 +339,7 @@ class AskService {
 
     async modifyAsk(req) {
         const {
+            Author,
             Id,
             Name,
             Telefon,
@@ -350,16 +351,16 @@ class AskService {
             Private,
             Hiden,
             Comment,
-            Party,
         } = req.body
-        //
+        const Party =  JSON.parse(req.body.Party)
+        ////
         const authorAsk =  await AskModel.findOne({_id:Id}).populate({path:'Author', select:'id'})
         const {refreshToken} = req.cookies
         const user = await tokenModel.findOne({user:authorAsk})
         if(user?.refreshToken!==refreshToken){
             throw ApiError.BadRequest('Токены не совпадают');
         }
-        //
+        ////
         JSON.parse(DeletedFiles).map((item)=>{
             if(fs.existsSync(__dirname+'\\..\\'+item.path)){
             fs.unlink(__dirname+'\\..\\'+item.path, function(err){
@@ -374,14 +375,26 @@ class AskService {
             Name,
             Telefon,
             EndDateOffers,
+            Private,
             Text,
             Category:JSON.parse(Category),
             Region:JSON.parse(Region),
             Files:req.files,
             Hiden,
-            Party:JSON.parse(Party),
+            Date: new Date(),
+            Party,
             Comment,
         }})
+        await Promise.all(Party.map(async (item)=>{
+            const userParty = await UserModel.findOne({_id:item.idContr})
+            if(userParty.notiInvited){
+               await UnreadInvitedModel.create({
+                Ask: Id,
+                To: userParty,
+               })
+                mailService.sendInvited(userParty.email,ask,Author)           
+            }
+        }))
         return ask
     }
     fileNameToObject(files,reqFiles,author){

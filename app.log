@@ -153,3 +153,108 @@
     at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:360:28)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
     at async modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:28)
+[info] [2023-06-22T13:45:38.562Z] Server run in port 5000 undefined
+[info] [2023-06-22T13:45:38.816Z] User Connected: 767Yaw_eJUipHwYzAAAD id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-22T13:45:38.979Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-23T08:30:34.968Z] Server run in port 5000 undefined
+[info] [2023-06-23T08:39:17.751Z] User Connected: tyRNqAy7_dVi6GMBAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T09:16:10.236Z] User Connected: Ci3niL2TizQOEzhRAAAJ id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T09:16:53.937Z] User Connected: RKDLBIsoVuaowVnVAAAL id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T09:16:59.707Z] User Connected: jjgHlt6R8rRoPlTdAAAN id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T09:37:00.333Z] Server run in port 5000 undefined
+[info] [2023-06-23T09:37:00.394Z] User Connected: DV0maKWje9HADWxVAAAB id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T09:37:00.897Z] User Connected: qzlqEIrMcZfifz3sAAAD id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T09:42:13.372Z] Токены не совпадают Error: Токены не совпадают
+    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at UserService.changeuser (C:\Users\John\Desktop\aut\server\service\user-service.js:287:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async changeuser (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:71:28)
+[info] [2023-06-23T09:44:51.920Z] Server run in port 5000 undefined
+[info] [2023-06-23T09:44:52.156Z] User Connected: elrZ3b4Iq6iqqbutAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T09:44:52.877Z] User Connected: it-HBeFZHuVyvtEAAAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T09:44:56.385Z] Токены не совпадают Error: Токены не совпадают
+    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at UserService.changeuser (C:\Users\John\Desktop\aut\server\service\user-service.js:288:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async changeuser (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:71:28)
+[info] [2023-06-23T09:45:19.907Z] Server run in port 5000 undefined
+[info] [2023-06-23T09:45:19.981Z] User Connected: K24LHCBtMRs3TMwHAAAB id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T09:45:20.013Z] User Connected: c0mhOR3vTDWIuOtGAAAE id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T10:00:09.412Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:16:31.789Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:17:01.597Z] User Connected: nVYC4CwycSYYTQOHAAAJ id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T10:17:51.568Z] User Connected: iVS12nrmGhsBzA7tAAAL id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:19:32.834Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:19:32.978Z] User Connected: 5b7ECOnpMRMP2-cJAAAB id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:19:37.292Z] User Connected: g4gVqv9lvfWDQj5VAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T10:19:39.192Z] User Connected: SylMqyWd2W5tOsRGAAAH id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:20:14.386Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:20:14.415Z] User Connected: JHXcA6xe0AUSJiZzAAAB id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:20:14.514Z] User Connected: IcNMwDV1aWRoAetUAAAF id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T10:21:52.085Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:21:52.265Z] User Connected: IX3wjgJCBLxUn6KoAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T10:21:53.903Z] User Connected: yz4EcLcCkcmzt1y5AAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:39:33.848Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:39:35.917Z] User Connected: ymMbbX4PhvuOna9RAAAE id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T10:39:35.935Z] User Connected: S0EPMRDVHEKBbnbUAAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:40:48.031Z] Party.map is not a function TypeError: Party.map is not a function
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:386:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:28)
+[info] [2023-06-23T10:50:06.067Z] Party.map is not a function TypeError: Party.map is not a function
+    at AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:386:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:28)
+[info] [2023-06-23T10:52:11.488Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:52:16.481Z] UnreadInvited validation failed: Ask: Cast to ObjectId failed for value "{ n: 1, nModified: 0, ok: 1 }" (type Object) at path "Ask" ValidationError: UnreadInvited validation failed: Ask: Cast to ObjectId failed for value "{ n: 1, nModified: 0, ok: 1 }" (type Object) at path "Ask"
+    at Document.invalidate (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:2782:32)
+    at model.$set (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:1349:12)
+    at model.$set (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:1058:16)
+    at model.Document (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:148:12)
+    at model.Model (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:106:12)
+    at new model (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:4911:15)
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3157:22
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3193:7
+    at Array.forEach (<anonymous>)
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3192:15
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\helpers\promiseOrCallback.js:32:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\helpers\promiseOrCallback.js:31:10)
+    at Mongoose._promiseOrCallback (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\index.js:1149:10)
+    at Function.create (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3127:23)
+    at C:\Users\John\Desktop\aut\server\service\ask-service.js:389:41
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Promise.all (index 0)
+    at async AskService.modifyAsk (C:\Users\John\Desktop\aut\server\service\ask-service.js:386:9)
+    at async modifyAsk (C:\Users\John\Desktop\aut\server\controllers\ask-controller.js:91:28)
+[info] [2023-06-23T10:53:38.178Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:57:34.115Z] Server run in port 5000 undefined
+[info] [2023-06-23T10:58:58.543Z] User Connected: 2UhUg7DnFuXoIu0HAAAH id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:59:03.305Z] User Connected: YgUazEreqbAkXX_8AAAJ id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T10:59:35.745Z] User Connected: m3CBbXL9S0xXJM1KAAAL id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:33:38.360Z] Server run in port 5000 undefined
+[info] [2023-06-23T11:33:46.422Z] User Connected: D_0iRySZLNG4XA0DAAAD id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:34:00.884Z] User Connected: -K-lY0SXylCDOaa5AAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:34:14.949Z] User Connected: ZS2iwk6aKt9h7QsPAAAJ id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T11:34:27.955Z] User Connected: 4h24tPNNaonxkVXkAAAL id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:36:20.423Z] User Connected: HHUHA31hQIIjodBzAAAN id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:37:01.581Z] User Connected: NBp2itZBK6tyoY00AAAP id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:37:51.960Z] User Connected: y9ihm4zhMhRowzKiAAAR id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:38:23.682Z] Server run in port 5000 undefined
+[info] [2023-06-23T11:38:23.961Z] User Connected: zK98heoXlYPQuj6WAAAB id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:38:26.722Z] User Connected: ojxzQvY27cFW_4GSAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T11:39:09.026Z] Server run in port 5000 undefined
+[info] [2023-06-23T11:39:09.119Z] User Connected: uE7ethlGmtCh1w1UAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T11:39:09.965Z] User Connected: Vb7a2siiNLEEDuTFAAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T11:40:13.272Z] Server run in port 5000 undefined
+[info] [2023-06-23T11:40:13.390Z] User Connected: exF9CLL224rOujd6AAAB id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T11:40:13.466Z] User Connected: PNrrEMvAiY_cwQokAAAD id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T12:14:36.325Z] User Connected: NicL5f1LGTjJwLfMAAAJ id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T12:17:33.794Z] User Connected: DAgTaPY6v91RWfV0AAAN id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-23T12:19:12.205Z] Server run in port 5000 undefined
+[info] [2023-06-23T12:19:12.388Z] User Connected: G1-Eda6lylPLA79YAAAE id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-23T12:19:12.981Z] User Connected: C3KJSbiUgO7RFjrHAAAH id 619e412feb0ad829d8e301b8 undefined

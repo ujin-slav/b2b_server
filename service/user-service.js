@@ -280,6 +280,13 @@ class UserService {
             getAskFromFiz,
         } = req.body
         let logo
+        ///
+        const {refreshToken} = req.cookies
+        const userToken = await tokenModel.findOne({user:id})
+        if(userToken?.refreshToken!==refreshToken){
+            throw ApiError.BadRequest('Токены не совпадают');
+        }
+        ///
         const existProfile = await UserModel.findOne({_id:id})
         if(fs.existsSync(__dirname+'\\..\\'+ existProfile.logo?.path)){
             fs.unlink(__dirname+'\\..\\'+ existProfile.logo?.path, function(err){
