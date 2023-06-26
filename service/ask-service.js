@@ -1,5 +1,6 @@
 const AskModel = require("../models/Ask-model")
 const UserModel =require('../models/user-model')
+const OfferModel = require("../models/offer-model")
 const tokenModel = require('../models/token-model')
 const LentStatusModel =require('../models/lentStatus-model')
 const UnreadIWinnerModel = require("../models/unreadIWinner-model")
@@ -321,6 +322,19 @@ class AskService {
             })
         }
         await AskModel.deleteOne({_id:id}); 
+        const offers = await OfferModel.find({Ask:id});
+        offers?.map((item)=>{
+            item?.Files?.map((item)=>{
+                fs.unlink(__dirname+'\\..\\'+item.path, function(err){
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log("Файл удалён");
+                    }
+                });
+            })
+        })
+        await OfferModel.deleteMany({Ask:id})
         return ask
     }
     async getUserAsks(req) {
