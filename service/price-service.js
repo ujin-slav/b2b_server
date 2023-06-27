@@ -188,7 +188,8 @@ class PriceService {
     }
 
     async clearPrice(req) {
-       const result = await PriceModel.deleteMany({User:req.user.id})
+       const {org} = req.body
+       const result = await PriceModel.deleteMany({User:org})
        return result
     }
 

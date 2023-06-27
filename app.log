@@ -270,3 +270,63 @@
 [info] [2023-06-26T11:32:20.674Z] Server run in port 5000 undefined
 [info] [2023-06-26T11:45:19.883Z] User Connected: RcVnciPY8lrPQMjAAAAJ id 619e412feb0ad829d8e301b8 undefined
 [info] [2023-06-26T12:46:09.572Z] User Connected: LKgqS-MW4hntVuIqAAAL id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T10:00:10.383Z] Server run in port 5000 undefined
+[info] [2023-06-27T10:02:29.499Z] User Connected: DTC-w9RLQpGgnBQuAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T10:03:29.765Z] User Connected: Si7OpYuuXdylF-4aAAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-27T10:03:48.143Z] User Connected: hqk_uCAwuH7KR3wiAAAH id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-27T10:05:57.980Z] User Connected: qqDk_zArW67nVUmEAAAJ id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T10:48:50.620Z] User Connected: ckJd6F_vM1Jj_bHTAAAL id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T10:49:19.602Z] User Connected: EMfvwKCcAGt_JhZLAAAN id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-27T10:49:37.217Z] User Connected: N46f6coFdZB8QtsdAAAP id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T10:49:44.525Z] Пользователь с таким email не найден Error: Пользователь с таким email не найден
+    at ApiError.BadRequest (C:\Users\John\Desktop\aut\server\exceptions\api-error.js:16:16)
+    at UserService.login (C:\Users\John\Desktop\aut\server\service\user-service.js:82:28)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async login (C:\Users\John\Desktop\aut\server\controllers\user-controller.js:19:30)
+[info] [2023-06-27T10:50:14.755Z] User Connected: 7JiTJYjxpWCG1lXWAAAT id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-27T10:50:14.942Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-27T10:50:56.075Z] User Connected: dFE2liyvER_OSuDqAAAV id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T11:36:22.863Z] User Connected: xRgdLtXxd0uIbzNrAAAZ id 619e4028315b602a6439ff05 undefined
+[error] [2023-06-27T11:36:23.047Z] Cannot read properties of null (reading 'id') TypeError: Cannot read properties of null (reading 'id')
+    at C:\Users\John\Desktop\aut\server\SocketIO\index.js:50:43
+    at Array.map (<anonymous>)
+    at IOconnect (C:\Users\John\Desktop\aut\server\SocketIO\index.js:49:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[info] [2023-06-27T12:58:34.005Z] Server run in port 5000 undefined
+[info] [2023-06-27T12:59:52.100Z] User Connected: f_YsigkuKiENs47PAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T13:00:11.541Z] User Connected: eWxldW5yz2NUBpBPAAAF id 619e412feb0ad829d8e301b8 undefined
+[info] [2023-06-27T13:26:00.106Z] User Connected: zVb4pAh4ambquWL4AAAJ id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T13:28:48.803Z] User Connected: qTq9je-011Eqi2N8AAAN id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T13:29:38.162Z] User Connected: ZVbe937udKXqkPVVAAAR id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T13:33:41.501Z] User Connected: giWbElbArc8LEz1PAAAV id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T13:37:13.888Z] Server run in port 5000 undefined
+[info] [2023-06-27T13:37:16.323Z] User Connected: KL0sa2gduwtSG9HSAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T13:37:16.596Z] Cannot read properties of undefined (reading 'id') TypeError: Cannot read properties of undefined (reading 'id')
+    at PriceService.clearPrice (C:\Users\John\Desktop\aut\server\service\price-service.js:191:66)
+    at clearPrice (C:\Users\John\Desktop\aut\server\controllers\price-controller.js:40:47)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:137:13)
+    at Route.dispatch (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\route.js:112:3)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:281:22
+    at Function.process_params (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:275:10)
+    at Function.handle (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:174:3)
+    at router (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:317:13)
+    at C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:335:12)
+    at next (C:\Users\John\Desktop\aut\server\node_modules\express\lib\router\index.js:275:10)
+    at cors (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:188:7)
+    at C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:224:17
+    at originCallback (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:214:15)
+    at C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:219:13
+    at optionsCallback (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:199:9)
+    at corsMiddleware (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:204:7)
+[info] [2023-06-27T13:38:35.036Z] Server run in port 5000 undefined
+[info] [2023-06-27T13:38:38.551Z] User Connected: kwcyK41PZd6MOZsDAAAF id 6492d12aad8d7f2d00f8fd2f undefined

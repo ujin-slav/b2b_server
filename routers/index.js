@@ -51,7 +51,7 @@ router.post('/addprice', uploadPrice.single("file"), priceController.addPrice);
 router.post('/getprice', priceController.getPrice);
 router.post('/getfilterprice', priceController.getFilterPrice);
 router.post('/getpriceunit', priceController.getPriceUnit);
-router.post('/clearprice',authMiddleware, priceController.clearPrice);
+router.post('/clearprice', priceController.clearPrice);
 
 router.post('/addspecoffer',  uploadPic.array("file"),specOfferController.addSpecOffer);
 router.post('/modifyspecoffer',  uploadPic.array("file"),specOfferController.modifySpecOffer);
