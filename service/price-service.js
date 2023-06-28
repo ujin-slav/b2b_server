@@ -53,6 +53,7 @@ class PriceService {
                     Price: item[2],
                     Balance: balance || 0,
                     User:userID,
+                    Measure: item[4],
                     Date: Date.now()
                 })
             }
@@ -168,6 +169,7 @@ class PriceService {
                  Name:'$Name',
                  Price:'$Price',
                  Balance:'$Balance',
+                 Measure:'$Measure',
                  Date:'$Date',
                 }
             },

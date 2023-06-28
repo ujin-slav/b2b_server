@@ -330,3 +330,33 @@
     at corsMiddleware (C:\Users\John\Desktop\aut\server\node_modules\cors\lib\index.js:204:7)
 [info] [2023-06-27T13:38:35.036Z] Server run in port 5000 undefined
 [info] [2023-06-27T13:38:38.551Z] User Connected: kwcyK41PZd6MOZsDAAAF id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-27T13:43:52.001Z] Server run in port 5000 undefined
+[info] [2023-06-27T13:43:52.148Z] User Connected: qyKDx9dSUg8TULRUAAAF id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-28T09:34:53.039Z] Server run in port 5000 undefined
+[info] [2023-06-28T09:48:24.461Z] Server run in port 5000 undefined
+[info] [2023-06-28T09:52:32.942Z] User Connected: qTLhmSengYV64LQoAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-28T09:55:54.939Z] Server run in port 5000 undefined
+[info] [2023-06-28T09:55:57.131Z] User Connected: 866tF_3Z-L2ZLaINAAAD id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-28T10:23:39.911Z] User Connected: Y95CDrGcf7dJFtzfAAAH id 6492d12aad8d7f2d00f8fd2f undefined
+[info] [2023-06-28T11:23:14.412Z] Price validation failed: Price: Cast to Number failed for value "4500т" (type string) at path "Price" ValidationError: Price validation failed: Price: Cast to Number failed for value "4500т" (type string) at path "Price"
+    at Document.invalidate (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:2782:32)
+    at model.$set (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:1349:12)
+    at model.$set (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:1058:16)
+    at model.Document (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\document.js:148:12)
+    at model.Model (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:106:12)
+    at new model (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:4911:15)
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3157:22
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3193:7
+    at Array.forEach (<anonymous>)
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3192:15
+    at C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\helpers\promiseOrCallback.js:32:5
+    at new Promise (<anonymous>)
+    at promiseOrCallback (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\helpers\promiseOrCallback.js:31:10)
+    at Mongoose._promiseOrCallback (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\index.js:1149:10)
+    at Function.create (C:\Users\John\Desktop\aut\server\node_modules\mongoose\lib\model.js:3127:23)
+    at C:\Users\John\Desktop\aut\server\service\price-service.js:50:34
+    at Array.map (<anonymous>)
+    at PriceService.addPrice (C:\Users\John\Desktop\aut\server\service\price-service.js:44:33)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async addPrice (C:\Users\John\Desktop\aut\server\controllers\price-controller.js:8:28)
+[info] [2023-06-28T11:41:36.496Z] Server run in port 5000 undefined
