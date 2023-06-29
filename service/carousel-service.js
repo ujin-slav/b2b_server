@@ -4,9 +4,21 @@ const ContrModel = require('../models/contr-model')
 class CarouselService {
 
     async getCarousel(req) {
-        const {page,limit,search,user} = req.body
-        const regex = search.replace(/ /g, '*.*')
-        let searchParam = 
+        const {
+            filterCat,
+            filterRegion,
+            searchInn,
+            page,
+            limit,
+            user} = req.body
+        const regex = searchInn.replace(/ /g, '*.*')
+        var abc = ({ path: 'Author', select: 'name nameOrg inn' });
+        var options = {
+            sort:{"_id":-1}, 
+            populate: abc,
+            limit,
+            page};
+        let textInnParam = 
         { $or: [
             {nameOrg: {
             $regex: regex,
@@ -19,6 +31,25 @@ class CarouselService {
             select:'name nameOrg email inn logo _id',
             limit,
             page}
+        if(filterCat.length==0 && filterRegion.length==0){
+            searchParam = textInnParam
+        }
+        if(filterCat.length>0 && filterRegion.length==0){
+            searchParam = Object.assign({
+                Category: {$in : filterCat}
+            },textInnParam)
+        }
+        if(filterCat.length==0 && filterRegion.length>0){
+            searchParam = Object.assign({
+                Region: {$in : filterRegion}
+            },textInnParam)
+        }
+        if(filterCat.length>0 && filterRegion.length>0){
+            searchParam = Object.assign({
+                Category: {$in : filterCat},
+                Region: {$in : filterRegion}
+            },textInnParam)
+        }
         const result = await UserModel.paginate(searchParam,option)
         if(user){
             const resultAuth = await Promise.all(result.docs.map(async (item)=>{
