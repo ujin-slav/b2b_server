@@ -4,6 +4,7 @@ const ContrModel = require('../models/contr-model')
 class CarouselService {
 
     async getCarousel(req) {
+        let searchParam = {}
         const {
             filterCat,
             filterRegion,
@@ -11,11 +12,11 @@ class CarouselService {
             page,
             limit,
             user} = req.body
+        console.log(page)
         const regex = searchInn.replace(/ /g, '*.*')
-        var abc = ({ path: 'Author', select: 'name nameOrg inn' });
         var options = {
-            sort:{"_id":-1}, 
-            populate: abc,
+            sort:{"_id":1}, 
+            select:'name nameOrg email inn logo _id',
             limit,
             page};
         let textInnParam = 
@@ -27,30 +28,26 @@ class CarouselService {
             $regex: regex,
             $options: 'i'
         }}]}
-        const option = {
-            select:'name nameOrg email inn logo _id',
-            limit,
-            page}
         if(filterCat.length==0 && filterRegion.length==0){
             searchParam = textInnParam
         }
         if(filterCat.length>0 && filterRegion.length==0){
             searchParam = Object.assign({
-                Category: {$in : filterCat}
+                category: {$in : filterCat}
             },textInnParam)
         }
         if(filterCat.length==0 && filterRegion.length>0){
             searchParam = Object.assign({
-                Region: {$in : filterRegion}
+                region: {$in : filterRegion}
             },textInnParam)
         }
         if(filterCat.length>0 && filterRegion.length>0){
             searchParam = Object.assign({
-                Category: {$in : filterCat},
-                Region: {$in : filterRegion}
+                category: {$in : filterCat},
+                region: {$in : filterRegion}
             },textInnParam)
         }
-        const result = await UserModel.paginate(searchParam,option)
+        const result = await UserModel.paginate(searchParam,options)
         if(user){
             const resultAuth = await Promise.all(result.docs.map(async (item)=>{
                 const showPlus = await ContrModel.findOne({User:user,Contragent:item._id})
