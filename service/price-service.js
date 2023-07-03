@@ -120,6 +120,10 @@ class PriceService {
             filterRegion,
             endDate
         } = req.body
+        var sd = new Date(startDate)
+        var ed = new Date(endDate)
+        sd.setDate(sd.getDate() - 1);
+        ed.setDate(ed.getDate() + 1);
         const regex = searchText.replace(/\s{20000,}/g, '*.*')
         const regexInn = searchInn.replace(/\s{20000,}/g, '*.*')
         const match = {
@@ -139,8 +143,8 @@ class PriceService {
                 }},
             ],
             Date: {
-                $gte: new Date(startDate),
-                $lt: new Date(endDate)
+                $gte: sd,
+                $lt: ed
             }
         }
         const newMatch = this.getFilterObj(filterCat,filterRegion,match)
