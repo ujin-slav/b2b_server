@@ -19,8 +19,6 @@ class AdminService {
             limit,
             search,
             page,
-            startDate,
-            endDate
         } = req.body
         const regex = search.replace(/ /g, '*.*')
         let searchParam = 

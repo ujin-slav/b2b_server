@@ -186,12 +186,21 @@ class UserService {
     }
 
     async getUsers(req) {
-        const {page,limit,user,search} = req.body
+        const {page,limit,user,search,idorg} = req.body
         const regex = search.replace(/\s{20000,}/g, '*.*')
         const options = {
             page,
             limit,
-        }        
+        }   
+        if(idorg){
+            let contactRecevier = await ContactsModel.findOne({owner:user,contact:idorg})
+            if(contactRecevier===null){
+              await ContactsModel.create({owner:user,contact:idorg})
+            }else{
+              await ContactsModel.deleteOne({owner:user,contact:idorg})
+              await ContactsModel.create({owner:user,contact:idorg})
+            }
+        }    
         const aggregate = ContactsModel.aggregate([
             { $lookup:
                 {
