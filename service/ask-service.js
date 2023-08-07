@@ -368,9 +368,9 @@ class AskService {
         } = req.body
         const Party =  JSON.parse(req.body.Party)
         ////
-        const authorAsk =  await AskModel.findOne({_id:Id}).populate({path:'Author', select:'id'})
+        const authorAsk =  await AskModel.findOne({_id:Id},{Author:1})
         const {refreshToken} = req.cookies
-        const user = await tokenModel.findOne({user:authorAsk})
+        const user = await tokenModel.findOne({user:authorAsk.Author})
         if(user?.refreshToken!==refreshToken){
             throw ApiError.BadRequest('Токены не совпадают');
         }

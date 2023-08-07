@@ -1,8 +1,10 @@
 const SpecOfferModel = require("../models/specOffer-model")
 const SpecAskModel = require("../models/specAsk-model")
 const PriceModel = require('../models/price-model')
+const tokenModel = require('../models/token-model')
 const UnreadSpecAskModel = require("../models/unreadSpecAsk-model")
 const UserModel =require('../models/user-model')
+const ApiError = require('../exceptions/api-error');
 const builder = require('xmlbuilder')
 const fs = require("fs");
 const { ifError } = require("assert");
@@ -88,6 +90,16 @@ class specOfferService {
             Price,
             ID
         } = req.body
+        {   
+            ///
+            const authorSpeccOffer =  await SpecOfferModel.findOne({_id:ID},{Author:1})
+            const {refreshToken} = req.cookies
+            const user = await tokenModel.findOne({user:authorSpeccOffer.Author})
+            if(user?.refreshToken!==refreshToken){
+                throw ApiError.BadRequest('Токены не совпадают');
+            }
+            ///
+        }
         const user = await UserModel.findOne({_id:Author});
         const existOffer = await SpecOfferModel.findOne({_id:ID})
         existOffer.Files?.map((item)=>{

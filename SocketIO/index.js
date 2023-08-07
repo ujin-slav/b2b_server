@@ -22,9 +22,9 @@ const UserDto = require('../dtos/user-dto')
 
 const IOconnectNotAuth = (socket,io)=>{
     socket.on("unread_invitedPriceFiz", async (data) => {
-      const unreadInvitedPrice = await UnreadInvitedPriceModel.find({To:data.To}).countDocuments()
+      const unreadInvitedPriceFiz = await UnreadInvitedPriceFizModel.find({To:data.To}).countDocuments()
       if(userSocketIdMap.has(data.To)) {
-        io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_invitedPriceFiz",unreadInvitedPrice);
+        io.sockets.sockets.get(userSocketIdMap.get(data.To)).emit("get_unread_invitedPriceFiz",unreadInvitedPriceFiz);
       }
     })
     socket.on("unread_specOfferAsk", async (data) => {
